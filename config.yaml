@@ -1,0 +1,163 @@
+# =====================================================================
+# config.yaml — ÚNICA fuente de parámetros del proyecto HW05
+# Regla: nada hardcodeado en el código. Si un número o ruta aparece en
+# src/, debe venir de aquí. Las credenciales NO van aquí (van en .env).
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# Rutas (relativas a la raíz del repo)
+# ---------------------------------------------------------------------
+rutas:
+  audio_entrevistas: data/audio/entrevistas      # no se commitea
+  audio_llamadas: data/audio/llamadas            # no se commitea
+  audio_degradado: data/audio/degradado          # L1/, L2/, L3/ dentro
+  audio_ruido: data/audio/ruido/ambiente.wav     # ruido para L3 (grabado por mí)
+  ground_truth_entrevistas: data/ground_truth/entrevistas.csv
+  ground_truth_llamadas: data/ground_truth/llamadas.csv
+  transcripts_referencia: data/ground_truth/transcripts_referencia
+  cache_transcripts: cache/transcripts           # SÍ se commitea
+  cache_results: cache/results                   # SÍ se commitea
+  modelos: models                                # pesos descargados, no se commitean
+
+# Plantilla del nombre de cada transcript cacheado (ver CLAUDE.md)
+cache_nombre: "{clip}__{modelo}__{device}__{compute}__{glosario}__{nivel}.json"
+
+# ---------------------------------------------------------------------
+# ASR: faster-whisper
+# ---------------------------------------------------------------------
+asr:
+  idioma: es                    # idioma fijo, sin autodetección
+  modelos: [small, large-v3]    # los 2 tamaños a comparar (large-v3 -> medium si no cabe)
+  modelo_default: small         # el que usa process_audio si no se indica otro
+  # Device SOLICITADO. El device REAL se lee en runtime del objeto del modelo,
+  # nunca de esta clave (es la prueba de que corrió en GPU).
+  devices: [cpu, cuda]
+  device_default: auto          # auto = cuda si hay GPU, si no cpu
+  # Precisiones a comparar. En CPU float16 no aplica -> se usa int8.
+  compute_types: [float16, int8]
+  compute_type_default: int8
+  beam_size: 5
+  vad_filter: true              # recorta silencios largos
+  word_timestamps: true         # necesario para probabilidad por palabra
+  # Muestreo de VRAM con pynvml (hilo paralelo durante la transcripción)
+  vram_intervalo_ms: 50
+  gpu_indice: 0
+
+# ---------------------------------------------------------------------
+# Glosario de dominio (comparación: plano vs con glosario)
+# Se pasa como initial_prompt y, si la versión instalada lo soporta, hotwords.
+# Verificar con inspect.signature(WhisperModel.transcribe) -> ver README.
+# ---------------------------------------------------------------------
+glosario:
+  modos: [plano, glosario]      # las dos condiciones del experimento
+  usar_hotwords: true           # se ignora si la versión no tiene el parámetro
+  entrevista:
+    initial_prompt: >-
+      Entrevista de trabajo. Experiencia en Python, SQL, Power BI, Excel,
+      Django, FastAPI, Docker, AWS, pandas, scikit-learn. Pretensión salarial
+      en soles o dólares. Nivel de inglés básico, intermedio o avanzado.
+    terminos: [Python, SQL, Power BI, Django, FastAPI, Docker, AWS, pandas, scikit-learn, Excel]
+  pedido:
+    initial_prompt: >-
+      Llamada de venta. Pedido con productos, tallas o planes, cantidades,
+      precios unitarios en soles, promoción, dirección de entrega,
+      método de pago Yape, Plin, tarjeta o efectivo, y total.
+    terminos: [Yape, Plin, soles, promoción, delivery, tarjeta, efectivo]
+
+# ---------------------------------------------------------------------
+# Normalización de texto (idéntica para hipótesis y referencia en WER)
+# ---------------------------------------------------------------------
+normalizacion:
+  minusculas: true
+  quitar_puntuacion: true
+  colapsar_espacios: true
+  numeros_a_digitos: true       # "seis mil quinientos" -> "6500"
+  # DECISIÓN A DOCUMENTAR EN README: quitar tildes evita penalizar
+  # "inglés" vs "ingles", pero pierde información. Valor inicial:
+  quitar_tildes: true
+  # Coloquialismos que text2num no resuelve (extensión propia, documentada)
+  coloquialismos:
+    lucas: "000"                # "seis lucas" -> 6000 soles
+    "y medio": ".5"             # "tres y medio años" -> 3.5
+
+# ---------------------------------------------------------------------
+# Extracción
+# ---------------------------------------------------------------------
+extraccion:
+  metodos: [reglas, llm]        # se comparan ambos
+  llm:
+    proveedor: anthropic
+    modelo: claude-haiku-5-5    # barato y suficiente para JSON estructurado
+    temperatura: 0
+    max_tokens: 1024
+    reintentos: 2               # si el JSON no valida contra schemas.py
+    # Variable de entorno que contiene la API key (el valor va en .env)
+    api_key_env: ANTHROPIC_API_KEY
+  prompts:
+    sistema: >-
+      Eres un extractor de datos. Recibes la transcripción de un audio en
+      español. Devuelve SOLO un JSON válido con los campos pedidos. Si un dato
+      no se dice en el audio, usa null. No corrijas ni inventes valores: copia
+      los números tal como aparecen en la transcripción.
+    entrevista: >-
+      Extrae de esta entrevista: anios_experiencia (número), ultimo_puesto
+      (texto), tecnologias (lista de textos), pretension_salarial (objeto con
+      monto y moneda), disponibilidad (texto), nivel_ingles (una de: basico,
+      intermedio, avanzado, nativo).
+    pedido: >-
+      Extrae de esta llamada el pedido FINAL (si el cliente se corrige, usa la
+      última versión): items (lista de objetos con producto, tamano_o_plan,
+      cantidad, precio_unitario), promocion (texto o null),
+      direccion_entrega o plazo_contrato (texto), metodo_pago (una de: yape,
+      plin, tarjeta, efectivo, transferencia), total_dicho (número).
+
+# ---------------------------------------------------------------------
+# Verificación literal (regla dura #7)
+# ---------------------------------------------------------------------
+verificacion:
+  etiqueta_ok: verificado
+  etiqueta_no: sin_verificar
+
+# ---------------------------------------------------------------------
+# Validación aritmética del pedido (Tarea 2)
+# sum(cantidad * precio_unitario) - promocion == total_dicho
+# ---------------------------------------------------------------------
+validacion:
+  tolerancia_soles: 0.5         # diferencia máxima aceptada
+  # Diagnóstico ASR vs hablante: umbral de probabilidad por palabra
+  # en los tokens numéricos. Por debajo -> sospecha de error de ASR.
+  prob_palabra_min: 0.80
+
+# ---------------------------------------------------------------------
+# Escalera de degradación (Tarea 2) — reproducible con ffmpeg
+# ---------------------------------------------------------------------
+degradacion:
+  niveles: [L0, L1, L2, L3]
+  L1:                           # tipo WhatsApp
+    canales: 1
+    codec: libopus
+    bitrate_kbps: 12
+  L2:                           # tipo teléfono
+    paso_banda_hz: [300, 3400]
+    sample_rate_hz: 8000
+  L3:                           # L1 + ruido ambiente
+    base: L1
+    snr_db: 10                  # SNR objetivo; el real se CALCULA con RMS y se reporta
+    # Si L3 sigue perfecto, bajar el SNR (endurecer) y documentarlo
+    snr_db_alternativos: [5, 0]
+
+# ---------------------------------------------------------------------
+# Métricas y bootstrap
+# ---------------------------------------------------------------------
+metricas:
+  bootstrap_n: 1000             # réplicas (remuestreo por clip)
+  bootstrap_alpha: 0.05         # IC al 95 %
+  semilla: 42
+
+# ---------------------------------------------------------------------
+# Regresión en CI (lee cache/, nunca re-transcribe)
+# Valores iniciales: ajustarlos cuando haya resultados reales.
+# ---------------------------------------------------------------------
+regresion:
+  wer_max: 0.30
+  accuracy_campos_min: 0.70
