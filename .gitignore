@@ -218,3 +218,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+CLAUDE.md
+
+# ===== HW05: De la voz al registro =====
+# Audios grabados y degradados: NO se commitean (pesan y contienen voz)
+data/audio/
+# Pesos de modelos (faster-whisper / CTranslate2) descargados localmente
+models/
+*.bin
+*.pt
+# .env, .venv y __pycache__/ ya están ignorados arriba; .env.example SÍ se commitea

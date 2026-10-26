@@ -1,0 +1,37 @@
+# Versiones fijadas para reproducibilidad (Python 3.12)
+# ffmpeg (binario del sistema) también es necesario: ver README.
+
+# ASR
+faster-whisper==1.2.1
+ctranslate2==4.8.4
+
+# Métricas
+jiwer==4.0.0
+
+# Medición de VRAM (paquete oficial de NVIDIA; se importa como pynvml)
+nvidia-ml-py==13.615.71
+
+# Datos
+pandas==3.1.0
+numpy==2.5.4
+
+# Configuración
+pyyaml==6.0.3
+python-dotenv==1.2.4
+
+# Audio
+soundfile==0.14.0
+ffmpeg-python==0.2.0
+
+# Números en palabras -> dígitos
+text2num==3.1.0
+
+# Extracción con LLM
+anthropic==2.3.0
+
+# App y gráficos
+streamlit==1.66.1
+plotly==7.1.0
+
+# Tests
+pytest==9.1.1
