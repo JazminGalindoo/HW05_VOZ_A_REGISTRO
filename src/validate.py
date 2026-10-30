@@ -76,7 +76,7 @@ def prob_numero(numero, palabras: list[dict], cfg: dict, ultimo: bool = False):
             if re.fullmatch(r"\d+(?:\.\d+)?", texto):
                 break
         if texto == objetivo:
-            hallados.append(min(p["probability"] for p in grupo))
+            hallados.append(float(min(p["probability"] for p in grupo)))
         i += largo  # saltar el número entero ("noventa" de "2890" no es un 90)
     if not hallados:
         return None

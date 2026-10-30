@@ -71,6 +71,14 @@ def test_reglas_pedido(cfg, referencias, clip):
     assert numero in r["direccion_entrega"] and distrito in r["direccion_entrega"]
 
 
+def test_reglas_no_duplican_productos_repetidos(cfg):
+    # Encontrado al probar el pipeline real: el resumen repetía cada producto
+    texto = ("Su pedido es un pollo entero y una gaseosa. El pollo entero a sesenta y cuatro "
+             "soles y la gaseosa a diez soles. El total es setenta y cuatro soles.")
+    r = extraer_reglas(texto, "pedido", cfg)
+    assert _items_simples(r["items"]) == [("pollo entero", 1, 64), ("gaseosa 1.5L", 1, 10)]
+
+
 # ---------------- LLM con cliente falso ----------------
 
 class ClienteFalso:

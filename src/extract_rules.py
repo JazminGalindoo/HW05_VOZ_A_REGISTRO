@@ -160,7 +160,15 @@ def _productos(resumen: str, cfg: dict) -> list[tuple[dict, int]]:
             # "unas papas" o sin número -> 1
             cantidad = int(m.group(1)) if m.group(1) and m.group(1).isdigit() else 1
             hallados.append((m.start(), producto, cantidad))
-    return [(producto, cantidad) for _, producto, cantidad in sorted(hallados, key=lambda h: h[0])]
+
+    # Un resumen nombra cada producto UNA vez; si se repite ("...una gaseosa.
+    # La gaseosa a 10 soles..."), vale la primera mención, que trae la cantidad
+    resultado, vistos = [], set()
+    for _, producto, cantidad in sorted(hallados, key=lambda h: h[0]):
+        if producto["producto"] not in vistos:
+            vistos.add(producto["producto"])
+            resultado.append((producto, cantidad))
+    return resultado
 
 
 def _precio(producto: dict, t: str, cfg: dict):

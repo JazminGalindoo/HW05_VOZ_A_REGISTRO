@@ -28,21 +28,33 @@ cache_nombre: "{clip}__{modelo}__{device}__{compute}__{glosario}__{nivel}.json"
 # ---------------------------------------------------------------------
 asr:
   idioma: es                    # idioma fijo, sin autodetección
+  # Valores de la GRILLA de experimentos (el valor por defecto está en "motor")
   modelos: [small, large-v3]    # los 2 tamaños a comparar (large-v3 -> medium si no cabe)
-  modelo_default: small         # el que usa process_audio si no se indica otro
   # Device SOLICITADO. El device REAL se lee en runtime del objeto del modelo,
   # nunca de esta clave (es la prueba de que corrió en GPU).
   devices: [cpu, cuda]
-  device_default: auto          # auto = cuda si hay GPU, si no cpu
   # Precisiones a comparar. En CPU float16 no aplica -> se usa int8.
   compute_types: [float16, int8]
-  compute_type_default: int8
   beam_size: 5
   vad_filter: true              # recorta silencios largos
   word_timestamps: true         # necesario para probabilidad por palabra
   # Muestreo de VRAM con pynvml (hilo paralelo durante la transcripción)
   vram_intervalo_ms: 50
   gpu_indice: 0
+
+# ---------------------------------------------------------------------
+# Motor: qué combinación usa process_audio (el notebook cambia estas claves
+# en una copia de cfg para recorrer la grilla de experimentos)
+# ---------------------------------------------------------------------
+motor:
+  modelo: small                 # tamaño de Whisper
+  device: auto                  # auto | cpu | cuda (lo REAL se lee del modelo)
+  compute_type: int8            # float16 | int8 | int8_float16 ...
+  glosario: plano               # plano | glosario
+  nivel: L0                     # L0..L3 (solo para el nombre del cache)
+  metodo_extraccion: reglas     # reglas | llm
+  usar_cache: true              # si el transcript ya está en cache/, no se re-transcribe
+  solo_cache: false             # la app y el CI ponen true: NUNCA transcriben
 
 # ---------------------------------------------------------------------
 # Glosario de dominio (comparación: plano vs con glosario)

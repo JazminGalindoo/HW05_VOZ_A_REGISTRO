@@ -4,6 +4,9 @@
 # ASR
 faster-whisper==1.2.1
 ctranslate2==4.8.4
+# PyAV (decodifica el audio en faster-whisper). La 19.x quitó el parámetro
+# metadata_errors que faster-whisper 1.2.1 usa -> TypeError. 18.1.0 es la última compatible.
+av==18.1.0
 
 # Métricas
 jiwer==4.0.0
