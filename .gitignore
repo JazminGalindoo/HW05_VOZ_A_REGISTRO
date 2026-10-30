@@ -229,3 +229,6 @@ models/
 *.bin
 *.pt
 # .env, .venv y __pycache__/ ya están ignorados arriba; .env.example SÍ se commitea
+
+# Cache de los audios subidos al probador de la app (no son del corpus)
+.probador_cache/

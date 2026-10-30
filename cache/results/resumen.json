@@ -1,0 +1,16 @@
+{
+  "metodos": [
+    "reglas"
+  ],
+  "n_clips_por_tarea": {
+    "entrevista": 4,
+    "pedido": 4
+  },
+  "transcripts_en_cache": 0,
+  "combinaciones_en_cache": [],
+  "clips_ignorados_sin_ground_truth": [],
+  "advertencias": [
+    "Muestra chica: 8 clips en total. Los IC bootstrap son anchos; una diferencia cuyo IC incluye 0 NO es evidencia de mejora.",
+    "El grupo 'referencia' mide solo la extracción (sin errores de ASR) y las reglas se escribieron mirando los guiones: es una cota optimista."
+  ]
+}

@@ -307,3 +307,16 @@ evaluacion:
       b: {modelo: large-v3, device: cuda, compute_type: float16, glosario: glosario}
   # Campos categóricos con macro-F1 (campo -> lista de clases en extraccion.categorias)
   macro_f1: {entrevista: nivel_ingles, pedido: metodo_pago}
+
+# ---------------------------------------------------------------------
+# App (streamlit run app.py): solo LEE cache/results y cache/transcripts.
+# La única pestaña que transcribe es "Probar un audio" (un clip NUEVO subido).
+# ---------------------------------------------------------------------
+app:
+  titulo: "De la voz al registro"
+  # Combinación de ASR que se muestra al abrir (si todavía no hay cache: "referencia")
+  combinacion_inicial: large-v3|cuda|float16|plano
+  # Motor del probador: liviano para que corra en CPU (sin GPU en la mayoría de PCs)
+  probador: {modelo: small, device: auto, compute_type: int8, glosario: plano}
+  # Transcripts de audios nuevos subidos al probador: fuera del repo
+  carpeta_probador: .probador_cache

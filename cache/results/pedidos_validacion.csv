@@ -1,0 +1,5 @@
+grupo,nivel,metodo,clip,total_dicho,total_esperado,total_correcto_gt,cuadra,diagnostico,motivo,trampa_total_erroneo,esperado,acierta
+referencia,-,reglas,L01,89,89,89,True,ok,la cuenta cuadra,False,ok,True
+referencia,-,reglas,L02,80,90,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+referencia,-,reglas,L03,75,65,65,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+referencia,-,reglas,L04,98,90,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,

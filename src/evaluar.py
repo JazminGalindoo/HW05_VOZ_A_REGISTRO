@@ -202,6 +202,45 @@ def tabla_extraccion(registros: list[dict], cfg: dict) -> pd.DataFrame:
     return pd.DataFrame(filas)
 
 
+def tabla_extraccion_por_clip(registros: list[dict], cfg: dict) -> pd.DataFrame:
+    """Una fila por clip: cuántos campos salieron bien. Se cruza con el WER del clip
+    para responder: ¿el WER predice si el registro sirve?"""
+    verdad = {t: leer_ground_truth(t, cfg) for t in ("entrevista", "pedido")}
+    filas = []
+    for r in registros:
+        res = r["resultado"]
+        aciertos = tabla_aciertos({r["clip"]: res.fields}, verdad[r["tarea"]], cfg)
+        correctos = [por_clip[r["clip"]] for por_clip in aciertos.values()]
+        filas.append({"grupo": r["grupo"], "nivel": r["nivel"], "metodo": r["metodo"],
+                      "tarea": r["tarea"], "clip": r["clip"],
+                      "campos_correctos": sum(correctos), "n_campos": len(correctos),
+                      "accuracy_registro": sum(correctos) / len(correctos),
+                      "campos_verificados": sum(res.verified.values()),
+                      "error": res.error})
+    return pd.DataFrame(filas)
+
+
+def tabla_capturas(validacion: pd.DataFrame) -> pd.DataFrame:
+    """Por grupo y nivel: de los totales mal dichos a propósito, cuántos atrapó el chequeo."""
+    if validacion.empty:
+        return pd.DataFrame()
+    filas = []
+    for (grupo, nivel, metodo), g in validacion.groupby(["grupo", "nivel", "metodo"]):
+        trampa = g["trampa_total_erroneo"].astype(bool)
+        no_cuadra = g["cuadra"] == False  # noqa: E712 (None = no se pudo chequear)
+        filas.append({
+            "grupo": grupo, "nivel": nivel, "metodo": metodo, "n_llamadas": len(g),
+            "trampas": int(trampa.sum()),
+            "capturadas": int((trampa & no_cuadra).sum()),             # no cuadra y era trampa
+            "perdidas": int((trampa & (g["cuadra"] == True)).sum()),  # noqa: E712 cuadra aunque era trampa
+            "falsas_alarmas": int((~trampa & no_cuadra).sum()),        # no cuadra sin trampa
+            "sin_chequeo": int(g["cuadra"].isna().sum()),
+            "diagnostico_aciertos": int((g["acierta"] == True).sum()),  # noqa: E712
+            "diagnostico_evaluados": int(g["acierta"].notna().sum()),
+        })
+    return pd.DataFrame(filas)
+
+
 def tabla_validacion(registros: list[dict], cfg: dict) -> pd.DataFrame:
     """Pedidos: ¿cuadra la cuenta?, diagnóstico y si acierta contra las trampas."""
     verdad = leer_ground_truth("pedido", cfg)
@@ -248,8 +287,10 @@ def evaluar(cfg: dict, metodos: list[str]) -> dict:
         "asr_resumen": resumen_asr(asr, cfg) if len(asr) else pd.DataFrame(),
         "comparaciones": tabla_comparaciones(asr, cfg) if len(asr) else pd.DataFrame(),
         "extraccion_por_campo": tabla_extraccion(registros, cfg),
+        "extraccion_por_clip": tabla_extraccion_por_clip(registros, cfg),
         "pedidos_validacion": tabla_validacion(registros, cfg),
     }
+    resultados["capturas_por_nivel"] = tabla_capturas(resultados["pedidos_validacion"])
     resultados["resumen"] = {
         "metodos": metodos,
         "n_clips_por_tarea": pd.Series(esquema_de).value_counts().to_dict(),

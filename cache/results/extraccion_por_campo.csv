@@ -1,0 +1,14 @@
+grupo,nivel,metodo,tarea,campo,n_clips,accuracy,ic_bajo,ic_alto,pct_verificado,errores_de_ejecucion,error_absoluto_medio,macro_f1
+referencia,-,reglas,entrevista,anios_experiencia,4,1.0,1.0,1.0,1.0,0,0.0,
+referencia,-,reglas,entrevista,ultimo_puesto,4,1.0,1.0,1.0,1.0,0,,
+referencia,-,reglas,entrevista,tecnologias,4,0.75,0.25,1.0,1.0,0,,
+referencia,-,reglas,entrevista,pretension_salarial,4,1.0,1.0,1.0,1.0,0,0.0,
+referencia,-,reglas,entrevista,moneda,4,1.0,1.0,1.0,1.0,0,,
+referencia,-,reglas,entrevista,disponibilidad,4,1.0,1.0,1.0,1.0,0,,
+referencia,-,reglas,entrevista,nivel_ingles,4,1.0,1.0,1.0,1.0,0,,1.0
+referencia,-,reglas,pedido,items,4,1.0,1.0,1.0,1.0,0,,
+referencia,-,reglas,pedido,promocion,4,1.0,1.0,1.0,0.75,0,,
+referencia,-,reglas,pedido,descuento,4,1.0,1.0,1.0,0.75,0,0.0,
+referencia,-,reglas,pedido,direccion_entrega,4,1.0,1.0,1.0,1.0,0,,
+referencia,-,reglas,pedido,metodo_pago,4,1.0,1.0,1.0,1.0,0,,1.0
+referencia,-,reglas,pedido,total_dicho,4,1.0,1.0,1.0,1.0,0,0.0,
