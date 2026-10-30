@@ -3,6 +3,8 @@ ASR con faster-whisper: de entrevistas y llamadas de venta grabadas a registros 
 
 > **Estado:** el pipeline completo está implementado y probado (tests + ensayo en CPU). Faltan los audios reales: las secciones de resultados (8 y 9) se llenan con `python -m src.evaluar` cuando el cache de Colab esté en el repo. Ningún número de resultados de este README está escrito a mano.
 
+**Documento del pipeline:** _(enlace público de Notion: pendiente)_ · versión en el repo: [docs/pipeline.md](docs/pipeline.md) (qué corre una vez, qué corre por cada audio, decisiones y lo descartado).
+
 ## 1. Descripción
 - **Tarea 1 — Entrevistas:** audio → registro del candidato con 6 campos (`anios_experiencia`, `ultimo_puesto`, `tecnologias`, `pretension_salarial` + `moneda`, `disponibilidad`, `nivel_ingles`), cada uno marcado `verificado` / `sin_verificar`.
 - **Tarea 2 — Llamadas de venta:** audio → pedido **final** (tras las autocorrecciones del cliente) que se valida aritméticamente: `Σ cantidad × precio − descuento = total dicho`.
@@ -205,7 +207,20 @@ _(pendiente: aciertos del diagnóstico)_
 Tests: `pytest` (rápidos, los corre el CI) y `pytest -m lento` (descarga Whisper `tiny` y transcribe de verdad en CPU).
 
 ## 11. App
-_(pendiente: `streamlit run app.py`. Solo leerá `cache/` con `motor.solo_cache: true`: nunca transcribe.)_
+```bash
+streamlit run app.py
+```
+Carga los resultados precalculados de `cache/results/` y **no transcribe el corpus al arrancar** (el test `tests/test_app.py` lo comprueba: falla si la app intenta transcribir). Si `python -m src.evaluar` reescribe los resultados, la app los toma sola en la siguiente interacción (lee cada tabla con su fecha de modificación como clave del cache).
+
+| Pestaña | Contenido |
+|---|---|
+| 1 · Problema y método | por qué no basta el celular, diagrama del pipeline, método |
+| 2 · Corpus | reproductor de audio (si el audio está en la PC) con el transcript de referencia y el del ASR al lado; registro extraído contra el ground truth; distribución de cada campo |
+| 3 · Resultados | capa 1 (WER/CER con IC, comparaciones pareadas) y capa 2 (accuracy por campo con IC, macro-F1, error absoluto, % verificado); WER del clip contra accuracy de su registro |
+| 4 · Probar un audio | subir un clip y ver transcript, registro, campos verificados, device real y tiempo. Es lo único que transcribe (`app.probador` en el config); su cache queda fuera del repo |
+| 5 · Pedidos (Tarea 2) | escalera con SNR medido, curva WER/accuracy por nivel, capturadas vs perdidas por nivel y chequeo aritmético en vivo |
+
+En la barra lateral se elige qué transcripción mirar (cada combinación de ASR en cache, o `referencia`) y el método de extracción.
 
 ## 12. Limitaciones
 - **Muestra muy chica:** 4 clips por tarea. Los IC son anchos y la muestra **no** soporta afirmar diferencias pequeñas entre modelos o configuraciones; solo diferencias grandes y consistentes.
