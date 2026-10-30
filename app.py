@@ -248,7 +248,11 @@ with t3:
         l0["combinación"] = l0[COMBO].astype(str).agg("|".join, axis=1)
         st.dataframe(l0[["tarea", "combinación", "device_real", "compute_real", "n_clips", "wer",
                          "wer_ic_bajo", "wer_ic_alto", "cer_promedio", "seg_por_min_audio",
-                         "peak_vram_mb_max"]].round(3), hide_index=True, width="stretch")
+                         "vram_extra_mb_max", "vram_modelo_mb", "vram_total_mb"]].round(3),
+                     hide_index=True, width="stretch")
+        st.caption("VRAM extra = lo que agrega transcribir con el modelo ya cargado. "
+                   "VRAM total = contexto CUDA + pesos + transcripción, medida aparte con "
+                   "`src/medir_vram.py` en un proceso nuevo (vacía si todavía no se midió).")
         l0["error_mas"], l0["error_menos"] = l0["wer_ic_alto"] - l0["wer"], l0["wer"] - l0["wer_ic_bajo"]
         st.plotly_chart(px.bar(l0, x="combinación", y="wer", color="tarea", barmode="group",
                                error_y="error_mas", error_y_minus="error_menos",
@@ -315,7 +319,7 @@ with t4:
             m1.metric("Device (runtime)", res.device)
             m2.metric("Compute", res.compute_type)
             m3.metric("Segundos", f"{res.elapsed_s:.1f}" + (" (cache)" if res.desde_cache else ""))
-            m4.metric("VRAM pico (MB)", "—" if res.peak_vram_mb is None else f"{res.peak_vram_mb:.0f}")
+            m4.metric("VRAM extra (MB)", "—" if res.peak_vram_mb is None else f"{res.peak_vram_mb:.0f}")
             st.text_area("Transcript", res.transcript, height=200)
             st.dataframe(tabla_registro(res), hide_index=True, width="stretch")
             if schema_p == "pedido":

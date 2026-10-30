@@ -90,26 +90,42 @@ def tabla_asr(corridas: list[dict], referencias: dict, esquema_de: dict, cfg: di
             "cer": cer(referencias[clip], d["transcript"], cfg),
             "errores": errores, "palabras_ref": palabras,
             "elapsed_s": d["elapsed_s"], "duracion_audio_s": d.get("duracion_audio_s"),
-            "seg_por_min_audio": d.get("seg_por_min_audio"), "peak_vram_mb": d["peak_vram_mb"],
+            "seg_por_min_audio": d.get("seg_por_min_audio"),
+            # VRAM extra durante la transcripción (sin pesos). En CPU no aplica, aunque el
+            # cache viejo traiga 0.0 (en Colab hay GPU y se midió igual)
+            "peak_vram_mb": d["peak_vram_mb"] if d["device"] == "cuda" else None,
             "transcript": d["transcript"],
         })
     return pd.DataFrame(filas)
 
 
+def leer_vram_modelos(cfg: dict) -> dict:
+    """VRAM total medida por src/medir_vram.py: {"large-v3|float16": {...}}; {} si no se midió."""
+    ruta = RAIZ / cfg["rutas"]["cache_results"] / "vram_modelos.json"
+    return json.loads(ruta.read_text(encoding="utf-8")) if ruta.exists() else {}
+
+
 def resumen_asr(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     """Por tarea y combinación: WER del conjunto con IC, CER, velocidad y VRAM."""
+    vram_modelos = leer_vram_modelos(cfg)
     filas = []
     for clave, g in df.groupby(["tarea", *COMBO, "nivel"]):
         ic = bootstrap_ic(list(zip(g["errores"], g["palabras_ref"])), wer_conjunto, cfg)
-        filas.append({
+        fila = {
             **dict(zip(["tarea", *COMBO, "nivel"], clave)),
             "n_clips": len(g), "device_real": "/".join(sorted(set(g["device_real"]))),
             "compute_real": "/".join(sorted(set(g["compute_real"]))),
             "wer": ic["estimacion"], "wer_ic_bajo": ic["ic_bajo"], "wer_ic_alto": ic["ic_alto"],
             "cer_promedio": g["cer"].mean(),
             "seg_por_min_audio": g["seg_por_min_audio"].mean(),
-            "peak_vram_mb_max": g["peak_vram_mb"].max(),
-        })
+            # Extra durante la transcripción (sin pesos), máximo entre clips
+            "vram_extra_mb_max": g["peak_vram_mb"].max(),
+        }
+        # Total (contexto CUDA + pesos + transcripción), medido aparte en un proceso nuevo
+        medida = vram_modelos.get(f"{fila['modelo']}|{fila['compute_type']}") if fila["device"] == "cuda" else None
+        fila["vram_modelo_mb"] = medida["modelo_mb"] if medida else None
+        fila["vram_total_mb"] = medida["total_mb"] if medida else None
+        filas.append(fila)
     return pd.DataFrame(filas)
 
 
@@ -139,8 +155,8 @@ def tabla_comparaciones(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
             "ic_incluye_0": dif["ic_bajo"] <= 0 <= dif["ic_alto"],
             "seg_por_min_a": a.loc[clips, "seg_por_min_audio"].mean(),
             "seg_por_min_b": b.loc[clips, "seg_por_min_audio"].mean(),
-            "vram_max_a": a.loc[clips, "peak_vram_mb"].max(),
-            "vram_max_b": b.loc[clips, "peak_vram_mb"].max(),
+            "vram_extra_max_a": a.loc[clips, "peak_vram_mb"].max(),
+            "vram_extra_max_b": b.loc[clips, "peak_vram_mb"].max(),
             # "¿Cambió el texto?": idéntico carácter a carácter, y WER de B contra A
             "clips_texto_identico": sum(a.loc[c, "transcript"] == b.loc[c, "transcript"] for c in clips),
             "wer_entre_salidas": float(np.mean([wer(a.loc[c, "transcript"], b.loc[c, "transcript"], cfg)

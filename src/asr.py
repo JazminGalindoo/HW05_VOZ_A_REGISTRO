@@ -9,6 +9,9 @@ Responsabilidad:
     - Medir en runtime: device REAL (del objeto del modelo / ctranslate2),
       tiempo transcurrido y VRAM pico con pynvml (hilo que muestrea cada ~50 ms;
       torch.cuda.max_memory_allocated NO sirve porque CTranslate2 no usa PyTorch).
+      OJO: peak_vram_mb es la VRAM EXTRA durante la transcripción (la medición empieza
+      con el modelo ya cargado, así que NO incluye los pesos). La VRAM total
+      (contexto CUDA + pesos + transcripción) la mide src/medir_vram.py.
     - Guardar y leer el cache de transcripts (cache/transcripts/*.json).
 """
 
@@ -155,7 +158,9 @@ def transcribir(audio_path: str, schema: str, cfg: dict) -> dict:
         "elapsed_s": round(elapsed_s, 3),
         "duracion_audio_s": round(info.duration, 3),
         "seg_por_min_audio": round(elapsed_s / (info.duration / 60), 3) if info.duration else None,
-        "peak_vram_mb": vram.pico_mb,
+        # VRAM extra durante la transcripción (sin los pesos). En CPU no aplica: aunque
+        # la máquina tenga GPU (Colab), lo que se mida ahí no es de este modelo
+        "peak_vram_mb": vram.pico_mb if modelo.model.device == "cuda" else None,
         "modelo": m["modelo"],
         "glosario": m["glosario"],
         "parametros_glosario": extra,
