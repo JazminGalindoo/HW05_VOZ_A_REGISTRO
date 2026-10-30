@@ -201,18 +201,26 @@ validacion:
 # ---------------------------------------------------------------------
 degradacion:
   niveles: [L0, L1, L2, L3]
+  ffmpeg: ffmpeg                # nombre o ruta del ejecutable
+  extensiones_audio: [.wav, .m4a, .mp3, .ogg, .opus, .aac, .flac]
+  sample_rate_mezcla_hz: 16000  # frecuencia a la que se mezcla el ruido (la de Whisper)
   L1:                           # tipo WhatsApp
     canales: 1
     codec: libopus
     bitrate_kbps: 12
+    extension: .ogg
   L2:                           # tipo teléfono
     paso_banda_hz: [300, 3400]
     sample_rate_hz: 8000
+    extension: .wav
   L3:                           # L1 + ruido ambiente
     base: L1
     snr_db: 10                  # SNR objetivo; el real se CALCULA con RMS y se reporta
     # Si L3 sigue perfecto, bajar el SNR (endurecer) y documentarlo
     snr_db_alternativos: [5, 0]
+    extension: .wav
+  # SNR medido de cada clip (lo escribe degrade.py, lo lee la app)
+  reporte: cache/results/degradacion.json
 
 # ---------------------------------------------------------------------
 # Métricas y bootstrap

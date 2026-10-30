@@ -21,7 +21,7 @@ python-dotenv==1.2.4
 
 # Audio
 soundfile==0.14.0
-ffmpeg-python==0.2.0
+# ffmpeg se llama con subprocess (src/degrade.py); no hace falta ffmpeg-python
 
 # Números en palabras -> dígitos
 text2num==3.1.0
