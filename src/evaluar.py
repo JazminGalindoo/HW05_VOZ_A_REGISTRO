@@ -363,9 +363,10 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Métricas finales desde cache/")
     parser.add_argument("--llm", action="store_true", help="incluir extracción con LLM")
     parser.add_argument("--verificar", action="store_true", help="fallar si no se cumplen umbrales")
+    parser.add_argument("--config", help="otro config.yaml (para probar umbrales)")
     args = parser.parse_args(argv)
 
-    cfg = cargar_config()
+    cfg = cargar_config(args.config)
     metodos = cfg["evaluacion"]["metodos"] + (["llm"] if args.llm else [])
     resultados = evaluar(cfg, metodos)
     print("Resultados en", guardar(resultados, cfg))

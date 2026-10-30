@@ -79,8 +79,12 @@ tests/                   # pytest
 ```
 
 ## 5. Datos y ground truth
-- **Todo el audio se grabó para este trabajo** (llamada de WhatsApp en altavoz, grabada con el celular). Todos los nombres, empresas, cifras y direcciones son inventados.
-- 4 entrevistas (`E01`–`E04`) y 4 llamadas a una pollería ficticia (`L01`–`L04`), de al menos 2 minutos cada una.
+> **Datos inventados:** todo lo que se dice en los audios es inventado: nombres, empresas, cargos, sueldos, direcciones, pedidos y precios. No hay datos personales reales de nadie.
+>
+> **Consentimiento:** todas las personas que aparecen en las grabaciones aceptaron participar y que sus voces se usen en este trabajo. No se nombra a ninguna persona real en el repositorio.
+
+- **Todo el audio se grabó para este trabajo** (llamada de WhatsApp en altavoz, grabada con el celular). Quien entrega este repositorio es una de las dos voces en todos los clips.
+- 4 entrevistas (`E01`–`E04`, 8,9 min en total) y 4 llamadas a una pollería ficticia (`L01`–`L04`, dominio **restaurante**, 9,5 min en total). Cada clip dura entre 2,06 y 2,53 min (medido por faster-whisper, `duracion_audio_s` en el cache).
 - **Ground truth escrito por humanos, antes de grabar:**
   - `scripts_grabacion/guiones.md`: el texto de cada clip. Si al grabar se dijo algo distinto, se corrige el guion.
   - `data/ground_truth/entrevistas.csv` y `llamadas.csv`: los valores correctos de cada campo.
@@ -234,6 +238,19 @@ Carga los resultados precalculados de `cache/results/` y **no transcribe el corp
 | 5 · Pedidos (Tarea 2) | escalera con SNR medido, curva WER/accuracy por nivel, capturadas vs perdidas por nivel y chequeo aritmético en vivo |
 
 En la barra lateral se elige qué transcripción mirar (cada combinación de ASR en cache, o `referencia`) y el método de extracción.
+
+**App publicada:** _(enlace de Streamlit Community Cloud: pendiente)_. Funciona sin audios ni GPU: lee `cache/` del repo; el reproductor de audio solo aparece donde el audio existe localmente, y el probador transcribe en CPU.
+
+## Innovación: regresión de calidad en GitHub Actions
+Cada push y cada PR corre `.github/workflows/regression.yml`, que:
+1. instala dependencias y ffmpeg, verifica que el motor no importe UI y corre `pytest`;
+2. corre `python -m src.evaluar --verificar`: **recalcula todas las métricas desde los transcripts cacheados** (nunca transcribe: los runners no tienen GPU) y **falla** si la combinación vigilada (`regresion.combinacion`, hoy large-v3 · int8) queda bajo los umbrales de `config.yaml`: WER > `wer_max` (0.30) o accuracy media de campos < `accuracy_campos_min` (0.70).
+
+**Comprobado que de verdad falla:**
+- **En GitHub:** el PR de demostración [#24](https://github.com/JazminGalindoo/HW05_VOZ_A_REGISTRO/pull/24) solo bajó `wer_max` a 0.10. La [corrida](https://github.com/JazminGalindoo/HW05_VOZ_A_REGISTRO/actions/runs/41125632566) quedó **en rojo** con `FALLA: WER entrevista … = 0.177 > 0.1` y `FALLA: WER pedido … = 0.277 > 0.1`. El PR se cerró sin mergear.
+- **En los tests:** `tests/test_evaluar.py` corre `--verificar` sobre el cache real con umbrales imposibles (WER 0.01, accuracy 0.99) y exige que salga con código 1; con los umbrales del repo, código 0.
+
+Así, un cambio que empeore la normalización, las reglas o el cache (por ejemplo, volver a romper el separador de miles) no se puede mergear sin que se vea.
 
 ## 12. Limitaciones
 - **Muestra muy chica:** 4 clips por tarea. Los IC son anchos y la muestra **no** soporta afirmar diferencias pequeñas entre modelos o configuraciones; solo diferencias grandes y consistentes.
