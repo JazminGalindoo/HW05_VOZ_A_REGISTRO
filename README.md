@@ -106,6 +106,10 @@ tests/                   # pytest
 - **Modo `plano`:** sin ayuda. **Modo `glosario`:** `initial_prompt` con una frase de contexto del dominio + `hotwords` con los términos clave (Python, Power BI, Yape, Plin…). Ambos por esquema, en `config.yaml → glosario`.
 - **Prueba de device:** el device y el compute type se leen del objeto CTranslate2 (`model.model.device`, `model.model.compute_type`), nunca del config. Ejemplo real: pedir `int8` en CPU corre como `int8_float32`.
 - **VRAM:** CTranslate2 no usa el allocator de PyTorch, así que `torch.cuda.max_memory_allocated()` no sirve. Un hilo lee la memoria usada de la GPU con `pynvml` cada 50 ms durante la transcripción y se reporta **pico − línea base**. Antes de medir con un modelo recién cargado se descarta una corrida de calentamiento (incluye inicializar CUDA).
+- **Hallazgo: Colab trae CUDA 13 y CTranslate2 necesita CUDA 12.** CTranslate2 4.8.4 está compilado para CUDA 12 + cuDNN 9; en el Colab actual (CUDA 13) falla al usar la GPU con `Library libcublas.so.12 is not found`.
+  - **Arreglo** (celda 3b del notebook): instalar `nvidia-cublas-cu12` y `nvidia-cudnn-cu12==9.*` con pip y **precargar** sus `.so` con `ctypes.CDLL(..., mode=RTLD_GLOBAL)` antes de importar faster-whisper. La misma celda hace una prueba real en GPU (`tiny` sobre 1 s de silencio), así el problema aparece en segundos y no a mitad de la grilla. Si se reinicia la sesión, hay que volver a correrla.
+  - **Lección:** que haya GPU en la máquina no garantiza que la librería pueda usarla; la incompatibilidad aparece recién al transcribir. Por eso el notebook prueba una transcripción real antes de la grilla, y el device de cada corrida se lee del modelo y se respalda con la VRAM medida.
+  - **Descartado:** bajar a una versión de CTranslate2 para CUDA 11, o cambiar la imagen de Colab. Lo primero obliga a otra versión de faster-whisper; lo segundo no es posible en el plan gratuito.
 
 ## 7. Normalización y números en palabras
 La misma normalización se aplica a hipótesis y referencia (`src/normalize.py`), en este orden:
@@ -119,16 +123,17 @@ La misma normalización se aplica a hipótesis y referencia (`src/normalize.py`)
 5. Se quita la puntuación (conservando el punto decimal: `2.5`) y se colapsan espacios.
 
 ## 8. Tarea 1 — Metodología y resultados
-Grilla de experimentos (`config.yaml → experimentos`), todos los clips en L0:
+Grilla de experimentos (`config.yaml → experimentos`), reducida para que entre en menos de 40 min en una T4 de Colab gratis:
 
-| Combinación | Compara |
-|---|---|
-| small · cuda · float16 · plano | base |
-| large-v3 · cuda · float16 · plano | tamaño |
-| small · cuda · int8 · plano | precisión (y GPU para CPU vs GPU) |
-| large-v3 · cuda · int8 · plano | precisión en large |
-| small · cpu · int8 · plano | CPU vs GPU |
-| small / large-v3 · cuda · float16 · glosario | glosario |
+| Combinación | Clips | Compara |
+|---|---|---|
+| small · cuda · float16 / int8 · plano | todos (L0) | precisión en small |
+| large-v3 · cuda · float16 / int8 · plano | todos (L0) | tamaño (vs small float16) y precisión en large |
+| large-v3 · cuda · int8 · glosario | todos (L0) | glosario (vs large-v3 int8 plano) |
+| small · cpu · int8 · plano | **solo E01 y L01** | CPU vs GPU (vs small cuda int8, mismos clips) |
+| large-v3 · cuda · int8 · plano | llamadas en L1–L3 | escalera (Tarea 2) |
+
+La combinación principal (la que vigila el CI y la que abre la app) es **large-v3 · cuda · int8 · plano**.
 
 **Métricas** (`src/metrics.py`, `src/evaluar.py`):
 - **WER/CER** con `jiwer` sobre texto normalizado. El WER de un conjunto de clips es Σ errores / Σ palabras (pesa por largo), no el promedio de WER.
@@ -196,7 +201,7 @@ _(pendiente: aciertos del diagnóstico)_
 
 ## 10. Cómo reproducir
 1. **Grabar** y subir a Drive: `MyDrive/HW05/audio/{entrevistas,llamadas,ruido}/`.
-2. **Transcribir en Colab GPU:** abrir `notebooks/colab_gpu_benchmark.ipynb`. Degrada las llamadas, recorre la grilla, guarda el cache en Drive (si se desconecta, retoma sin re-transcribir) y descarga `cache_hw05.zip`.
+2. **Transcribir en Colab GPU:** abrir `notebooks/colab_gpu_benchmark.ipynb` con entorno T4. Instala las dependencias y el arreglo de CUDA 12 (celda 3b, ver §6), degrada las llamadas, recorre la grilla, guarda el cache en Drive (si se desconecta, retoma sin re-transcribir) y descarga `cache_hw05.zip`.
 3. **En local:** descomprimir el zip en la raíz del repo y correr
    ```bash
    python -m src.evaluar            # + --llm para incluir la extracción con LLM
