@@ -12,6 +12,7 @@ rutas:
   audio_llamadas: data/audio/llamadas            # no se commitea
   audio_degradado: data/audio/degradado          # L1/, L2/, L3/ dentro
   audio_ruido: data/audio/ruido/ambiente.wav     # ruido para L3 (grabado por mí)
+  guiones: scripts_grabacion/guiones.md           # guiones escritos ANTES de grabar
   ground_truth_entrevistas: data/ground_truth/entrevistas.csv
   ground_truth_llamadas: data/ground_truth/llamadas.csv
   transcripts_referencia: data/ground_truth/transcripts_referencia

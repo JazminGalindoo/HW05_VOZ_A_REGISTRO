@@ -1,0 +1,5 @@
+clip,anios_experiencia,ultimo_puesto,tecnologias,pretension_salarial,moneda,disponibilidad,nivel_ingles,orden_campos
+E01,4,analista de datos,Python|SQL|Power BI,6500,PEN,2_semanas,intermedio,puesto>tecnologias>experiencia>ingles>disponibilidad>salario
+E02,7,desarrolladora backend,Java|Spring Boot|Docker|Kubernetes,9000,PEN,inmediata,avanzado,salario>ingles>tecnologias>puesto>disponibilidad>experiencia
+E03,2.5,asistente de marketing digital,Google Analytics|HubSpot|Canva,3800,PEN,2026-12-01,basico,ingles>disponibilidad>experiencia>salario>puesto>tecnologias
+E04,10,jefa de proyectos TI,Jira|AWS|Terraform,4000,USD,1_mes,avanzado,disponibilidad>tecnologias>salario>experiencia>ingles>puesto

@@ -1,0 +1,22 @@
+Buenos días, gracias por conectarse. Soy la encargada de selección. ¿Me escucha bien?
+Sí, buenos días, la escucho perfecto. Mi nombre es Lucía Ramos.
+Perfecto, Lucía. Para empezar, cuénteme, ¿en qué trabajó último?
+Mi último puesto fue de analista de datos en una distribuidora de alimentos. Veía los reportes de ventas de todas las tiendas y cada lunes armaba el resumen para gerencia.
+Interesante. ¿Y con qué herramientas trabajaba ahí?
+Sobre todo con Python para limpiar los datos, SQL para sacar la información de la base, y los tableros los hacía en Power BI. Al inicio usaba bastante Excel, pero eso ya casi no.
+¿Me cuenta de algún proyecto del que esté orgullosa?
+Sí, armé un tablero que mostraba qué productos se vencían antes de venderse. Con eso redujimos bastante las pérdidas en las tiendas de provincia.
+Muy bien. ¿Cuánto tiempo de experiencia tiene en total trabajando con datos?
+Empecé con unas prácticas y luego me contrataron… si sumo todo, son cuatro años de experiencia.
+El puesto requiere leer documentación en inglés y a veces reuniones con un equipo de afuera. ¿Cómo está su inglés?
+Diría que intermedio. Leo sin problema y escribo correos, pero hablando todavía me pongo un poco nerviosa.
+Es normal, no se preocupe. ¿Y cuándo podría empezar, si avanzamos?
+Tengo que avisar en mi trabajo actual, así que podría empezar en dos semanas.
+Perfecto. Última pregunta: ¿cuál es su pretensión salarial?
+Bueno, revisé un poco el mercado… estaría pensando en unos seis mil quinientos soles mensuales.
+Lo anoto. ¿Tiene alguna pregunta sobre el puesto?
+Sí, ¿el trabajo es remoto o presencial?
+Es híbrido: tres días en oficina y dos desde casa.
+Ah, perfecto, me acomoda bastante.
+Muy bien, Lucía. Le escribiremos esta semana con los siguientes pasos. Muchas gracias por su tiempo.
+Gracias a usted, que tenga buen día.
