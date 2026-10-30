@@ -88,6 +88,35 @@ def test_parametros_glosario(cfg):
     assert "Yape" in g["hotwords"]  # faster-whisper 1.2.1 tiene hotwords
 
 
+# ---------------- grilla de experimentos del notebook ----------------
+
+def test_grilla_de_experimentos_valida(cfg):
+    e, a = cfg["experimentos"], cfg["asr"]
+    combos = e["combinaciones_l0"] + e["escalera"]["combinaciones"]
+    for c in combos:
+        assert c["modelo"] in a["modelos"] and c["device"] in a["devices"], c
+        assert c["compute_type"] in a["compute_types"], c
+        assert c["glosario"] in cfg["glosario"]["modos"], c
+        assert not (c["device"] == "cpu" and c["compute_type"] == "float16"), "float16 no corre en CPU"
+    assert set(e["escalera"]["niveles"]) <= set(cfg["degradacion"]["niveles"])
+    # Están las 4 comparaciones pedidas
+    l0 = [(c["modelo"], c["device"], c["compute_type"], c["glosario"]) for c in e["combinaciones_l0"]]
+    assert {m for m, *_ in l0} == {"small", "large-v3"}                    # 2 tamaños
+    assert ("small", "cpu", "int8", "plano") in l0 and ("small", "cuda", "int8", "plano") in l0
+    assert {ct for _, _, ct, _ in l0} == {"float16", "int8"}               # 2 precisiones
+    assert {g for *_, g in l0} == {"plano", "glosario"}                    # glosario
+
+
+def test_notebook_es_json_valido_y_compila():
+    import ast
+    from pathlib import Path
+    nb = json.loads((Path(__file__).parent.parent / "notebooks" / "colab_gpu_benchmark.ipynb")
+                    .read_text(encoding="utf-8"))
+    for celda in nb["cells"]:
+        if celda["cell_type"] == "code":  # sin las líneas mágicas de Colab (! y %)
+            ast.parse("".join(l for l in celda["source"] if not l.lstrip().startswith(("!", "%"))))
+
+
 # ---------------- ASR real (lento) ----------------
 
 @pytest.mark.lento

@@ -57,6 +57,30 @@ motor:
   solo_cache: false             # la app y el CI ponen true: NUNCA transcriben
 
 # ---------------------------------------------------------------------
+# Grilla de experimentos (la recorre notebooks/colab_gpu_benchmark.ipynb)
+# Cada combinación se escribe completa; el comentario dice qué compara.
+# ---------------------------------------------------------------------
+experimentos:
+  # Todos los clips (entrevistas y llamadas) en L0
+  combinaciones_l0:
+    - {modelo: small,    device: cuda, compute_type: float16, glosario: plano}     # base
+    - {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}     # tamaño: vs base
+    - {modelo: small,    device: cuda, compute_type: int8,    glosario: plano}     # precisión: vs base
+    - {modelo: large-v3, device: cuda, compute_type: int8,    glosario: plano}     # precisión en large
+    - {modelo: small,    device: cpu,  compute_type: int8,    glosario: plano}     # CPU vs GPU: vs small/cuda/int8
+    - {modelo: small,    device: cuda, compute_type: float16, glosario: glosario}  # glosario: vs base
+    - {modelo: large-v3, device: cuda, compute_type: float16, glosario: glosario}  # glosario en large
+  # Solo llamadas, en los niveles degradados
+  escalera:
+    niveles: [L1, L2, L3]
+    combinaciones:
+      - {modelo: small,    device: cuda, compute_type: float16, glosario: plano}
+      - {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+  # Antes de medir con un modelo recién cargado se transcribe un clip y se
+  # descarta: la primera corrida incluye la inicialización de CUDA.
+  calentar: true
+
+# ---------------------------------------------------------------------
 # Glosario de dominio (comparación: plano vs con glosario)
 # Se pasa como initial_prompt y, si la versión instalada lo soporta, hotwords.
 # Verificar con inspect.signature(WhisperModel.transcribe) -> ver README.
