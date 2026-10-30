@@ -13,6 +13,7 @@ import soundfile as sf
 
 from src.asr import parametros_glosario, resolver_device, ruta_cache
 from src.engine import EngineResult, con_motor, process_audio, process_transcript
+from src.schemas import leer_ground_truth
 
 
 @pytest.fixture
@@ -93,7 +94,9 @@ def test_parametros_glosario(cfg):
 def test_grilla_de_experimentos_valida(cfg):
     e, a = cfg["experimentos"], cfg["asr"]
     combos = e["combinaciones_l0"] + e["escalera"]["combinaciones"]
+    clips_gt = set(leer_ground_truth("entrevista", cfg)) | set(leer_ground_truth("pedido", cfg))
     for c in combos:
+        assert set(c.get("clips", [])) <= clips_gt, f"clips desconocidos en {c}"
         assert c["modelo"] in a["modelos"] and c["device"] in a["devices"], c
         assert c["compute_type"] in a["compute_types"], c
         assert c["glosario"] in cfg["glosario"]["modos"], c
