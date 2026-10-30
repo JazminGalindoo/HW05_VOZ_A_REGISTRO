@@ -1,0 +1,9 @@
+grupo,nivel,metodo,tarea,clip,campos_correctos,n_campos,accuracy_registro,campos_verificados,error
+referencia,-,reglas,entrevista,E01,6,7,0.8571428571428571,7,
+referencia,-,reglas,entrevista,E02,7,7,1.0,7,
+referencia,-,reglas,entrevista,E03,7,7,1.0,7,
+referencia,-,reglas,entrevista,E04,7,7,1.0,7,
+referencia,-,reglas,pedido,L01,6,6,1.0,4,
+referencia,-,reglas,pedido,L02,6,6,1.0,6,
+referencia,-,reglas,pedido,L03,6,6,1.0,6,
+referencia,-,reglas,pedido,L04,6,6,1.0,6,

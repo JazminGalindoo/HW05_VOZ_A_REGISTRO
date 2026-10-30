@@ -83,6 +83,25 @@ def test_validacion_y_diagnostico(resultados):
     assert ref.loc[ref["diagnostico"] == "indeterminado", "acierta"].isna().all()
 
 
+def test_capturas_por_nivel(resultados):
+    _, r = resultados
+    cap = r["capturas_por_nivel"].set_index(["grupo", "nivel"])
+    l0 = cap.loc[("small|cuda|float16|plano", "L0")]
+    assert (l0["trampas"], l0["capturadas"], l0["perdidas"], l0["falsas_alarmas"]) == (3, 3, 0, 0)
+    assert (l0["diagnostico_aciertos"], l0["diagnostico_evaluados"]) == (4, 4)
+    l1 = cap.loc[("small|cuda|float16|plano", "L1")]  # solo L01, que deja de cuadrar
+    assert (l1["trampas"], l1["falsas_alarmas"]) == (0, 1)
+
+
+def test_extraccion_por_clip(resultados):
+    _, r = resultados
+    pc = r["extraccion_por_clip"]
+    e01 = pc[(pc["grupo"] == "referencia") & (pc["clip"] == "E01")].iloc[0]
+    assert (e01["campos_correctos"], e01["n_campos"]) == (6, 7)  # falla tecnologías
+    l01_l1 = pc[(pc["nivel"] == "L1") & (pc["clip"] == "L01")].iloc[0]
+    assert l01_l1["accuracy_registro"] < 1  # el total mal oído rompe el registro
+
+
 def test_sinteticos_quedan_fuera(resultados):
     _, r = resultados
     assert r["resumen"]["clips_ignorados_sin_ground_truth"] == ["Z99"]
@@ -103,5 +122,6 @@ def test_guardar(resultados, tmp_path):
     c["rutas"]["cache_results"] = str(tmp_path)
     carpeta = guardar(r, c)
     for nombre in ["asr_por_clip.csv", "asr_resumen.csv", "comparaciones.csv",
-                   "extraccion_por_campo.csv", "pedidos_validacion.csv", "resumen.json"]:
+                   "extraccion_por_campo.csv", "extraccion_por_clip.csv", "pedidos_validacion.csv",
+                   "capturas_por_nivel.csv", "resumen.json"]:
         assert (carpeta / nombre).exists(), nombre
