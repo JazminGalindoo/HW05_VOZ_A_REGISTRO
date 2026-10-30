@@ -1,0 +1,21 @@
+Hola, buenas tardes. ¿Daniela Salas?
+Sí, buenas tardes, ella habla.
+Mucho gusto, Daniela. Le voy a ser sincera: antes de seguir, quiero confirmar el tema económico, porque el rango de este puesto es bastante específico. ¿Cuál es su expectativa?
+Claro. Mi pretensión es de nueve mil soles, más o menos lo que gano ahora, quizá un poquito más.
+Está dentro del rango, perfecto. El equipo es internacional y las reuniones diarias son en inglés. ¿Qué tal su nivel?
+Avanzado. Trabajé dos años con un cliente de Canadá y todas las reuniones eran en inglés.
+Excelente. Cuénteme un poco de la parte técnica, ¿con qué tecnologías trabaja?
+Principalmente Java con Spring Boot para los servicios. Para desplegar uso Docker, y en mi último proyecto todo corría en Kubernetes.
+¿Y cuál fue su último puesto exactamente?
+Desarrolladora backend en una fintech. Me encargaba de los servicios de pagos, que eran los más delicados porque no podían caerse.
+¿Alguna vez se cayeron?
+Una vez, un viernes en la noche. Lo resolvimos en una hora, y después de eso armamos alertas para que no volviera a pasar.
+Buena respuesta. ¿Y cuándo podría incorporarse?
+De inmediato. Mi contrato terminó la semana pasada, así que estoy libre desde ya.
+Perfecto. Y en total, ¿cuántos años lleva programando de forma profesional?
+Siete años. Si cuento la universidad serían más, pero profesionalmente son siete.
+Muy bien. ¿Tiene alguna pregunta para mí?
+Sí, ¿cuántas personas son en el equipo?
+Son seis desarrolladores y una líder técnica.
+Perfecto, gracias.
+Gracias a usted, Daniela. Le avisamos el lunes.

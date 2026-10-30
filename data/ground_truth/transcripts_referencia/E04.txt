@@ -1,0 +1,21 @@
+Buenas tardes, ¿Andrea Paredes?
+Sí, buenas tardes.
+Gracias por conectarse. Empiezo por algo práctico: el proyecto arranca pronto. ¿En cuánto tiempo podría incorporarse?
+Tengo que dar un preaviso en mi empresa, así que podría empezar en un mes.
+Está bien. ¿Con qué herramientas gestiona sus proyectos?
+Para el seguimiento del equipo uso Jira, y en la parte técnica trabajamos sobre AWS. La infraestructura la manejamos con Terraform.
+Muy bien. Este puesto se paga en dólares. ¿Cuál sería su pretensión?
+Cuatro mil dólares mensuales.
+¿Y cuántos años tiene de experiencia?
+Uf… empecé como programadora y luego pasé a gestión. En total ya son diez años.
+Una década, impresionante. Con clientes de afuera, ¿qué tal su inglés?
+Avanzado. Hago presentaciones a clientes de Estados Unidos casi todas las semanas.
+Perfecto. ¿Y su cargo actual cuál es?
+Soy jefa de proyectos TI en una empresa de logística. Tengo a cargo dos equipos, en total unas doce personas.
+¿Cuál ha sido el proyecto más difícil?
+Mudar todo el sistema de una empresa a la nube sin que el negocio parara. Lo hicimos en etapas, durante varios fines de semana.
+Muy interesante. ¿Alguna pregunta para mí?
+Sí, ¿el equipo ya está formado o tendría que contratar?
+Hay cuatro personas y tendría que contratar dos más.
+Perfecto, gracias.
+Gracias, Andrea. Le escribimos en estos días.
