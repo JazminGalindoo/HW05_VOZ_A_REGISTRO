@@ -3,7 +3,7 @@ ASR con faster-whisper: de entrevistas y llamadas de venta grabadas a registros 
 
 > **Estado:** el pipeline completo está implementado y probado (tests + ensayo en CPU). Faltan los audios reales: las secciones de resultados (8 y 9) se llenan con `python -m src.evaluar` cuando el cache de Colab esté en el repo. Ningún número de resultados de este README está escrito a mano.
 
-**Documento del pipeline:** _(enlace público de Notion: pendiente)_ · versión en el repo: [docs/pipeline.md](docs/pipeline.md) (qué corre una vez, qué corre por cada audio, decisiones y lo descartado).
+**Documento del pipeline:** [Notion — Pipeline HW05: De la voz al registro](https://gamy-maple-386.notion.site/Pipeline-HW05-De-la-voz-al-registro-6754285ae77e83c2873f010292a6b284) · versión en el repo: [docs/pipeline.md](docs/pipeline.md) (qué corre una vez, qué corre por cada audio, decisiones y lo descartado).
 
 ## 1. Descripción
 - **Tarea 1 — Entrevistas:** audio → registro del candidato con 6 campos (`anios_experiencia`, `ultimo_puesto`, `tecnologias`, `pretension_salarial` + `moneda`, `disponibilidad`, `nivel_ingles`), cada uno marcado `verificado` / `sin_verificar`.
