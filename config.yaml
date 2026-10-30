@@ -277,7 +277,7 @@ metricas:
 # Valores iniciales: ajustarlos cuando haya resultados reales.
 # ---------------------------------------------------------------------
 regresion:
-  wer_max: 0.30
+  wer_max: 0.10
   accuracy_campos_min: 0.70
   # Qué combinación se vigila (si todavía no está en cache, solo se revisa
   # la extracción sobre los transcripts de referencia)
