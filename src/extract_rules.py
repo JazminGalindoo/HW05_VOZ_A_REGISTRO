@@ -185,7 +185,7 @@ def _promocion(t: str, items: list[dict], cfg: dict):
             if alias in m.group(1):
                 precio = next((i["precio_unitario"] for i in items
                                if i["producto"] == producto["producto"]), None)
-                return f"{producto['producto']} 2x1", precio or 0
+                return f"{alias} 2x1", precio or 0  # con la palabra dicha: "gaseosas 2x1"
     return None, 0
 
 
@@ -198,7 +198,7 @@ def _direccion(t: str, cfg: dict):
     ventana = " ".join(t[m.end():].split()[:12])
     unidad = re.search(r"\b(departamento|interior) (\d+(?: [a-z])?)\b", ventana)
     if unidad:
-        partes.append(f"{unidad.group(1)} {unidad.group(2).replace(' ', '')}")  # "4 b" -> "4b"
+        partes.append(f"{unidad.group(1)} {unidad.group(2)}")  # tal como se dijo: "4 b"
     for distrito in cfg["extraccion"]["reglas"]["distritos"]:
         if re.search(rf"\b{normalizar(distrito, cfg)}\b", ventana):
             partes.append(normalizar(distrito, cfg))
