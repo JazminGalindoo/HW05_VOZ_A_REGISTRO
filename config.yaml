@@ -61,21 +61,21 @@ motor:
 # Cada combinación se escribe completa; el comentario dice qué compara.
 # ---------------------------------------------------------------------
 experimentos:
-  # Todos los clips (entrevistas y llamadas) en L0
+  # Grilla reducida para que entre en < 40 min en una T4 (Colab gratis).
+  # Todos los clips en L0, salvo los que indican "clips".
   combinaciones_l0:
-    - {modelo: small,    device: cuda, compute_type: float16, glosario: plano}     # base
-    - {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}     # tamaño: vs base
-    - {modelo: small,    device: cuda, compute_type: int8,    glosario: plano}     # precisión: vs base
-    - {modelo: large-v3, device: cuda, compute_type: int8,    glosario: plano}     # precisión en large
-    - {modelo: small,    device: cpu,  compute_type: int8,    glosario: plano}     # CPU vs GPU: vs small/cuda/int8
-    - {modelo: small,    device: cuda, compute_type: float16, glosario: glosario}  # glosario: vs base
-    - {modelo: large-v3, device: cuda, compute_type: float16, glosario: glosario}  # glosario en large
-  # Solo llamadas, en los niveles degradados
+    - {modelo: small,    device: cuda, compute_type: float16, glosario: plano}     # small base
+    - {modelo: small,    device: cuda, compute_type: int8,    glosario: plano}     # precisión en small
+    - {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}     # tamaño: vs small float16
+    - {modelo: large-v3, device: cuda, compute_type: int8,    glosario: plano}     # precisión en large (combinación principal)
+    - {modelo: large-v3, device: cuda, compute_type: int8,    glosario: glosario}  # glosario: vs large int8 plano
+    # CPU vs GPU: solo 2 clips (en CPU es ~40 veces más lento); se compara con small/cuda/int8
+    - {modelo: small,    device: cpu,  compute_type: int8,    glosario: plano, clips: [E01, L01]}
+  # Solo llamadas, en los niveles degradados (la curva usa también su L0 de arriba)
   escalera:
     niveles: [L1, L2, L3]
     combinaciones:
-      - {modelo: small,    device: cuda, compute_type: float16, glosario: plano}
-      - {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+      - {modelo: large-v3, device: cuda, compute_type: int8, glosario: plano}
   # Antes de medir con un modelo recién cargado se transcribe un clip y se
   # descarta: la primera corrida incluye la inicialización de CUDA.
   calentar: true
@@ -278,7 +278,7 @@ regresion:
   accuracy_campos_min: 0.70
   # Qué combinación se vigila (si todavía no está en cache, solo se revisa
   # la extracción sobre los transcripts de referencia)
-  combinacion: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+  combinacion: {modelo: large-v3, device: cuda, compute_type: int8, glosario: plano}
 
 # ---------------------------------------------------------------------
 # Evaluación final (python -m src.evaluar): lee cache/, escribe cache/results/
@@ -287,10 +287,10 @@ evaluacion:
   metodos: [reglas]             # "llm" se agrega con: python -m src.evaluar --llm
   # Comparaciones pareadas en L0: diferencia de WER = WER(b) - WER(a) con IC bootstrap
   comparaciones:
-    - nombre: tamaño (small -> large-v3)
+    - nombre: tamaño (small -> large-v3), float16
       a: {modelo: small,    device: cuda, compute_type: float16, glosario: plano}
       b: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
-    - nombre: device (cpu -> cuda), small int8
+    - nombre: device (cpu -> cuda), small int8, 2 clips
       a: {modelo: small, device: cpu,  compute_type: int8, glosario: plano}
       b: {modelo: small, device: cuda, compute_type: int8, glosario: plano}
     - nombre: precisión (float16 -> int8), small
@@ -299,12 +299,9 @@ evaluacion:
     - nombre: precisión (float16 -> int8), large-v3
       a: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
       b: {modelo: large-v3, device: cuda, compute_type: int8,    glosario: plano}
-    - nombre: glosario (plano -> glosario), small
-      a: {modelo: small, device: cuda, compute_type: float16, glosario: plano}
-      b: {modelo: small, device: cuda, compute_type: float16, glosario: glosario}
-    - nombre: glosario (plano -> glosario), large-v3
-      a: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
-      b: {modelo: large-v3, device: cuda, compute_type: float16, glosario: glosario}
+    - nombre: glosario (plano -> glosario), large-v3 int8
+      a: {modelo: large-v3, device: cuda, compute_type: int8, glosario: plano}
+      b: {modelo: large-v3, device: cuda, compute_type: int8, glosario: glosario}
   # Campos categóricos con macro-F1 (campo -> lista de clases en extraccion.categorias)
   macro_f1: {entrevista: nivel_ingles, pedido: metodo_pago}
 
@@ -315,7 +312,7 @@ evaluacion:
 app:
   titulo: "De la voz al registro"
   # Combinación de ASR que se muestra al abrir (si todavía no hay cache: "referencia")
-  combinacion_inicial: large-v3|cuda|float16|plano
+  combinacion_inicial: large-v3|cuda|int8|plano
   # Motor del probador: liviano para que corra en CPU (sin GPU en la mayoría de PCs)
   probador: {modelo: small, device: auto, compute_type: int8, glosario: plano}
   # Transcripts de audios nuevos subidos al probador: fuera del repo

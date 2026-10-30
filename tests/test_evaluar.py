@@ -54,7 +54,7 @@ def test_wer_por_combinacion(resultados):
 
 def test_comparacion_tamano(resultados):
     _, r = resultados
-    fila = r["comparaciones"].set_index("comparacion").loc["tamaño (small -> large-v3)"]
+    fila = r["comparaciones"].set_index("comparacion").loc["tamaño (small -> large-v3), float16"]
     assert fila["n_clips"] == 8 and fila["wer_a"] == 0
     assert fila["dif_wer_b_menos_a"] == pytest.approx(fila["wer_b"]) and fila["dif_wer_b_menos_a"] > 0
     assert fila["clips_texto_identico"] == 0
