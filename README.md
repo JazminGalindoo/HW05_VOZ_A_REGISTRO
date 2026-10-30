@@ -96,7 +96,7 @@ tests/                   # pytest
 | L01 | sí (2 gaseosas → 1) | 89 | 89 |
 | L02 | sí (3 chaufas → 2) | **80** | 90 |
 | L03 | sí (pollo entero → 2 cuartos) | **75** (olvida el 2×1) | 65 |
-| L04 | no | **98** | 90 |
+| L04 | no | **98** | 87 (el chaufa se dijo a 25; el guion decía 28 y se corrigió tras escuchar el audio) |
 
 - En las entrevistas los campos se preguntan **en distinto orden** en cada clip (columna `orden_campos`), para que la extracción no dependa del orden.
 - **Datos sintéticos:** ninguno entra en las métricas. Durante el desarrollo se usó una frase con voz sintética de Windows solo para probar que el pipeline corre de punta a punta; ese audio no está en el repo, y `src/evaluar.py` ignora cualquier clip que no esté en el ground truth (y lo lista en `cache/results/resumen.json`).
@@ -260,7 +260,11 @@ Así, un cambio que empeore la normalización, las reglas o el cache (por ejempl
 - **Reglas ajustadas a los guiones** (§8.5): su acierto sobre referencias es optimista.
 - **Reglas ajustadas después de ver la salida del ASR:** se agregaron 3 formas de decir que aparecieron al grabar ("pollo entero **está a** 64 soles", "el total **sería de** 98", "su pedido **sería**…"), además del separador de miles (§7). Son frases comunes del español y no errores del ASR, pero se detectaron con este mismo corpus: los resultados con ASR también son algo optimistas.
   - **No** se adaptaron las reglas a los errores del ASR ("en **totales** 80", "**Girón Guayaga**… encercado", "desarrolladora de **bacnet**", "las **doceras** están a" por "las gaseosas están dos por uno"). Esos errores son el hallazgo: rompen el registro aunque el WER sea moderado.
-- **Referencias = guiones, no lo dicho palabra por palabra:** al grabar se improvisaron frases ("¿algo más que desee?", "el total sería de…"). Si no se corrigen los transcripts de referencia escuchando el audio, el WER mide el error del ASR **más** la diferencia entre el guion y lo dicho, y queda inflado.
+- **Referencias = guiones, corregidos solo en números y valores de campos.** Al grabar se improvisaron frases ("¿algo más que desee?", "el total sería de…").
+  - **Lo que se corrigió escuchando el audio:** solo las diferencias que tocan un número o el valor de un campo. Se listan en [docs/revisar_numeros_y_campos.md](docs/revisar_numeros_y_campos.md), con clip y minuto:segundo; ahí también se anota qué se dijo. Hasta ahora: L04, chaufa a **25** soles (no 28).
+  - **Lo que NO se corrigió:** las demás diferencias entre guion y audio (muletillas, frases de cortesía, preguntas reformuladas). Están en [docs/revisar_referencias.md](docs/revisar_referencias.md) (115 fragmentos).
+  - **Consecuencia: el WER está inflado.** Mide el error del ASR **más** lo improvisado que no se corrigió. Las métricas del **registro** no se afectan, porque los valores de los campos sí se corrigieron. Las comparaciones **pareadas** entre configuraciones (tamaño, precisión, glosario, CPU/GPU) siguen siendo válidas: todas se miden contra la misma referencia.
+  - **Además, large-v3 se salta frases completas**, sobre todo al final de algunos clips (E02, E04, L01). Son borrados reales del ASR, no improvisaciones.
 - **Ground truth anotado por una sola persona** y guiones leídos (habla menos espontánea que una llamada real).
 - **El diagnóstico usa probabilidades de Whisper**, que no están calibradas; el umbral de 0.80 es una elección, no un valor ajustado.
 

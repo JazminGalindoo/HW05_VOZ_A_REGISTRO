@@ -138,26 +138,27 @@ Los transcripts de referencia salen del guion, pero al grabar se improvisó. Par
 | 14 | 2:06 | es 1 poco confusa **no se preocupe tenemos su numero y le timbra antes de llegar gracias cuanto demora unos 45 minutos** listo gracias gracias a | es 1 poco confusa **ok cuanto estaria demorando ok** listo gracias gracias a | sí | |
 | 15 | 2:21 | gracias gracias a usted **∅** buenas noches | gracias gracias a usted **por su pedido** buenas noches | sí | |
 
-## L04 — 19 fragmentos
+## L04 — 20 fragmentos
 
 | # | Tiempo | Guion | ASR | ¿Otros modelos igual? | Lo que se dijo |
 |---|---|---|---|---|---|
 | 1 | 0:07 | pollo entero por favor **pollo entero** 64 soles algo mas | pollo entero por favor **ok pollo entero esta a** 64 soles algo mas | no | |
 | 2 | 0:10 | 64 soles algo mas **∅** 1 arroz chaufa y | 64 soles algo mas **que desee** 1 arroz chaufa y | no | |
-| 3 | 0:14 | 1 arroz chaufa y **1 ensalada chaufa a 28 soles y** ensalada a 8 soles | 1 arroz chaufa y **ensalada ok chaufa a 25 soles y de** ensalada a 8 soles | no | |
-| 4 | 0:27 | la promocion del dia **ah perfecto** direccion de entrega avenida | la promocion del dia **excelente perfecto ok la** direccion de entrega avenida | sí | |
-| 5 | 0:36 | entrega avenida arequipa 2890 **en lince es 1 edificio interior 302** avenida arequipa 2890 interior | entrega avenida arequipa 2890 **inficio interior 302 ok** avenida arequipa 2890 interior | no | |
-| 6 | 0:48 | 302 lince alguna referencia **∅** esta cerca de 1 | 302 lince alguna referencia **que me podria dar** esta cerca de 1 | no | |
-| 7 | 0:55 | cerca de 1 banco **en la esquina el portero recibe el pedido perfecto** como va a pagar | cerca de 1 banco **el banco es el nivel pedido ok** como va a pagar | no | |
-| 8 | 1:02 | como va a pagar **con tarjeta** muy bien el motorizado | como va a pagar **el pedido con tarjeta por favor** muy bien el motorizado | sí | |
-| 9 | 1:08 | bien el motorizado lleva **pos entonces es** 1 pollo entero 1 | bien el motorizado lleva **el pos entonces seria** 1 pollo entero 1 | sí | |
-| 10 | 1:16 | su descuento el total **es** 98 soles ya perfecto | su descuento el total **seria de** 98 soles ya perfecto | sí | |
-| 11 | 1:20 | 98 soles ya perfecto **mandan cremas si** mayonesa ketchup y aji | 98 soles ya perfecto **me mandan cremas si mandamos todas** mayonesa ketchup y aji | no | |
-| 12 | 1:34 | mayonesa ketchup y aji **oiga el pollo lo pueden cortar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |
-| 13 | 1:42 | perfecto y el chaufa **es para cuantas personas** alcanza bien para 2 | perfecto y el chaufa **para cuantas personas alcanza de acuerdo a lo que ustedes venden** alcanza bien para 2 | no | |
-| 14 | 1:50 | bien para 2 personas **∅** ya esta bien y | bien para 2 personas **en verdad** ya esta bien y | no | |
-| 15 | 1:58 | motorizado sube si si **el edificio lo** permite sube hasta la | motorizado sube si si **si el edificio le** permite sube hasta la | no | |
-| 16 | 2:00 | sube hasta la puerta **si no le llama para que baje listo me parece bien es que** estoy con mi mama | sube hasta la puerta **y si no le van a llamar para que usted pueda bajar listo** estoy con mi mama | sí | |
-| 17 | 2:08 | que no camina mucho **∅** no se preocupe le | que no camina mucho **y por eso le indico en caso que no este el portero para que pueda salir ok** no se preocupe le | no | |
-| 18 | 2:16 | le avisamos con tiempo **y cuanto se demora** unos 30 minutos aproximadamente | le avisamos con tiempo **cuanto tiempo sirve para traer el pedido yo creo que** unos 30 minutos aproximadamente | no | |
-| 19 | 2:28 | unos 30 minutos aproximadamente **listo gracias** gracias por su pedido | unos 30 minutos aproximadamente **∅** gracias por su pedido | sí | |
+| 3 | 0:14 | 1 arroz chaufa y **1 ensalada** chaufa a 25 soles | 1 arroz chaufa y **ensalada ok** chaufa a 25 soles | no | |
+| 4 | 0:17 | a 25 soles y **∅** ensalada a 8 soles | a 25 soles y **de** ensalada a 8 soles | no | |
+| 5 | 0:27 | la promocion del dia **ah perfecto** direccion de entrega avenida | la promocion del dia **excelente perfecto ok la** direccion de entrega avenida | sí | |
+| 6 | 0:36 | entrega avenida arequipa 2890 **en lince es 1 edificio interior 302** avenida arequipa 2890 interior | entrega avenida arequipa 2890 **inficio interior 302 ok** avenida arequipa 2890 interior | no | |
+| 7 | 0:48 | 302 lince alguna referencia **∅** esta cerca de 1 | 302 lince alguna referencia **que me podria dar** esta cerca de 1 | no | |
+| 8 | 0:55 | cerca de 1 banco **en la esquina el portero recibe el pedido perfecto** como va a pagar | cerca de 1 banco **el banco es el nivel pedido ok** como va a pagar | no | |
+| 9 | 1:02 | como va a pagar **con tarjeta** muy bien el motorizado | como va a pagar **el pedido con tarjeta por favor** muy bien el motorizado | sí | |
+| 10 | 1:08 | bien el motorizado lleva **pos entonces es** 1 pollo entero 1 | bien el motorizado lleva **el pos entonces seria** 1 pollo entero 1 | sí | |
+| 11 | 1:16 | su descuento el total **es** 98 soles ya perfecto | su descuento el total **seria de** 98 soles ya perfecto | sí | |
+| 12 | 1:20 | 98 soles ya perfecto **mandan cremas si** mayonesa ketchup y aji | 98 soles ya perfecto **me mandan cremas si mandamos todas** mayonesa ketchup y aji | no | |
+| 13 | 1:34 | mayonesa ketchup y aji **oiga el pollo lo pueden cortar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |
+| 14 | 1:42 | perfecto y el chaufa **es para cuantas personas** alcanza bien para 2 | perfecto y el chaufa **para cuantas personas alcanza de acuerdo a lo que ustedes venden** alcanza bien para 2 | no | |
+| 15 | 1:50 | bien para 2 personas **∅** ya esta bien y | bien para 2 personas **en verdad** ya esta bien y | no | |
+| 16 | 1:58 | motorizado sube si si **el edificio lo** permite sube hasta la | motorizado sube si si **si el edificio le** permite sube hasta la | no | |
+| 17 | 2:00 | sube hasta la puerta **si no le llama para que baje listo me parece bien es que** estoy con mi mama | sube hasta la puerta **y si no le van a llamar para que usted pueda bajar listo** estoy con mi mama | sí | |
+| 18 | 2:08 | que no camina mucho **∅** no se preocupe le | que no camina mucho **y por eso le indico en caso que no este el portero para que pueda salir ok** no se preocupe le | no | |
+| 19 | 2:16 | le avisamos con tiempo **y cuanto se demora** unos 30 minutos aproximadamente | le avisamos con tiempo **cuanto tiempo sirve para traer el pedido yo creo que** unos 30 minutos aproximadamente | no | |
+| 20 | 2:28 | unos 30 minutos aproximadamente **listo gracias** gracias por su pedido | unos 30 minutos aproximadamente **∅** gracias por su pedido | sí | |

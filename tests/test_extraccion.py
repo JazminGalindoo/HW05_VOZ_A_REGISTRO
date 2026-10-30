@@ -161,10 +161,18 @@ def test_llm_reintenta_si_el_json_no_valida(cfg_rapido, referencias):
     assert len(cliente.solicitudes) == 3
 
 
-def test_llm_espera_si_el_api_responde_429(cfg_rapido, referencias):
+def test_llm_espera_si_el_api_responde_429_o_503(cfg_rapido, referencias):
     limite = errors.ClientError(429, {"error": {"message": "cuota", "status": "RESOURCE_EXHAUSTED"}})
-    cliente = ClienteFalso([limite, (json.dumps(_registro_e01()), "STOP")])
+    saturado = errors.ServerError(503, {"error": {"message": "high demand", "status": "UNAVAILABLE"}})
+    cliente = ClienteFalso([limite, saturado, (json.dumps(_registro_e01()), "STOP")])
     assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente) == _registro_e01()
+    assert len(cliente.solicitudes) == 3
+
+
+def test_llm_otros_errores_no_se_esconden(cfg_rapido, referencias):
+    malo = errors.ClientError(400, {"error": {"message": "bad request", "status": "INVALID_ARGUMENT"}})
+    with pytest.raises(errors.ClientError):
+        extraer_llm(referencias["E01"], "entrevista", cfg_rapido, ClienteFalso([malo]))
 
 
 def test_llm_rechazo_lanza_error(cfg_rapido, referencias):

@@ -13,7 +13,8 @@ Este script solo dice DÓNDE escuchar:
       así (improvisación); si solo uno, probablemente es error del ASR. Es una pista,
       la decisión es de quien escucha.
 
-Uso:  python scripts_grabacion/revisar_referencias.py   -> docs/revisar_referencias.md
+Uso:  python scripts_grabacion/revisar_referencias.py                 -> docs/revisar_referencias.md
+      python scripts_grabacion/revisar_referencias.py --solo-campos  -> docs/revisar_numeros_y_campos.md
 """
 
 import json
@@ -47,6 +48,49 @@ def tokens_con_tiempo(datos: dict, cfg: dict) -> list[tuple[str, float]]:
     return salida
 
 
+PALABRAS_CORTAS = {"de", "la", "el", "en", "los", "las", "del", "y", "a", "con", "por", "para",
+                   "al", "que", "es", "un", "una", "unos", "unas", "su", "mi"}
+
+
+def vocabulario_de_campos(clip: str, cfg: dict) -> set[str]:
+    """Palabras que forman VALORES de campos: las del ground truth de ese clip
+    y las del catálogo del config (tecnologías, carta, pagos, distritos...)."""
+    from src.schemas import leer_ground_truth
+    textos = []
+    for tarea in ("entrevista", "pedido"):
+        registro = leer_ground_truth(tarea, cfg).get(clip)
+        if not registro:
+            continue
+        for campo, valor in registro.items():
+            if campo.startswith("_") or valor is None:
+                continue
+            for v in (valor if isinstance(valor, list) else [valor]):
+                textos += [str(x) for x in v.values()] if isinstance(v, dict) else [str(v)]
+    r = cfg["extraccion"]["reglas"]
+    textos += r["tecnologias_conocidas"] + r["distritos"] + list(r["monedas"])
+    textos += [p for palabras in r["metodos_pago"].values() for p in palabras]
+    textos += [a for producto in r["carta"] for a in producto["alias"]]
+    textos += cfg["extraccion"]["categorias"]["nivel_ingles"]
+    palabras = set(normalizar(" ".join(textos), cfg).split())
+    return {p for p in palabras if p not in PALABRAS_CORTAS and len(p) >= 3}
+
+
+def toca_un_campo(dif_guion: list[str], dif_asr: list[str], vocabulario: set[str]) -> bool:
+    """¿La diferencia cambia un número o un valor de campo?
+
+    Solo cuentan las palabras que están de UN lado y no del otro: si "tarjeta"
+    aparece en el guion y en el ASR, el valor no cambió aunque cambie lo de alrededor.
+    "1" solo cuenta junto a una palabra de campo: "un/una" se normaliza a 1 y,
+    suelto, casi siempre es un artículo ("en 1 empresa").
+    """
+    from collections import Counter
+    g, a = Counter(dif_guion), Counter(dif_asr)
+    dif = list(((g - a) + (a - g)).elements())
+    de_campo = [p for p in dif if p in vocabulario]
+    numeros = [p for p in dif if any(c.isdigit() for c in p) and (p != "1" or de_campo)]
+    return bool(de_campo or numeros)
+
+
 def mmss(segundos: float) -> str:
     return f"{int(segundos // 60)}:{int(segundos % 60):02d}"
 
@@ -76,11 +120,13 @@ def fragmentos(ref: list[str], asr: list[tuple[str, float]]) -> list[dict]:
         # Lo que escribió el ASR con 2 palabras de contexto, para buscarlo en otros modelos
         clave = " ".join(palabras_asr[max(0, j1 - 2):j2 + 2])
         salida.append({"tiempo": t, "guion": con_contexto(ref, i1, i2),
-                       "asr": con_contexto(palabras_asr, j1, j2), "clave": clave})
+                       "asr": con_contexto(palabras_asr, j1, j2), "clave": clave,
+                       "dif_guion": ref[i1:i2], "dif_asr": palabras_asr[j1:j2]})
     return salida
 
 
 def main():
+    solo_campos = "--solo-campos" in sys.argv
     cfg = cargar_config()
     cache = RAIZ / cfg["rutas"]["cache_transcripts"]
     refs = RAIZ / cfg["rutas"]["transcripts_referencia"]
@@ -113,6 +159,9 @@ def main():
                                   ["transcript"], cfg) + " "
                  for o in OTROS if (cache / f"{clip}__{o}.json").exists()]
         frags = fragmentos(ref, asr)
+        if solo_campos:
+            vocabulario = vocabulario_de_campos(clip, cfg)
+            frags = [f for f in frags if toca_un_campo(f["dif_guion"], f["dif_asr"], vocabulario)]
         total += len(frags)
         lineas += [f"## {clip} — {len(frags)} fragmentos", "",
                    "| # | Tiempo | Guion | ASR | ¿Otros modelos igual? | Lo que se dijo |",
@@ -122,7 +171,13 @@ def main():
             lineas.append(f"| {n} | {mmss(f['tiempo'])} | {f['guion']} | {f['asr']} | {igual} | |")
         lineas.append("")
 
-    salida = RAIZ / "docs" / "revisar_referencias.md"
+    if solo_campos:
+        lineas[0] = "# Revisar SOLO números y valores de campos contra el audio"
+        lineas.insert(2, "Subconjunto de `revisar_referencias.md`: solo los fragmentos donde lo que difiere "
+                         "es un número o una palabra que forma el valor de un campo (ground truth del clip "
+                         "o catálogo del config). El resto de diferencias no se corrige: ver README §12.\n")
+    nombre = "revisar_numeros_y_campos.md" if solo_campos else "revisar_referencias.md"
+    salida = RAIZ / "docs" / nombre
     salida.write_text("\n".join(lineas), encoding="utf-8")
     print(f"{total} fragmentos -> {salida}")
 
