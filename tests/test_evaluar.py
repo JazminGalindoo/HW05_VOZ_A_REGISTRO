@@ -139,3 +139,26 @@ def test_guardar(resultados, tmp_path):
                    "extraccion_por_campo.csv", "extraccion_por_clip.csv", "pedidos_validacion.csv",
                    "capturas_por_nivel.csv", "resumen.json"]:
         assert (carpeta / nombre).exists(), nombre
+
+
+# ---------------- la regresión de verdad falla (sobre el cache REAL del repo) ----------------
+
+def _config_temporal(cfg, tmp_path, **umbrales):
+    import yaml
+    c = json.loads(json.dumps(cfg))
+    c["rutas"]["cache_results"] = str(tmp_path / "results")  # no pisar cache/results del repo
+    c["regresion"].update(umbrales)
+    ruta = tmp_path / "config.yaml"
+    ruta.write_text(yaml.safe_dump(c, allow_unicode=True), encoding="utf-8")
+    return str(ruta)
+
+
+def test_verificar_pasa_con_los_umbrales_del_repo(cfg, tmp_path):
+    from src.evaluar import main
+    assert main(["--verificar", "--config", _config_temporal(cfg, tmp_path)]) == 0
+
+
+@pytest.mark.parametrize("umbral", [{"wer_max": 0.01}, {"accuracy_campos_min": 0.99}])
+def test_verificar_falla_si_baja_la_calidad(cfg, tmp_path, umbral):
+    from src.evaluar import main
+    assert main(["--verificar", "--config", _config_temporal(cfg, tmp_path, **umbral)]) == 1
