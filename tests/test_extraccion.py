@@ -89,22 +89,40 @@ def test_reglas_con_formas_de_hablar_del_audio_real(cfg):
     assert e["pretension_salarial"] == 6500
 
 
-# ---------------- LLM con cliente falso ----------------
+# ---------------- LLM (Gemini) con cliente falso ----------------
+
+from google.genai import errors, types  # noqa: E402
+
+from src.extract_llm import esquema_para_gemini  # noqa: E402
+
+
+@pytest.fixture
+def cfg_rapido(cfg):
+    """Sin pausas del nivel gratuito: los tests no deben esperar."""
+    c = json.loads(json.dumps(cfg))
+    c["extraccion"]["llm"].update(pausa_entre_llamadas_s=0, espera_si_limite_s=0)
+    return c
+
 
 class ClienteFalso:
-    """Imita anthropic.Anthropic: guarda las solicitudes y devuelve respuestas preparadas."""
+    """Imita genai.Client: guarda las solicitudes y devuelve respuestas preparadas.
+
+    Cada respuesta es (texto, motivo_de_fin) o una excepción para lanzar.
+    """
 
     def __init__(self, respuestas):
         self.respuestas = list(respuestas)
         self.solicitudes = []
-        self.messages = SimpleNamespace(create=self._crear)
-        self.beta = SimpleNamespace(messages=SimpleNamespace(create=self._crear))
+        self.models = SimpleNamespace(generate_content=self._generar)
 
-    def _crear(self, **solicitud):
+    def _generar(self, **solicitud):
         self.solicitudes.append(solicitud)
-        texto, stop = self.respuestas.pop(0)
-        return SimpleNamespace(stop_reason=stop,
-                               content=[SimpleNamespace(type="text", text=texto)])
+        r = self.respuestas.pop(0)
+        if isinstance(r, Exception):
+            raise r
+        texto, motivo = r
+        return SimpleNamespace(text=texto, prompt_feedback=None,
+                               candidates=[SimpleNamespace(finish_reason=types.FinishReason[motivo])])
 
 
 def _registro_e01():
@@ -113,28 +131,43 @@ def _registro_e01():
             "moneda": "PEN", "disponibilidad": "2_semanas", "nivel_ingles": "intermedio"}
 
 
-def test_solicitud_sin_temperatura_y_con_schema(cfg, referencias):
+def test_solicitud_gemini_json_estructurado_y_temperatura_0(cfg, referencias):
     s = armar_solicitud(referencias["E01"], "entrevista", cfg)
-    assert "temperature" not in s  # el API 2026-10-21 la rechaza
     assert s["model"] == cfg["extraccion"]["llm"]["modelo"]
-    assert s["output_config"]["format"]["type"] == "json_schema"
-    assert referencias["E01"] in s["messages"][0]["content"]  # va el transcript completo
+    assert s["config"].temperature == 0
+    assert s["config"].response_mime_type == "application/json"
+    assert s["config"].response_json_schema["required"]  # el esquema de schemas.py
+    assert referencias["E01"] in s["contents"]  # va el transcript completo
 
 
-def test_llm_devuelve_registro_valido(cfg, referencias):
-    cliente = ClienteFalso([(json.dumps(_registro_e01()), "end_turn")])
-    assert extraer_llm(referencias["E01"], "entrevista", cfg, cliente) == _registro_e01()
+def test_esquema_para_gemini_sin_listas_en_type(cfg):
+    from src.schemas import esquema_json
+    g = esquema_para_gemini(esquema_json("pedido", cfg))
+    assert '"type": [' not in json.dumps(g)  # Gemini no acepta ["number", "null"]
+    pago = g["properties"]["metodo_pago"]["anyOf"]
+    assert {"type": "null"} in pago and None not in pago[0]["enum"]
 
 
-def test_llm_reintenta_si_el_json_no_valida(cfg, referencias):
+def test_llm_devuelve_registro_valido(cfg_rapido, referencias):
+    cliente = ClienteFalso([(json.dumps(_registro_e01()), "STOP")])
+    assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente) == _registro_e01()
+
+
+def test_llm_reintenta_si_el_json_no_valida(cfg_rapido, referencias):
     malo = dict(_registro_e01(), nivel_ingles="experto")
-    cliente = ClienteFalso([("no es json", "end_turn"), (json.dumps(malo), "end_turn"),
-                            (json.dumps(_registro_e01()), "end_turn")])
-    assert extraer_llm(referencias["E01"], "entrevista", cfg, cliente) == _registro_e01()
+    cliente = ClienteFalso([("no es json", "STOP"), (json.dumps(malo), "STOP"),
+                            (json.dumps(_registro_e01()), "STOP")])
+    assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente) == _registro_e01()
     assert len(cliente.solicitudes) == 3
 
 
-def test_llm_rechazo_lanza_error(cfg, referencias):
-    cliente = ClienteFalso([("", "refusal")])
+def test_llm_espera_si_el_api_responde_429(cfg_rapido, referencias):
+    limite = errors.ClientError(429, {"error": {"message": "cuota", "status": "RESOURCE_EXHAUSTED"}})
+    cliente = ClienteFalso([limite, (json.dumps(_registro_e01()), "STOP")])
+    assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente) == _registro_e01()
+
+
+def test_llm_rechazo_lanza_error(cfg_rapido, referencias):
+    cliente = ClienteFalso([("", "SAFETY")])
     with pytest.raises(ErrorExtraccion):
-        extraer_llm(referencias["E01"], "entrevista", cfg, cliente)
+        extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente)

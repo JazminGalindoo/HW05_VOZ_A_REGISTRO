@@ -26,7 +26,7 @@ Probado en Windows 11 con Python 3.12.10 (en CI: Ubuntu, Python 3.12).
 python -m venv .venv
 # Windows: .venv\Scripts\activate   |   Linux/Mac: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # y completar ANTHROPIC_API_KEY (solo para la extracción con LLM)
+cp .env.example .env   # y completar GEMINI_API_KEY (solo para la extracción con LLM; gratis en aistudio.google.com)
 ```
 También se necesita **ffmpeg** en el sistema (`winget install Gyan.FFmpeg` en Windows; ya viene en Colab).
 
@@ -37,7 +37,7 @@ Versiones relevantes (fijadas en `requirements.txt`):
 | faster-whisper | 1.2.1 | `WhisperModel.transcribe` **sí** tiene `hotwords` (ver §6) |
 | ctranslate2 | 4.8.4 | motor de inferencia de faster-whisper |
 | av (PyAV) | 18.1.0 | **fijada a propósito**: la 19.x quitó `metadata_errors`, que faster-whisper 1.2.1 usa → `TypeError` al decodificar |
-| anthropic | 2.3.0 | usa la versión de API `2026-10-21` (ver §8.5) |
+| google-genai | 2.34.0 | SDK de Gemini para la extracción con LLM (ver §8.5) |
 | jiwer | 4.0.0 | WER/CER |
 | text2num | 3.1.0 | números en palabras → dígitos |
 
@@ -164,8 +164,10 @@ _(pendiente: filas "glosario")_
 
 ### 8.5 Extracción: reglas vs LLM, verificación literal
 - **Reglas** (`extract_rules.py`): cada campo se busca **después de una pregunta ancla** ("pretensión", "inglés"…), así no depende del orden. Para el pedido se usa el **resumen final de la operadora** ("su pedido es… el total es…"), que ya incluye las autocorrecciones; los precios salen de lo que dice la operadora (la carta del config no tiene precios).
-- **LLM** (`extract_llm.py`): Anthropic `claude-haiku-5-5` con **structured outputs** (el API garantiza un JSON que cumple el esquema de `schemas.py`), validación propia y reintentos.
-  - **Desviación del plan: no hay "temperatura 0".** Desde la versión de API `2026-10-21` (SDK `anthropic` 2.x) enviar `temperature` da error 400 y los modelos actuales solo aceptan el valor por defecto. La estabilidad de la salida viene del JSON schema y de `effort: low`; y la verificación literal impide que una salida distinta "corrija" al ASR.
+- **LLM** (`extract_llm.py`): Google **Gemini `gemini-3.8-flash`** (nivel gratuito, SDK `google-genai`), con **temperatura 0** y **salida JSON estructurada**: se le pasa el JSON schema de `schemas.py` (`response_json_schema`), así que solo puede responder con esa forma. Igual se valida y se reintenta.
+  - Gemini no acepta `"type": ["number", "null"]` ni `null` dentro de `enum`, así que `esquema_para_gemini` reescribe esos campos como `anyOf`. El esquema de `schemas.py` no cambia.
+  - **Nivel gratuito:** pocas solicitudes por minuto. Hay una pausa entre llamadas, y si el API responde 429 se espera y se reintenta (valores en `config.yaml → extraccion.llm`).
+  - **Descartado:** Anthropic (requiere pago). Con su API actual (versión `2026-10-21`) tampoco se podía fijar la temperatura en 0.
 - **Verificación literal** (`verify.py`): un campo es `verificado` solo si su valor aparece en el transcript normalizado. Números como número completo (`90` no cuenta dentro de `2890`); frases tal cual; dirección y promoción palabra por palabra; listas elemento por elemento; categorías por sus palabras del config (`PEN` ← "soles"). Si el LLM devolviera 90 como total de L02 (se dijo 80), queda `sin_verificar`.
 - **Métricas por campo:** accuracy con IC, % verificado, error absoluto medio en numéricos y macro-F1 en `nivel_ingles` (escrita a mano en `metrics.py`).
 

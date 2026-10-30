@@ -30,7 +30,7 @@ soundfile==0.14.0
 text2num==3.1.0
 
 # Extracción con LLM
-anthropic==2.3.0
+google-genai==2.34.0
 
 # App y gráficos
 streamlit==1.66.1
