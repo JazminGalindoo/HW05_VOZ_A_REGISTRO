@@ -1,60 +1,219 @@
 # HW05_VOZ_A_REGISTRO
 ASR con faster-whisper: de entrevistas y llamadas de venta grabadas a registros estructurados y verificados. HW_05 Data Science Python.
 
-> Esqueleto: las secciones marcadas con _(pendiente)_ se completan en cada fase con resultados que salen de scripts re-ejecutables.
+> **Estado:** el pipeline completo está implementado y probado (tests + ensayo en CPU). Faltan los audios reales: las secciones de resultados (8 y 9) se llenan con `python -m src.evaluar` cuando el cache de Colab esté en el repo. Ningún número de resultados de este README está escrito a mano.
 
 ## 1. Descripción
-- **Tarea 1 — Entrevistas:** audio → registro de candidato con 6 campos verificados.
-- **Tarea 2 — Llamadas de venta:** audio → registro de pedido que se valida aritméticamente.
+- **Tarea 1 — Entrevistas:** audio → registro del candidato con 6 campos (`anios_experiencia`, `ultimo_puesto`, `tecnologias`, `pretension_salarial` + `moneda`, `disponibilidad`, `nivel_ingles`), cada uno marcado `verificado` / `sin_verificar`.
+- **Tarea 2 — Llamadas de venta:** audio → pedido **final** (tras las autocorrecciones del cliente) que se valida aritméticamente: `Σ cantidad × precio − descuento = total dicho`.
 
-Ambas tareas comparten un solo motor: `src.engine.process_audio(audio_path, schema, cfg)`.
+Ambas tareas usan **un solo motor**, `src/engine.py`:
+
+```python
+process_audio(audio_path: str, schema: str, cfg: dict | None = None) -> EngineResult
+```
+
+`EngineResult` trae `transcript`, `segments` (palabras con probabilidad), `fields`, `verified`, `device` y `compute_type` **leídos del modelo en runtime**, `elapsed_s`, `peak_vram_mb`, `error` y `desde_cache`.
+
+**Segunda función pública (decisión):** `process_transcript(transcript, schema, cfg, segments)` hace solo extracción + verificación. Existe para evaluar sin audio (con los transcripts de referencia) y `process_audio` la usa por dentro, así la lógica vive en un único lugar.
 
 ## 2. Instalación
+Probado en Windows 11 con Python 3.12.10 (en CI: Ubuntu, Python 3.12).
+
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate   |   Linux/Mac: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # y completar la API key
+cp .env.example .env   # y completar ANTHROPIC_API_KEY (solo para la extracción con LLM)
 ```
-También se necesita `ffmpeg` instalado en el sistema (para `src/degrade.py`).
+También se necesita **ffmpeg** en el sistema (`winget install Gyan.FFmpeg` en Windows; ya viene en Colab).
+
+Versiones relevantes (fijadas en `requirements.txt`):
+
+| Paquete | Versión | Nota |
+|---|---|---|
+| faster-whisper | 1.2.1 | `WhisperModel.transcribe` **sí** tiene `hotwords` (ver §6) |
+| ctranslate2 | 4.8.4 | motor de inferencia de faster-whisper |
+| av (PyAV) | 18.1.0 | **fijada a propósito**: la 19.x quitó `metadata_errors`, que faster-whisper 1.2.1 usa → `TypeError` al decodificar |
+| anthropic | 2.3.0 | usa la versión de API `2026-10-21` (ver §8.5) |
+| jiwer | 4.0.0 | WER/CER |
+| text2num | 3.1.0 | números en palabras → dígitos |
 
 ## 3. Verificación: el motor no importa UI
 ```bash
 python -c "import sys; import src.engine; bad={'streamlit','gradio','telegram'}&set(sys.modules); assert not bad, bad; print('OK: engine sin UI')"
 ```
+También corre en cada push en GitHub Actions (`.github/workflows/regression.yml`), junto con los tests y `python -m src.evaluar --verificar`.
 
 ## 4. Estructura del repo
-_(pendiente)_
+```
+config.yaml              # TODOS los parámetros (rutas, modelos, umbrales, prompts, SNR, grilla...)
+.env.example             # solo nombres de variables; .env nunca se sube
+app.py                   # interfaz (pendiente); solo lee cache/
+scripts_grabacion/
+  guiones.md             # guiones escritos ANTES de grabar (ground truth)
+  generar_referencias.py # guiones.md -> transcripts de referencia
+data/
+  audio/                 # NO se sube (entrevistas/, llamadas/, ruido/, degradado/L1..L3)
+  ground_truth/          # entrevistas.csv, llamadas.csv, transcripts_referencia/*.txt
+cache/
+  transcripts/           # {clip}__{modelo}__{device}__{compute}__{glosario}__{nivel}.json
+  results/               # métricas que escribe src/evaluar.py y lee la app
+src/
+  engine.py              # process_audio / process_transcript: única puerta de entrada
+  asr.py                 # faster-whisper, device real, VRAM con pynvml, cache
+  normalize.py           # normalización + números en palabras -> dígitos
+  extract_rules.py       # extracción por regex
+  extract_llm.py         # extracción con LLM (structured outputs)
+  schemas.py             # campos, JSON schema, validación, lectura del ground truth
+  verify.py              # regla de verificación literal
+  validate.py            # chequeo aritmético + diagnóstico ASR vs hablante
+  metrics.py             # WER/CER, accuracy, macro-F1, error absoluto, bootstrap
+  degrade.py             # escalera L0–L3 con ffmpeg y SNR medido
+  evaluar.py             # métricas finales desde cache/ -> cache/results/
+notebooks/
+  colab_gpu_benchmark.ipynb  # ÚNICO lugar donde se transcribe (Colab GPU)
+tests/                   # pytest
+```
 
 ## 5. Datos y ground truth
-_(pendiente: cómo se grabó, guiones en `scripts_grabacion/`, tablas en `data/ground_truth/`, grupo sintético separado)_
+- **Todo el audio se grabó para este trabajo** (llamada de WhatsApp en altavoz, grabada con el celular). Todos los nombres, empresas, cifras y direcciones son inventados.
+- 4 entrevistas (`E01`–`E04`) y 4 llamadas a una pollería ficticia (`L01`–`L04`), de al menos 2 minutos cada una.
+- **Ground truth escrito por humanos, antes de grabar:**
+  - `scripts_grabacion/guiones.md`: el texto de cada clip. Si al grabar se dijo algo distinto, se corrige el guion.
+  - `data/ground_truth/entrevistas.csv` y `llamadas.csv`: los valores correctos de cada campo.
+  - `data/ground_truth/transcripts_referencia/*.txt`: se **generan** del guion con `python scripts_grabacion/generar_referencias.py` (solo el texto hablado, sin nombres de hablante). Nunca se usa salida de ASR ni subtítulos automáticos como referencia.
+- **Trampas** marcadas en `llamadas.csv` para medir la validación y el diagnóstico:
+
+| Clip | Autocorrección del cliente | Total dicho | Total correcto |
+|---|---|---|---|
+| L01 | sí (2 gaseosas → 1) | 89 | 89 |
+| L02 | sí (3 chaufas → 2) | **80** | 90 |
+| L03 | sí (pollo entero → 2 cuartos) | **75** (olvida el 2×1) | 65 |
+| L04 | no | **98** | 90 |
+
+- En las entrevistas los campos se preguntan **en distinto orden** en cada clip (columna `orden_campos`), para que la extracción no dependa del orden.
+- **Datos sintéticos:** ninguno entra en las métricas. Durante el desarrollo se usó una frase con voz sintética de Windows solo para probar que el pipeline corre de punta a punta; ese audio no está en el repo, y `src/evaluar.py` ignora cualquier clip que no esté en el ground truth (y lo lista en `cache/results/resumen.json`).
 
 ## 6. Versión de faster-whisper y glosario
-_(pendiente: versión exacta instalada y salida de `inspect.signature(WhisperModel.transcribe)` — ¿existe `hotwords`?)_
+- faster-whisper **1.2.1**, ctranslate2 **4.8.4**. Comprobado con:
+  ```python
+  import inspect; from faster_whisper import WhisperModel
+  "hotwords" in inspect.signature(WhisperModel.transcribe).parameters   # True
+  ```
+- **Modo `plano`:** sin ayuda. **Modo `glosario`:** `initial_prompt` con una frase de contexto del dominio + `hotwords` con los términos clave (Python, Power BI, Yape, Plin…). Ambos por esquema, en `config.yaml → glosario`.
+- **Prueba de device:** el device y el compute type se leen del objeto CTranslate2 (`model.model.device`, `model.model.compute_type`), nunca del config. Ejemplo real: pedir `int8` en CPU corre como `int8_float32`.
+- **VRAM:** CTranslate2 no usa el allocator de PyTorch, así que `torch.cuda.max_memory_allocated()` no sirve. Un hilo lee la memoria usada de la GPU con `pynvml` cada 50 ms durante la transcripción y se reporta **pico − línea base**. Antes de medir con un modelo recién cargado se descarta una corrida de calentamiento (incluye inicializar CUDA).
 
 ## 7. Normalización y números en palabras
-_(pendiente: reglas de normalización, decisión sobre tildes, casos que `text2num` no resuelve)_
+La misma normalización se aplica a hipótesis y referencia (`src/normalize.py`), en este orden:
+1. Minúsculas.
+2. Números en palabras → dígitos con `text2num` (`alpha2digit`, `lang="es"`), **con `threshold=0`**: con el valor por defecto, "dos chaufas" quedaba sin convertir.
+3. Reglas propias (en `config.yaml → normalizacion`), porque `text2num` falla en:
+   - **ordinales y "unos/unas"**: "dos cuartos de pollo" → `2 4ᵒˢ`, "unos seis mil" → `1 6000`. Se protegen esas palabras antes de convertir.
+   - **"y medio"**: "dos años y medio" → `2.5 años`, "tres y medio años" → `3.5 años`. Solo con unidades de tiempo, para no tocar "gaseosa de litro y medio" (nombre de producto).
+   - **"lucas"**: "seis lucas" → `6000`.
+4. **Se quitan las tildes** (decisión): evita penalizar "inglés"/"ingles" entre ASR y referencia; la pérdida de información no afecta a ningún campo.
+5. Se quita la puntuación (conservando el punto decimal: `2.5`) y se colapsan espacios.
 
-## 8. Tarea 1 — Resultados
+## 8. Tarea 1 — Metodología y resultados
+Grilla de experimentos (`config.yaml → experimentos`), todos los clips en L0:
+
+| Combinación | Compara |
+|---|---|
+| small · cuda · float16 · plano | base |
+| large-v3 · cuda · float16 · plano | tamaño |
+| small · cuda · int8 · plano | precisión (y GPU para CPU vs GPU) |
+| large-v3 · cuda · int8 · plano | precisión en large |
+| small · cpu · int8 · plano | CPU vs GPU |
+| small / large-v3 · cuda · float16 · glosario | glosario |
+
+**Métricas** (`src/metrics.py`, `src/evaluar.py`):
+- **WER/CER** con `jiwer` sobre texto normalizado. El WER de un conjunto de clips es Σ errores / Σ palabras (pesa por largo), no el promedio de WER.
+- **Intervalos de confianza:** bootstrap remuestreando **clips**, 1000 réplicas, semilla 42, IC 95 %. Las comparaciones usan bootstrap **pareado** (mismos clips en A y B): si el IC de la diferencia incluye 0, la muestra no permite afirmar que haya diferencia.
+- **¿Cambió el texto?** Para cada par: cuántos clips salen idénticos carácter a carácter y el WER de una salida contra la otra.
+- **Velocidad:** segundos de cómputo por minuto de audio. **VRAM:** pico − base (§6).
+
 ### 8.1 Modelos (small vs large-v3)
-### 8.2 CPU vs GPU (prueba de device en runtime, VRAM con pynvml)
+_(pendiente: `cache/results/comparaciones.csv`, fila "tamaño")_
+### 8.2 CPU vs GPU
+_(pendiente: fila "device"; device real en `asr_resumen.csv`)_
 ### 8.3 Precisión (float16 vs int8) y diff de texto
+_(pendiente: filas "precisión")_
 ### 8.4 Glosario vs plano (diferencia de WER con IC bootstrap)
-### 8.5 Extracción: reglas vs LLM, verificación literal
+_(pendiente: filas "glosario")_
 
-## 9. Tarea 2 — Resultados
+### 8.5 Extracción: reglas vs LLM, verificación literal
+- **Reglas** (`extract_rules.py`): cada campo se busca **después de una pregunta ancla** ("pretensión", "inglés"…), así no depende del orden. Para el pedido se usa el **resumen final de la operadora** ("su pedido es… el total es…"), que ya incluye las autocorrecciones; los precios salen de lo que dice la operadora (la carta del config no tiene precios).
+- **LLM** (`extract_llm.py`): Anthropic `claude-haiku-5-5` con **structured outputs** (el API garantiza un JSON que cumple el esquema de `schemas.py`), validación propia y reintentos.
+  - **Desviación del plan: no hay "temperatura 0".** Desde la versión de API `2026-10-21` (SDK `anthropic` 2.x) enviar `temperature` da error 400 y los modelos actuales solo aceptan el valor por defecto. La estabilidad de la salida viene del JSON schema y de `effort: low`; y la verificación literal impide que una salida distinta "corrija" al ASR.
+- **Verificación literal** (`verify.py`): un campo es `verificado` solo si su valor aparece en el transcript normalizado. Números como número completo (`90` no cuenta dentro de `2890`); frases tal cual; dirección y promoción palabra por palabra; listas elemento por elemento; categorías por sus palabras del config (`PEN` ← "soles"). Si el LLM devolviera 90 como total de L02 (se dijo 80), queda `sin_verificar`.
+- **Métricas por campo:** accuracy con IC, % verificado, error absoluto medio en numéricos y macro-F1 en `nivel_ingles` (escrita a mano en `metrics.py`).
+
+**Grupo "referencia"** (transcripts humanos como si fueran el ASR; mide solo la extracción). Sale de `python -m src.evaluar` → `cache/results/extraccion_por_campo.csv`, método reglas, 4 clips por tarea:
+
+| Tarea | Campo | Accuracy (IC 95 %) |
+|---|---|---|
+| entrevista | tecnologías | 0.75 (0.25–1.00) |
+| entrevista | los otros 6 campos | 1.00 |
+| pedido | los 6 campos | 1.00 |
+
+El único error es **E01 tecnologías**: la candidata dice "usaba bastante Excel, pero eso ya casi no" y las reglas listan Excel (no entienden negaciones). Ojo: las reglas se escribieron **mirando los guiones**, así que este 100 % es una cota optimista, no evidencia de que generalicen. La prueba real es con la salida del ASR.
+
+_(pendiente: resultados con ASR y con LLM)_
+
+## 9. Tarea 2 — Metodología y resultados
 ### 9.1 Escalera de degradación L0–L3 (SNR medido)
+`python -m src.degrade` (parámetros en `config.yaml → degradacion`):
+
+| Nivel | Qué simula | Cómo |
+|---|---|---|
+| L0 | original | — |
+| L1 | WhatsApp | mono, Opus 12 kbps |
+| L2 | teléfono | paso banda 300–3400 Hz, 8 kHz |
+| L3 | L1 + ruido ambiente | ruido grabado mezclado a SNR objetivo 10 dB |
+
+El SNR de L3 **se calcula**: el ruido se escala para que `20·log10(RMS señal / RMS ruido)` sea el objetivo, y el SNR medido de cada clip queda en `cache/results/degradacion.json`. Si L3 sigue sin errores, se baja a 5 o 0 dB (`snr_db_alternativos`) y se documenta. Cada nivel se transcribe con small y large-v3 (cuda, float16, plano).
+
+_(pendiente: WER y accuracy por nivel)_
+
 ### 9.2 Validación aritmética
+`validate.chequear`: `Σ cantidad × precio_unitario − descuento` contra `total_dicho`, con tolerancia de 0.5 soles. Sobre las referencias detecta **L02, L03 y L04** y L01 cuadra.
+
+_(pendiente: con ASR, por nivel — `cache/results/pedidos_validacion.csv`)_
+
 ### 9.3 Diagnóstico: error de ASR vs error del hablante
+Si la cuenta no cuadra, en este orden:
+1. Si la misma combinación cuadraba en L0 y en este nivel no → **error de ASR** (lo rompió la degradación).
+2. Se buscan las palabras del ASR que forman cada número implicado (total, precios, descuento, cantidades > 1) y se toma su probabilidad mínima. Si alguna está bajo 0.80 → **error de ASR**.
+3. Si todos los números tienen alta confianza → **error del hablante** (se dijo así).
+
+Se mide contra las trampas: lo esperado es "error del hablante" en L02–L04 y "ok" en L01 (o "error de ASR" si deja de cuadrar por la degradación).
+
+_(pendiente: aciertos del diagnóstico)_
 
 ## 10. Cómo reproducir
-_(pendiente: comandos para regenerar `cache/` y métricas; notebook de Colab GPU)_
+1. **Grabar** y subir a Drive: `MyDrive/HW05/audio/{entrevistas,llamadas,ruido}/`.
+2. **Transcribir en Colab GPU:** abrir `notebooks/colab_gpu_benchmark.ipynb`. Degrada las llamadas, recorre la grilla, guarda el cache en Drive (si se desconecta, retoma sin re-transcribir) y descarga `cache_hw05.zip`.
+3. **En local:** descomprimir el zip en la raíz del repo y correr
+   ```bash
+   python -m src.evaluar            # + --llm para incluir la extracción con LLM
+   pytest
+   ```
+4. Commit de `cache/` (los audios no se suben).
+
+Tests: `pytest` (rápidos, los corre el CI) y `pytest -m lento` (descarga Whisper `tiny` y transcribe de verdad en CPU).
 
 ## 11. App
-_(pendiente: `streamlit run app.py`, lee solo de `cache/`)_
+_(pendiente: `streamlit run app.py`. Solo leerá `cache/` con `motor.solo_cache: true`: nunca transcribe.)_
 
 ## 12. Limitaciones
-_(pendiente: tamaño de muestra, qué no soportan los IC)_
+- **Muestra muy chica:** 4 clips por tarea. Los IC son anchos y la muestra **no** soporta afirmar diferencias pequeñas entre modelos o configuraciones; solo diferencias grandes y consistentes.
+- **Dos voces, un acento, un dominio por tarea:** nada de esto dice cómo rinde con otros hablantes o ruidos.
+- **Reglas ajustadas a los guiones** (§8.5): su acierto sobre referencias es optimista.
+- **Ground truth anotado por una sola persona** y guiones leídos (habla menos espontánea que una llamada real).
+- **El diagnóstico usa probabilidades de Whisper**, que no están calibradas; el umbral de 0.80 es una elección, no un valor ajustado.
 
 ## 13. Uso de IA
-_(pendiente)_
+_(pendiente de completar)_
+El código se desarrolló con Claude Code (Anthropic) como asistente, módulo por módulo, con un PR por bloque, tests y revisión de cada cambio. Las decisiones de diseño que se tomaron en el camino están documentadas en este README (§1, §2, §7, §8.5).
