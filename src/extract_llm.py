@@ -1,85 +1,121 @@
 """
-extract_llm.py — Extracción con LLM.
+extract_llm.py — Extracción con LLM (Google Gemini).
 
 Responsabilidad:
     - Enviar el transcript al LLM configurado (proveedor, modelo, prompts y
-      esfuerzo en config.yaml; API key leída de .env).
-    - Pedir salida JSON con structured outputs (el API garantiza que el JSON
-      cumple el esquema de schemas.py); igual se valida y se reintenta si falla.
+      temperatura 0 en config.yaml; API key leída de .env: GEMINI_API_KEY).
+    - Pedir salida JSON estructurada: se pasa el JSON schema de schemas.py
+      (response_json_schema) para que el modelo solo pueda responder con esa forma;
+      igual se valida y se reintenta si no cumple.
     - El LLM NO puede corregir al ASR: lo que devuelva pasa luego por verify.py.
-
-Sobre la "temperatura 0": desde la versión de API 2026-10-21 (SDK anthropic 2.x)
-el parámetro temperature ya no existe (error 400). La estabilidad de la salida
-viene del JSON schema y del effort bajo; ver config.yaml.
+    - Nivel gratuito: pausa entre llamadas y espera si el API responde 429.
 
 Para los tests se pasa un cliente falso en el parámetro `cliente`,
-así no se llama a la red ni se gasta dinero.
+así no se llama a la red ni se gasta cuota.
 """
 
+import copy
 import json
 import os
+import time
 
-import anthropic
 from dotenv import load_dotenv
+from google import genai
+from google.genai import errors, types
 
 from src.schemas import esquema_json, validar
+
+# Motivos de fin que significan "el modelo no quiso responder"
+RECHAZOS = {"SAFETY", "BLOCKLIST", "PROHIBITED_CONTENT", "SPII", "RECITATION"}
 
 
 class ErrorExtraccion(Exception):
     """El LLM no devolvió un registro válido."""
 
 
-def crear_cliente(cfg: dict) -> anthropic.Anthropic:
-    """Cliente real de Anthropic. La API key se lee de .env (nunca del código)."""
+def crear_cliente(cfg: dict) -> genai.Client:
+    """Cliente real de Gemini. La API key se lee de .env (nunca del código)."""
     load_dotenv()
-    return anthropic.Anthropic(api_key=os.environ.get(cfg["extraccion"]["llm"]["api_key_env"]))
+    return genai.Client(api_key=os.environ.get(cfg["extraccion"]["llm"]["api_key_env"]))
+
+
+def esquema_para_gemini(esquema: dict) -> dict:
+    """Adapta el JSON schema de schemas.py a lo que acepta Gemini.
+
+    Gemini no acepta una lista en "type" (["number", "null"]) ni null dentro de "enum":
+    eso se escribe como anyOf: [{"type": "number"}, {"type": "null"}].
+    """
+    esquema = copy.deepcopy(esquema)
+    if isinstance(esquema.get("type"), list):
+        tipos = esquema.pop("type")
+        valores = esquema.pop("enum", None)
+        opciones = []
+        for t in tipos:
+            opcion = {"type": t}
+            if valores is not None and t != "null":
+                opcion["enum"] = [v for v in valores if v is not None]
+            opciones.append(opcion)
+        esquema["anyOf"] = opciones
+    if "properties" in esquema:
+        esquema["properties"] = {k: esquema_para_gemini(v) for k, v in esquema["properties"].items()}
+    if "items" in esquema:
+        esquema["items"] = esquema_para_gemini(esquema["items"])
+    return esquema
 
 
 def armar_solicitud(transcript: str, schema: str, cfg: dict) -> dict:
-    """Parámetros de messages.create. Separado para poder revisarlo en los tests."""
+    """Parámetros de models.generate_content. Separado para poder revisarlo en los tests."""
     llm = cfg["extraccion"]["llm"]
     prompts = cfg["extraccion"]["prompts"]
     instruccion = prompts[schema].format(anio=cfg["extraccion"]["anio_referencia"])
-    solicitud = {
+    return {
         "model": llm["modelo"],
-        "max_tokens": llm["max_tokens"],
-        "system": prompts["sistema"],
-        "messages": [{
-            "role": "user",
-            "content": f"{instruccion}\n\n<transcripcion>\n{transcript}\n</transcripcion>",
-        }],
-        "output_config": {
-            "effort": llm["effort"],
-            "format": {"type": "json_schema", "schema": esquema_json(schema, cfg)},
-        },
+        "contents": f"{instruccion}\n\n<transcripcion>\n{transcript}\n</transcripcion>",
+        "config": types.GenerateContentConfig(
+            system_instruction=prompts["sistema"],
+            temperature=llm["temperatura"],
+            max_output_tokens=llm["max_tokens"],
+            response_mime_type="application/json",
+            response_json_schema=esquema_para_gemini(esquema_json(schema, cfg)),
+        ),
     }
-    if llm.get("fallbacks"):
-        # Si el modelo rechaza la solicitud, el API la reintenta en otro modelo
-        solicitud["betas"] = [llm["beta_fallbacks"]]
-        solicitud["fallbacks"] = llm["fallbacks"]
-    return solicitud
+
+
+def _llamar(cliente, solicitud: dict, llm: dict):
+    """Una llamada al API, esperando si el nivel gratuito responde 429."""
+    for _ in range(llm["max_esperas_por_limite"] + 1):
+        time.sleep(llm["pausa_entre_llamadas_s"])  # no pasar el límite por minuto
+        try:
+            return cliente.models.generate_content(**solicitud)
+        except errors.APIError as e:
+            if e.code != 429:
+                raise
+            time.sleep(llm["espera_si_limite_s"])
+    raise ErrorExtraccion("límite de solicitudes del nivel gratuito: se agotaron las esperas")
 
 
 def extraer_llm(transcript: str, schema: str, cfg: dict, cliente=None) -> dict:
     """Devuelve el registro extraído por el LLM o lanza ErrorExtraccion."""
+    llm = cfg["extraccion"]["llm"]
     cliente = cliente or crear_cliente(cfg)
     solicitud = armar_solicitud(transcript, schema, cfg)
-    # Los fallbacks son una función beta: van por cliente.beta.messages
-    crear = cliente.beta.messages.create if "betas" in solicitud else cliente.messages.create
 
     problemas = []
-    for _ in range(1 + cfg["extraccion"]["llm"]["reintentos"]):
-        respuesta = crear(**solicitud)
+    for _ in range(1 + llm["reintentos"]):
+        respuesta = _llamar(cliente, solicitud, llm)
 
-        if respuesta.stop_reason == "refusal":
-            raise ErrorExtraccion("el modelo rechazó la solicitud")
-        if respuesta.stop_reason == "max_tokens":
+        if respuesta.prompt_feedback and respuesta.prompt_feedback.block_reason:
+            raise ErrorExtraccion(f"solicitud bloqueada: {respuesta.prompt_feedback.block_reason}")
+        candidato = respuesta.candidates[0] if respuesta.candidates else None
+        motivo = candidato.finish_reason.name if candidato and candidato.finish_reason else None
+        if motivo in RECHAZOS:
+            raise ErrorExtraccion(f"el modelo rechazó la solicitud: {motivo}")
+        if motivo == "MAX_TOKENS":
             problemas = ["respuesta cortada por max_tokens"]
             continue
 
-        texto = next((b.text for b in respuesta.content if b.type == "text"), "")
         try:
-            registro = json.loads(texto)
+            registro = json.loads(respuesta.text or "")
         except json.JSONDecodeError as e:
             problemas = [f"JSON inválido: {e}"]
             continue

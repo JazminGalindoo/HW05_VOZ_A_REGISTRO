@@ -304,7 +304,7 @@ with t4:
     subido = st.file_uploader("Audio", type=extensiones)
     schema_p = st.radio("Esquema", list(TAREAS), format_func=TAREAS.get, horizontal=True, key="prob_schema")
     metodo_p = st.radio("Extracción", ["reglas", "llm"], horizontal=True, key="prob_metodo",
-                        help="llm necesita ANTHROPIC_API_KEY en .env")
+                        help="llm necesita GEMINI_API_KEY en .env")
     if subido and st.button("Procesar", type="primary"):
         ruta = Path(tempfile.mkdtemp()) / subido.name
         ruta.write_bytes(subido.getvalue())
