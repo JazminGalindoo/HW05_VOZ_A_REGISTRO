@@ -144,7 +144,9 @@ def _alias_normalizados(cfg: dict) -> list[tuple[str, dict]]:
 
 def _resumen_final(t: str) -> str:
     """Último resumen de la operadora: 'su pedido es ... el total es'. Si no hay, todo el texto."""
-    resumenes = re.findall(r"(?:su pedido es|entonces seria|entonces es)(.+?)(?:el total es|$)", t)
+    # "su pedido es / sería ...", "entonces es / sería ..." hasta "el total es / sería" o "en total"
+    resumenes = re.findall(r"(?:su pedido (?:es|seria)|entonces seria|entonces es)(.+?)"
+                           r"(?:(?:el|en) total (?:es|seria|sera)|en total|$)", t)
     return resumenes[-1] if resumenes else t
 
 
@@ -174,7 +176,8 @@ def _productos(resumen: str, cfg: dict) -> list[tuple[dict, int]]:
 def _precio(producto: dict, t: str, cfg: dict):
     """Primer 'ALIAS [a] N soles' en toda la llamada (la operadora dice los precios)."""
     for alias in producto["alias"]:
-        m = re.search(rf"\b{re.escape(normalizar(alias, cfg))} (?:a )?{NUM} soles", t)
+        # "pollo entero 64 soles", "pollo entero a 64 soles", "pollo entero esta a 64 soles"
+        m = re.search(rf"\b{re.escape(normalizar(alias, cfg))} (?:esta )?(?:a )?{NUM} soles", t)
         if m:
             return _numero(m.group(1))
     return None
@@ -226,7 +229,8 @@ def _metodo_pago(t: str, cfg: dict):
 
 
 def _total_dicho(t: str):
-    totales = re.findall(rf"total es (?:de )?{NUM}", t)
+    # "el total es 89", "en total es 89", "el total seria de 98", "el total sera 90"
+    totales = re.findall(rf"total (?:es|seria|sera) (?:de )?{NUM}", t)
     return _numero(totales[-1]) if totales else None  # el último total dicho
 
 

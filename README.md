@@ -126,6 +126,9 @@ La misma normalización se aplica a hipótesis y referencia (`src/normalize.py`)
    - **"lucas"**: "seis lucas" → `6000`.
 4. **Se quitan las tildes** (decisión): evita penalizar "inglés"/"ingles" entre ASR y referencia; la pérdida de información no afecta a ningún campo.
 5. Se quita la puntuación (conservando el punto decimal: `2.5`) y se colapsan espacios.
+6. **Separador de miles (hallazgo con el audio real):** antes que todo, `6,500` y `9.000` → `6500` y `9000`. Una coma o un punto seguido de exactamente 3 dígitos es separador de miles; `2.5` sigue siendo decimal.
+   - Con las referencias (números en palabras) este caso no existía. Whisper, en cambio, escribe los montos con dígitos y separador: "seis mil quinientos" sale `6,500`.
+   - Sin esta regla la coma se volvía espacio (`6 500`) y el punto se leía como decimal (`9.000` = 9). Por eso `pretension_salarial` daba 0 % de acierto con todos los modelos.
 
 ## 8. Tarea 1 — Metodología y resultados
 Grilla de experimentos (`config.yaml → experimentos`), reducida para que entre en menos de 40 min en una T4 de Colab gratis:
@@ -236,6 +239,9 @@ En la barra lateral se elige qué transcripción mirar (cada combinación de ASR
 - **Muestra muy chica:** 4 clips por tarea. Los IC son anchos y la muestra **no** soporta afirmar diferencias pequeñas entre modelos o configuraciones; solo diferencias grandes y consistentes.
 - **Dos voces, un acento, un dominio por tarea:** nada de esto dice cómo rinde con otros hablantes o ruidos.
 - **Reglas ajustadas a los guiones** (§8.5): su acierto sobre referencias es optimista.
+- **Reglas ajustadas después de ver la salida del ASR:** se agregaron 3 formas de decir que aparecieron al grabar ("pollo entero **está a** 64 soles", "el total **sería de** 98", "su pedido **sería**…"), además del separador de miles (§7). Son frases comunes del español y no errores del ASR, pero se detectaron con este mismo corpus: los resultados con ASR también son algo optimistas.
+  - **No** se adaptaron las reglas a los errores del ASR ("en **totales** 80", "**Girón Guayaga**… encercado", "desarrolladora de **bacnet**", "las **doceras** están a" por "las gaseosas están dos por uno"). Esos errores son el hallazgo: rompen el registro aunque el WER sea moderado.
+- **Referencias = guiones, no lo dicho palabra por palabra:** al grabar se improvisaron frases ("¿algo más que desee?", "el total sería de…"). Si no se corrigen los transcripts de referencia escuchando el audio, el WER mide el error del ASR **más** la diferencia entre el guion y lo dicho, y queda inflado.
 - **Ground truth anotado por una sola persona** y guiones leídos (habla menos espontánea que una llamada real).
 - **El diagnóstico usa probabilidades de Whisper**, que no están calibradas; el umbral de 0.80 es una elección, no un valor ajustado.
 

@@ -109,6 +109,9 @@ normalizacion:
   quitar_puntuacion: true
   colapsar_espacios: true
   numeros_a_digitos: true       # "seis mil quinientos" -> "6500"
+  # Whisper escribe montos con separador de miles: "6,500" / "9.000" -> "6500" / "9000"
+  # (coma o punto seguido de exactamente 3 dígitos; "2.5" sigue siendo decimal)
+  unir_miles: true
   # DECISIÓN A DOCUMENTAR EN README: quitar tildes evita penalizar
   # "inglés" vs "ingles", pero pierde información. Valor inicial:
   quitar_tildes: true

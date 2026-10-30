@@ -6,8 +6,18 @@
     "entrevista": 4,
     "pedido": 4
   },
-  "transcripts_en_cache": 0,
-  "combinaciones_en_cache": [],
+  "transcripts_en_cache": 54,
+  "combinaciones_en_cache": [
+    "large-v3|cuda|float16|plano|L0",
+    "large-v3|cuda|int8|glosario|L0",
+    "large-v3|cuda|int8|plano|L0",
+    "large-v3|cuda|int8|plano|L1",
+    "large-v3|cuda|int8|plano|L2",
+    "large-v3|cuda|int8|plano|L3",
+    "small|cpu|int8|plano|L0",
+    "small|cuda|float16|plano|L0",
+    "small|cuda|int8|plano|L0"
+  ],
   "clips_ignorados_sin_ground_truth": [],
   "advertencias": [
     "Muestra chica: 8 clips en total. Los IC bootstrap son anchos; una diferencia cuyo IC incluye 0 NO es evidencia de mejora.",

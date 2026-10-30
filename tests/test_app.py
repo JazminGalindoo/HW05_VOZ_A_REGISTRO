@@ -33,6 +33,8 @@ def test_cinco_pestanas(app):
 
 
 def test_chequeo_atrapa_el_total_de_l02(app):
+    # Con "referencia" (texto humano) el resultado no depende de qué haya en cache
+    app.sidebar.selectbox[0].set_value("referencia").run()
     app.selectbox(key="ped_clip").set_value("L02").run()
     assert not app.exception
     errores = " ".join(e.value for e in app.error)
@@ -40,6 +42,7 @@ def test_chequeo_atrapa_el_total_de_l02(app):
 
 
 def test_corpus_muestra_registro_verificado(app):
+    app.sidebar.selectbox[0].set_value("referencia").run()
     app.radio(key="corpus_tarea").set_value("entrevista").run()
     app.selectbox(key="corpus_clip").set_value("E03").run()
     tablas = [d.value for d in app.dataframe]

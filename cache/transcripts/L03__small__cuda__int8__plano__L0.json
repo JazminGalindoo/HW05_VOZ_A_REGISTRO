@@ -1,0 +1,1689 @@
+{
+ "audio": "L03.m4a",
+ "transcript": "Poyaría la abraza dorada. Buenas noches. Hola, buenas noches. Quiero un pollo entero. No mejor, cámbelo por dos cuartos de pollo porque somos poquitos. Dos cuartos de pollo a veinte soles cada uno. ¿Qué más deciría? Unas papas familiares. Las papas familiares a quince soles. ¿Algo de tomar? Sí, dos vaciosas de litro y medio. Aquí es todo listado una. Y está de suerte. Hoy las dos veces están así que una le sale gratis. Ah, buenísimo. Entonces déme la oferta. ¿Está bien? ¿A qué dirección lo enviamos? Calle las begonias 517 San Isidro. Calle las begonias 517. ¿Casa o departamento? Casa. Tiene una puerta de madera grande al lado de una bodega. Perfecto. ¿Por qué medio va a pagar? ¿Por ya peseis que se podría? Sí, claro. Le mandamos el número por mensaje. Su pedido sería entonces dos cuartos de pollo, una papas familiares y dos vaciosas, que es como con la promoción. En total es setenta y cinco soles. Perfecto. ¿Me podría agregar bastante aquí, porfa? Sí, le ponemos aquí extra sin costo y también algunas otras. Ok, otra cosa. ¿Los cuartos podrían ser piernas? Ok, genial. ¿Y las vaciosas que vengan heladas, porfa? Directo de la refugia. Perfecto. Ah, y si el motorizado no encuentra la casa que me llame normal porque la numeración de la calle es un poco confusa. Ok, ¿cuánto estaría demorando? Ok, listo. Gracias. Gracias a usted por su pedido. Buenas noches.",
+ "segments": [
+  {
+   "start": 0.56,
+   "end": 2.78,
+   "text": " Poyaría la abraza dorada. Buenas noches.",
+   "words": [
+    {
+     "word": " Poyaría",
+     "start": 0.56,
+     "end": 1.1,
+     "probability": 0.30426025390625
+    },
+    {
+     "word": " la",
+     "start": 1.1,
+     "end": 1.32,
+     "probability": 0.85302734375
+    },
+    {
+     "word": " abraza",
+     "start": 1.32,
+     "end": 1.6,
+     "probability": 0.5523681640625
+    },
+    {
+     "word": " dorada.",
+     "start": 1.6,
+     "end": 1.98,
+     "probability": 0.943603515625
+    },
+    {
+     "word": " Buenas",
+     "start": 2.1,
+     "end": 2.34,
+     "probability": 0.96337890625
+    },
+    {
+     "word": " noches.",
+     "start": 2.34,
+     "end": 2.78,
+     "probability": 0.993408203125
+    }
+   ]
+  },
+  {
+   "start": 3.24,
+   "end": 5.58,
+   "text": " Hola, buenas noches. Quiero un pollo entero.",
+   "words": [
+    {
+     "word": " Hola,",
+     "start": 3.24,
+     "end": 3.46,
+     "probability": 0.6533203125
+    },
+    {
+     "word": " buenas",
+     "start": 3.58,
+     "end": 3.78,
+     "probability": 0.9755859375
+    },
+    {
+     "word": " noches.",
+     "start": 3.78,
+     "end": 4.38,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " Quiero",
+     "start": 4.68,
+     "end": 4.8,
+     "probability": 0.837890625
+    },
+    {
+     "word": " un",
+     "start": 4.8,
+     "end": 4.96,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " pollo",
+     "start": 4.96,
+     "end": 5.08,
+     "probability": 0.953125
+    },
+    {
+     "word": " entero.",
+     "start": 5.08,
+     "end": 5.58,
+     "probability": 0.992431640625
+    }
+   ]
+  },
+  {
+   "start": 6.58,
+   "end": 10.92,
+   "text": " No mejor, cámbelo por dos cuartos de pollo porque somos poquitos.",
+   "words": [
+    {
+     "word": " No",
+     "start": 6.58,
+     "end": 7.22,
+     "probability": 0.859375
+    },
+    {
+     "word": " mejor,",
+     "start": 7.22,
+     "end": 7.62,
+     "probability": 0.5634765625
+    },
+    {
+     "word": " cámbelo",
+     "start": 7.98,
+     "end": 8.28,
+     "probability": 0.8064778645833334
+    },
+    {
+     "word": " por",
+     "start": 8.28,
+     "end": 8.62,
+     "probability": 0.95556640625
+    },
+    {
+     "word": " dos",
+     "start": 8.62,
+     "end": 8.98,
+     "probability": 0.7529296875
+    },
+    {
+     "word": " cuartos",
+     "start": 8.98,
+     "end": 9.38,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " de",
+     "start": 9.38,
+     "end": 9.5,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " pollo",
+     "start": 9.5,
+     "end": 9.74,
+     "probability": 0.989013671875
+    },
+    {
+     "word": " porque",
+     "start": 9.74,
+     "end": 10.18,
+     "probability": 0.47705078125
+    },
+    {
+     "word": " somos",
+     "start": 10.18,
+     "end": 10.4,
+     "probability": 0.98291015625
+    },
+    {
+     "word": " poquitos.",
+     "start": 10.4,
+     "end": 10.92,
+     "probability": 0.9972330729166666
+    }
+   ]
+  },
+  {
+   "start": 12.62,
+   "end": 16.3,
+   "text": " Dos cuartos de pollo a veinte soles cada uno.",
+   "words": [
+    {
+     "word": " Dos",
+     "start": 12.62,
+     "end": 12.94,
+     "probability": 0.87060546875
+    },
+    {
+     "word": " cuartos",
+     "start": 12.94,
+     "end": 13.5,
+     "probability": 0.9952799479166666
+    },
+    {
+     "word": " de",
+     "start": 13.5,
+     "end": 13.66,
+     "probability": 0.99658203125
+    },
+    {
+     "word": " pollo",
+     "start": 13.66,
+     "end": 14.12,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " a",
+     "start": 14.12,
+     "end": 15.1,
+     "probability": 0.61083984375
+    },
+    {
+     "word": " veinte",
+     "start": 15.1,
+     "end": 15.38,
+     "probability": 0.6861572265625
+    },
+    {
+     "word": " soles",
+     "start": 15.38,
+     "end": 15.8,
+     "probability": 0.739990234375
+    },
+    {
+     "word": " cada",
+     "start": 15.8,
+     "end": 16.0,
+     "probability": 0.984375
+    },
+    {
+     "word": " uno.",
+     "start": 16.0,
+     "end": 16.3,
+     "probability": 0.9853515625
+    }
+   ]
+  },
+  {
+   "start": 16.88,
+   "end": 17.72,
+   "text": " ¿Qué más deciría?",
+   "words": [
+    {
+     "word": " ¿Qué",
+     "start": 16.88,
+     "end": 17.04,
+     "probability": 0.8310546875
+    },
+    {
+     "word": " más",
+     "start": 17.04,
+     "end": 17.22,
+     "probability": 0.467041015625
+    },
+    {
+     "word": " deciría?",
+     "start": 17.22,
+     "end": 17.72,
+     "probability": 0.5906982421875
+    }
+   ]
+  },
+  {
+   "start": 18.54,
+   "end": 19.82,
+   "text": " Unas papas familiares.",
+   "words": [
+    {
+     "word": " Unas",
+     "start": 18.54,
+     "end": 18.86,
+     "probability": 0.93212890625
+    },
+    {
+     "word": " papas",
+     "start": 18.86,
+     "end": 19.18,
+     "probability": 0.973876953125
+    },
+    {
+     "word": " familiares.",
+     "start": 19.18,
+     "end": 19.82,
+     "probability": 0.9990234375
+    }
+   ]
+  },
+  {
+   "start": 21.24,
+   "end": 24.3,
+   "text": " Las papas familiares a quince soles. ¿Algo de tomar?",
+   "words": [
+    {
+     "word": " Las",
+     "start": 21.24,
+     "end": 21.78,
+     "probability": 0.52783203125
+    },
+    {
+     "word": " papas",
+     "start": 21.78,
+     "end": 22.04,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " familiares",
+     "start": 22.04,
+     "end": 22.68,
+     "probability": 0.998046875
+    },
+    {
+     "word": " a",
+     "start": 22.68,
+     "end": 22.88,
+     "probability": 0.409423828125
+    },
+    {
+     "word": " quince",
+     "start": 22.88,
+     "end": 23.12,
+     "probability": 0.847412109375
+    },
+    {
+     "word": " soles.",
+     "start": 23.12,
+     "end": 23.54,
+     "probability": 0.89697265625
+    },
+    {
+     "word": " ¿Algo",
+     "start": 23.68,
+     "end": 23.9,
+     "probability": 0.9718424479166666
+    },
+    {
+     "word": " de",
+     "start": 23.9,
+     "end": 24.04,
+     "probability": 0.98291015625
+    },
+    {
+     "word": " tomar?",
+     "start": 24.04,
+     "end": 24.3,
+     "probability": 0.95361328125
+    }
+   ]
+  },
+  {
+   "start": 24.94,
+   "end": 27.32,
+   "text": " Sí, dos vaciosas de litro y medio.",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 24.94,
+     "end": 25.24,
+     "probability": 0.833984375
+    },
+    {
+     "word": " dos",
+     "start": 25.82,
+     "end": 26.06,
+     "probability": 0.9638671875
+    },
+    {
+     "word": " vaciosas",
+     "start": 26.06,
+     "end": 26.62,
+     "probability": 0.7202962239583334
+    },
+    {
+     "word": " de",
+     "start": 26.62,
+     "end": 26.76,
+     "probability": 0.8173828125
+    },
+    {
+     "word": " litro",
+     "start": 26.76,
+     "end": 27.02,
+     "probability": 0.964111328125
+    },
+    {
+     "word": " y",
+     "start": 27.02,
+     "end": 27.1,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " medio.",
+     "start": 27.1,
+     "end": 27.32,
+     "probability": 0.99755859375
+    }
+   ]
+  },
+  {
+   "start": 27.32,
+   "end": 33.62,
+   "text": " Aquí es todo listado una. Y está de suerte.",
+   "words": [
+    {
+     "word": " Aquí",
+     "start": 27.32,
+     "end": 28.3,
+     "probability": 0.2181396484375
+    },
+    {
+     "word": " es",
+     "start": 30.8,
+     "end": 30.96,
+     "probability": 0.378662109375
+    },
+    {
+     "word": " todo",
+     "start": 30.96,
+     "end": 31.06,
+     "probability": 0.07598876953125
+    },
+    {
+     "word": " listado",
+     "start": 31.06,
+     "end": 31.44,
+     "probability": 0.764892578125
+    },
+    {
+     "word": " una.",
+     "start": 31.44,
+     "end": 31.8,
+     "probability": 0.474609375
+    },
+    {
+     "word": " Y",
+     "start": 32.58,
+     "end": 32.8,
+     "probability": 0.61669921875
+    },
+    {
+     "word": " está",
+     "start": 32.8,
+     "end": 33.0,
+     "probability": 0.75732421875
+    },
+    {
+     "word": " de",
+     "start": 33.0,
+     "end": 33.14,
+     "probability": 0.68115234375
+    },
+    {
+     "word": " suerte.",
+     "start": 33.14,
+     "end": 33.62,
+     "probability": 0.937255859375
+    }
+   ]
+  },
+  {
+   "start": 33.98,
+   "end": 39.44,
+   "text": " Hoy las dos veces están así que una le sale gratis.",
+   "words": [
+    {
+     "word": " Hoy",
+     "start": 33.98,
+     "end": 34.14,
+     "probability": 0.9208984375
+    },
+    {
+     "word": " las",
+     "start": 34.14,
+     "end": 34.3,
+     "probability": 0.5986328125
+    },
+    {
+     "word": " dos",
+     "start": 34.3,
+     "end": 34.44,
+     "probability": 0.67041015625
+    },
+    {
+     "word": " veces",
+     "start": 34.44,
+     "end": 34.56,
+     "probability": 0.84228515625
+    },
+    {
+     "word": " están",
+     "start": 34.56,
+     "end": 34.88,
+     "probability": 0.94189453125
+    },
+    {
+     "word": " así",
+     "start": 34.88,
+     "end": 35.64,
+     "probability": 0.61328125
+    },
+    {
+     "word": " que",
+     "start": 37.24,
+     "end": 37.5,
+     "probability": 0.94482421875
+    },
+    {
+     "word": " una",
+     "start": 37.5,
+     "end": 37.84,
+     "probability": 0.95263671875
+    },
+    {
+     "word": " le",
+     "start": 37.84,
+     "end": 38.06,
+     "probability": 0.5771484375
+    },
+    {
+     "word": " sale",
+     "start": 38.06,
+     "end": 38.84,
+     "probability": 0.97119140625
+    },
+    {
+     "word": " gratis.",
+     "start": 38.84,
+     "end": 39.44,
+     "probability": 0.82421875
+    }
+   ]
+  },
+  {
+   "start": 40.06,
+   "end": 43.54,
+   "text": " Ah, buenísimo. Entonces déme la oferta.",
+   "words": [
+    {
+     "word": " Ah,",
+     "start": 40.06,
+     "end": 40.2,
+     "probability": 0.7021484375
+    },
+    {
+     "word": " buenísimo.",
+     "start": 40.28,
+     "end": 40.86,
+     "probability": 0.937744140625
+    },
+    {
+     "word": " Entonces",
+     "start": 41.14,
+     "end": 41.46,
+     "probability": 0.95654296875
+    },
+    {
+     "word": " déme",
+     "start": 41.46,
+     "end": 42.32,
+     "probability": 0.2493896484375
+    },
+    {
+     "word": " la",
+     "start": 42.32,
+     "end": 42.64,
+     "probability": 0.9921875
+    },
+    {
+     "word": " oferta.",
+     "start": 42.64,
+     "end": 43.54,
+     "probability": 0.928955078125
+    }
+   ]
+  },
+  {
+   "start": 45.86,
+   "end": 47.46,
+   "text": " ¿Está bien? ¿A qué dirección lo enviamos?",
+   "words": [
+    {
+     "word": " ¿Está",
+     "start": 45.86,
+     "end": 46.1,
+     "probability": 0.6435953776041666
+    },
+    {
+     "word": " bien?",
+     "start": 46.1,
+     "end": 46.32,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " ¿A",
+     "start": 46.5,
+     "end": 46.52,
+     "probability": 0.81396484375
+    },
+    {
+     "word": " qué",
+     "start": 46.52,
+     "end": 46.64,
+     "probability": 0.87060546875
+    },
+    {
+     "word": " dirección",
+     "start": 46.64,
+     "end": 47.0,
+     "probability": 0.91845703125
+    },
+    {
+     "word": " lo",
+     "start": 47.0,
+     "end": 47.16,
+     "probability": 0.5908203125
+    },
+    {
+     "word": " enviamos?",
+     "start": 47.16,
+     "end": 47.46,
+     "probability": 0.6930745442708334
+    }
+   ]
+  },
+  {
+   "start": 48.22,
+   "end": 51.72,
+   "text": " Calle las begonias 517 San Isidro.",
+   "words": [
+    {
+     "word": " Calle",
+     "start": 48.22,
+     "end": 48.78,
+     "probability": 0.5548095703125
+    },
+    {
+     "word": " las",
+     "start": 48.78,
+     "end": 48.94,
+     "probability": 0.46337890625
+    },
+    {
+     "word": " begonias",
+     "start": 48.94,
+     "end": 49.5,
+     "probability": 0.7098795572916666
+    },
+    {
+     "word": " 517",
+     "start": 49.5,
+     "end": 50.8,
+     "probability": 0.869140625
+    },
+    {
+     "word": " San",
+     "start": 50.8,
+     "end": 51.28,
+     "probability": 0.83154296875
+    },
+    {
+     "word": " Isidro.",
+     "start": 51.28,
+     "end": 51.72,
+     "probability": 0.9397786458333334
+    }
+   ]
+  },
+  {
+   "start": 52.84,
+   "end": 56.86,
+   "text": " Calle las begonias 517. ¿Casa o departamento?",
+   "words": [
+    {
+     "word": " Calle",
+     "start": 52.84,
+     "end": 53.52,
+     "probability": 0.7470703125
+    },
+    {
+     "word": " las",
+     "start": 53.52,
+     "end": 53.68,
+     "probability": 0.97314453125
+    },
+    {
+     "word": " begonias",
+     "start": 53.68,
+     "end": 54.28,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " 517.",
+     "start": 54.28,
+     "end": 55.26,
+     "probability": 0.970947265625
+    },
+    {
+     "word": " ¿Casa",
+     "start": 55.86,
+     "end": 56.14,
+     "probability": 0.67840576171875
+    },
+    {
+     "word": " o",
+     "start": 56.14,
+     "end": 56.44,
+     "probability": 0.8583984375
+    },
+    {
+     "word": " departamento?",
+     "start": 56.44,
+     "end": 56.86,
+     "probability": 0.73681640625
+    }
+   ]
+  },
+  {
+   "start": 57.34,
+   "end": 61.1,
+   "text": " Casa. Tiene una puerta de madera grande al lado de una bodega.",
+   "words": [
+    {
+     "word": " Casa.",
+     "start": 57.34,
+     "end": 57.8,
+     "probability": 0.454833984375
+    },
+    {
+     "word": " Tiene",
+     "start": 58.2,
+     "end": 58.32,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " una",
+     "start": 58.32,
+     "end": 58.54,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " puerta",
+     "start": 58.54,
+     "end": 58.76,
+     "probability": 0.97265625
+    },
+    {
+     "word": " de",
+     "start": 58.76,
+     "end": 59.12,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " madera",
+     "start": 59.12,
+     "end": 59.58,
+     "probability": 0.987060546875
+    },
+    {
+     "word": " grande",
+     "start": 59.58,
+     "end": 60.02,
+     "probability": 0.98974609375
+    },
+    {
+     "word": " al",
+     "start": 60.02,
+     "end": 60.44,
+     "probability": 0.85302734375
+    },
+    {
+     "word": " lado",
+     "start": 60.44,
+     "end": 60.62,
+     "probability": 0.89892578125
+    },
+    {
+     "word": " de",
+     "start": 60.62,
+     "end": 60.74,
+     "probability": 0.994140625
+    },
+    {
+     "word": " una",
+     "start": 60.74,
+     "end": 60.8,
+     "probability": 0.921875
+    },
+    {
+     "word": " bodega.",
+     "start": 60.8,
+     "end": 61.1,
+     "probability": 0.97412109375
+    }
+   ]
+  },
+  {
+   "start": 62.64,
+   "end": 65.36,
+   "text": " Perfecto. ¿Por qué medio va a pagar?",
+   "words": [
+    {
+     "word": " Perfecto.",
+     "start": 62.64,
+     "end": 63.28,
+     "probability": 0.589599609375
+    },
+    {
+     "word": " ¿Por",
+     "start": 63.8,
+     "end": 64.44,
+     "probability": 0.829345703125
+    },
+    {
+     "word": " qué",
+     "start": 64.44,
+     "end": 64.66,
+     "probability": 0.95654296875
+    },
+    {
+     "word": " medio",
+     "start": 64.66,
+     "end": 64.96,
+     "probability": 0.92822265625
+    },
+    {
+     "word": " va",
+     "start": 64.96,
+     "end": 65.12,
+     "probability": 0.89013671875
+    },
+    {
+     "word": " a",
+     "start": 65.12,
+     "end": 65.18,
+     "probability": 0.99267578125
+    },
+    {
+     "word": " pagar?",
+     "start": 65.18,
+     "end": 65.36,
+     "probability": 0.94677734375
+    }
+   ]
+  },
+  {
+   "start": 66.02,
+   "end": 67.48,
+   "text": " ¿Por ya peseis que se podría?",
+   "words": [
+    {
+     "word": " ¿Por",
+     "start": 66.02,
+     "end": 66.24,
+     "probability": 0.546844482421875
+    },
+    {
+     "word": " ya",
+     "start": 66.24,
+     "end": 66.42,
+     "probability": 0.60107421875
+    },
+    {
+     "word": " peseis",
+     "start": 66.42,
+     "end": 66.86,
+     "probability": 0.5526936848958334
+    },
+    {
+     "word": " que",
+     "start": 66.86,
+     "end": 66.98,
+     "probability": 0.939453125
+    },
+    {
+     "word": " se",
+     "start": 66.98,
+     "end": 67.14,
+     "probability": 0.890625
+    },
+    {
+     "word": " podría?",
+     "start": 67.14,
+     "end": 67.48,
+     "probability": 0.9794921875
+    }
+   ]
+  },
+  {
+   "start": 68.54,
+   "end": 70.82,
+   "text": " Sí, claro. Le mandamos el número por mensaje.",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 68.54,
+     "end": 68.8,
+     "probability": 0.444580078125
+    },
+    {
+     "word": " claro.",
+     "start": 68.98,
+     "end": 69.08,
+     "probability": 0.97802734375
+    },
+    {
+     "word": " Le",
+     "start": 69.32,
+     "end": 69.4,
+     "probability": 0.96484375
+    },
+    {
+     "word": " mandamos",
+     "start": 69.4,
+     "end": 69.78,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " el",
+     "start": 69.78,
+     "end": 69.96,
+     "probability": 0.98779296875
+    },
+    {
+     "word": " número",
+     "start": 69.96,
+     "end": 70.16,
+     "probability": 0.99365234375
+    },
+    {
+     "word": " por",
+     "start": 70.16,
+     "end": 70.4,
+     "probability": 0.9853515625
+    },
+    {
+     "word": " mensaje.",
+     "start": 70.4,
+     "end": 70.82,
+     "probability": 0.99365234375
+    }
+   ]
+  },
+  {
+   "start": 71.24,
+   "end": 74.4,
+   "text": " Su pedido sería entonces dos cuartos de pollo,",
+   "words": [
+    {
+     "word": " Su",
+     "start": 71.24,
+     "end": 71.46,
+     "probability": 0.06427001953125
+    },
+    {
+     "word": " pedido",
+     "start": 71.46,
+     "end": 71.98,
+     "probability": 0.887451171875
+    },
+    {
+     "word": " sería",
+     "start": 71.98,
+     "end": 72.5,
+     "probability": 0.8447265625
+    },
+    {
+     "word": " entonces",
+     "start": 72.5,
+     "end": 72.94,
+     "probability": 0.8505859375
+    },
+    {
+     "word": " dos",
+     "start": 72.94,
+     "end": 73.42,
+     "probability": 0.7431640625
+    },
+    {
+     "word": " cuartos",
+     "start": 73.42,
+     "end": 73.84,
+     "probability": 0.9443359375
+    },
+    {
+     "word": " de",
+     "start": 73.84,
+     "end": 74.0,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " pollo,",
+     "start": 74.0,
+     "end": 74.4,
+     "probability": 0.968505859375
+    }
+   ]
+  },
+  {
+   "start": 74.64,
+   "end": 77.36,
+   "text": " una papas familiares y dos vaciosas,",
+   "words": [
+    {
+     "word": " una",
+     "start": 74.64,
+     "end": 74.8,
+     "probability": 0.81298828125
+    },
+    {
+     "word": " papas",
+     "start": 74.8,
+     "end": 75.12,
+     "probability": 0.24991607666015625
+    },
+    {
+     "word": " familiares",
+     "start": 75.12,
+     "end": 75.96,
+     "probability": 0.573486328125
+    },
+    {
+     "word": " y",
+     "start": 75.96,
+     "end": 76.52,
+     "probability": 0.8115234375
+    },
+    {
+     "word": " dos",
+     "start": 76.52,
+     "end": 76.7,
+     "probability": 0.990234375
+    },
+    {
+     "word": " vaciosas,",
+     "start": 76.7,
+     "end": 77.36,
+     "probability": 0.7937825520833334
+    }
+   ]
+  },
+  {
+   "start": 77.38,
+   "end": 79.58,
+   "text": " que es como con la promoción.",
+   "words": [
+    {
+     "word": " que",
+     "start": 77.38,
+     "end": 78.02,
+     "probability": 0.9326171875
+    },
+    {
+     "word": " es",
+     "start": 78.02,
+     "end": 78.28,
+     "probability": 0.98193359375
+    },
+    {
+     "word": " como",
+     "start": 78.28,
+     "end": 78.64,
+     "probability": 0.80126953125
+    },
+    {
+     "word": " con",
+     "start": 78.64,
+     "end": 79.06,
+     "probability": 0.83935546875
+    },
+    {
+     "word": " la",
+     "start": 79.06,
+     "end": 79.16,
+     "probability": 0.99609375
+    },
+    {
+     "word": " promoción.",
+     "start": 79.16,
+     "end": 79.58,
+     "probability": 0.989990234375
+    }
+   ]
+  },
+  {
+   "start": 80.2,
+   "end": 82.64,
+   "text": " En total es setenta y cinco soles.",
+   "words": [
+    {
+     "word": " En",
+     "start": 80.2,
+     "end": 80.36,
+     "probability": 0.85986328125
+    },
+    {
+     "word": " total",
+     "start": 80.36,
+     "end": 80.54,
+     "probability": 0.99951171875
+    },
+    {
+     "word": " es",
+     "start": 80.54,
+     "end": 81.12,
+     "probability": 0.81201171875
+    },
+    {
+     "word": " setenta",
+     "start": 81.12,
+     "end": 81.72,
+     "probability": 0.56396484375
+    },
+    {
+     "word": " y",
+     "start": 81.72,
+     "end": 81.84,
+     "probability": 0.99609375
+    },
+    {
+     "word": " cinco",
+     "start": 81.84,
+     "end": 82.18,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " soles.",
+     "start": 82.18,
+     "end": 82.64,
+     "probability": 0.3350830078125
+    }
+   ]
+  },
+  {
+   "start": 83.34,
+   "end": 86.42,
+   "text": " Perfecto. ¿Me podría agregar bastante aquí, porfa?",
+   "words": [
+    {
+     "word": " Perfecto.",
+     "start": 83.34,
+     "end": 83.98,
+     "probability": 0.969482421875
+    },
+    {
+     "word": " ¿Me",
+     "start": 84.18,
+     "end": 84.48,
+     "probability": 0.84765625
+    },
+    {
+     "word": " podría",
+     "start": 84.48,
+     "end": 84.76,
+     "probability": 0.89306640625
+    },
+    {
+     "word": " agregar",
+     "start": 84.76,
+     "end": 85.18,
+     "probability": 0.94873046875
+    },
+    {
+     "word": " bastante",
+     "start": 85.18,
+     "end": 85.5,
+     "probability": 0.92822265625
+    },
+    {
+     "word": " aquí,",
+     "start": 85.5,
+     "end": 85.88,
+     "probability": 0.344482421875
+    },
+    {
+     "word": " porfa?",
+     "start": 86.14,
+     "end": 86.42,
+     "probability": 0.943603515625
+    }
+   ]
+  },
+  {
+   "start": 87.46,
+   "end": 90.16,
+   "text": " Sí, le ponemos aquí extra sin costo",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 87.46,
+     "end": 87.78,
+     "probability": 0.814453125
+    },
+    {
+     "word": " le",
+     "start": 87.92,
+     "end": 88.02,
+     "probability": 0.7587890625
+    },
+    {
+     "word": " ponemos",
+     "start": 88.02,
+     "end": 88.38,
+     "probability": 0.96435546875
+    },
+    {
+     "word": " aquí",
+     "start": 88.38,
+     "end": 88.84,
+     "probability": 0.67822265625
+    },
+    {
+     "word": " extra",
+     "start": 88.84,
+     "end": 89.4,
+     "probability": 0.75146484375
+    },
+    {
+     "word": " sin",
+     "start": 89.4,
+     "end": 89.68,
+     "probability": 0.76904296875
+    },
+    {
+     "word": " costo",
+     "start": 89.68,
+     "end": 90.16,
+     "probability": 0.974365234375
+    }
+   ]
+  },
+  {
+   "start": 90.16,
+   "end": 91.1,
+   "text": " y también algunas otras.",
+   "words": [
+    {
+     "word": " y",
+     "start": 90.16,
+     "end": 90.28,
+     "probability": 0.043914794921875
+    },
+    {
+     "word": " también",
+     "start": 90.28,
+     "end": 90.48,
+     "probability": 0.70361328125
+    },
+    {
+     "word": " algunas",
+     "start": 90.48,
+     "end": 90.9,
+     "probability": 0.79150390625
+    },
+    {
+     "word": " otras.",
+     "start": 90.9,
+     "end": 91.1,
+     "probability": 0.83349609375
+    }
+   ]
+  },
+  {
+   "start": 91.76,
+   "end": 95.86,
+   "text": " Ok, otra cosa. ¿Los cuartos podrían ser piernas?",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 91.76,
+     "end": 92.44,
+     "probability": 0.24267578125
+    },
+    {
+     "word": " otra",
+     "start": 92.76,
+     "end": 93.46,
+     "probability": 0.646484375
+    },
+    {
+     "word": " cosa.",
+     "start": 93.46,
+     "end": 93.88,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " ¿Los",
+     "start": 94.12,
+     "end": 94.26,
+     "probability": 0.6642252604166666
+    },
+    {
+     "word": " cuartos",
+     "start": 94.26,
+     "end": 94.64,
+     "probability": 0.91748046875
+    },
+    {
+     "word": " podrían",
+     "start": 94.64,
+     "end": 95.08,
+     "probability": 0.993408203125
+    },
+    {
+     "word": " ser",
+     "start": 95.08,
+     "end": 95.34,
+     "probability": 0.99365234375
+    },
+    {
+     "word": " piernas?",
+     "start": 95.34,
+     "end": 95.86,
+     "probability": 0.7196044921875
+    }
+   ]
+  },
+  {
+   "start": 104.19,
+   "end": 108.05,
+   "text": " Ok, genial. ¿Y las vaciosas que vengan heladas, porfa?",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 104.19,
+     "end": 104.37,
+     "probability": 0.7041015625
+    },
+    {
+     "word": " genial.",
+     "start": 104.45,
+     "end": 104.81,
+     "probability": 0.9248046875
+    },
+    {
+     "word": " ¿Y",
+     "start": 105.19,
+     "end": 105.29,
+     "probability": 0.7548828125
+    },
+    {
+     "word": " las",
+     "start": 105.29,
+     "end": 105.41,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " vaciosas",
+     "start": 105.41,
+     "end": 105.85,
+     "probability": 0.4070943196614583
+    },
+    {
+     "word": " que",
+     "start": 105.85,
+     "end": 106.39,
+     "probability": 0.8857421875
+    },
+    {
+     "word": " vengan",
+     "start": 106.39,
+     "end": 106.65,
+     "probability": 0.86865234375
+    },
+    {
+     "word": " heladas,",
+     "start": 106.65,
+     "end": 107.31,
+     "probability": 0.722900390625
+    },
+    {
+     "word": " porfa?",
+     "start": 107.61,
+     "end": 108.05,
+     "probability": 0.984375
+    }
+   ]
+  },
+  {
+   "start": 110.51,
+   "end": 111.55,
+   "text": " Directo de la refugia.",
+   "words": [
+    {
+     "word": " Directo",
+     "start": 110.51,
+     "end": 110.89,
+     "probability": 0.58013916015625
+    },
+    {
+     "word": " de",
+     "start": 110.89,
+     "end": 110.99,
+     "probability": 0.916015625
+    },
+    {
+     "word": " la",
+     "start": 110.99,
+     "end": 111.11,
+     "probability": 0.748046875
+    },
+    {
+     "word": " refugia.",
+     "start": 111.11,
+     "end": 111.55,
+     "probability": 0.5166422526041666
+    }
+   ]
+  },
+  {
+   "start": 113.01,
+   "end": 117.59,
+   "text": " Perfecto. Ah, y si el motorizado no encuentra la casa",
+   "words": [
+    {
+     "word": " Perfecto.",
+     "start": 113.01,
+     "end": 113.69,
+     "probability": 0.641845703125
+    },
+    {
+     "word": " Ah,",
+     "start": 113.95,
+     "end": 114.07,
+     "probability": 0.68017578125
+    },
+    {
+     "word": " y",
+     "start": 114.53,
+     "end": 114.75,
+     "probability": 0.8115234375
+    },
+    {
+     "word": " si",
+     "start": 114.75,
+     "end": 115.11,
+     "probability": 0.93798828125
+    },
+    {
+     "word": " el",
+     "start": 115.11,
+     "end": 115.23,
+     "probability": 0.94677734375
+    },
+    {
+     "word": " motorizado",
+     "start": 115.23,
+     "end": 116.17,
+     "probability": 0.962890625
+    },
+    {
+     "word": " no",
+     "start": 116.17,
+     "end": 116.51,
+     "probability": 0.990234375
+    },
+    {
+     "word": " encuentra",
+     "start": 116.51,
+     "end": 117.11,
+     "probability": 0.8720703125
+    },
+    {
+     "word": " la",
+     "start": 117.11,
+     "end": 117.33,
+     "probability": 0.953125
+    },
+    {
+     "word": " casa",
+     "start": 117.33,
+     "end": 117.59,
+     "probability": 0.9970703125
+    }
+   ]
+  },
+  {
+   "start": 117.59,
+   "end": 120.37,
+   "text": " que me llame normal porque la numeración de la calle",
+   "words": [
+    {
+     "word": " que",
+     "start": 117.59,
+     "end": 117.91,
+     "probability": 0.61083984375
+    },
+    {
+     "word": " me",
+     "start": 117.91,
+     "end": 118.27,
+     "probability": 0.96337890625
+    },
+    {
+     "word": " llame",
+     "start": 118.27,
+     "end": 118.49,
+     "probability": 0.902587890625
+    },
+    {
+     "word": " normal",
+     "start": 118.49,
+     "end": 118.83,
+     "probability": 0.94091796875
+    },
+    {
+     "word": " porque",
+     "start": 118.83,
+     "end": 119.21,
+     "probability": 0.484130859375
+    },
+    {
+     "word": " la",
+     "start": 119.21,
+     "end": 119.51,
+     "probability": 0.990234375
+    },
+    {
+     "word": " numeración",
+     "start": 119.51,
+     "end": 119.95,
+     "probability": 0.536102294921875
+    },
+    {
+     "word": " de",
+     "start": 119.95,
+     "end": 120.09,
+     "probability": 0.99267578125
+    },
+    {
+     "word": " la",
+     "start": 120.09,
+     "end": 120.19,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " calle",
+     "start": 120.19,
+     "end": 120.37,
+     "probability": 0.99658203125
+    }
+   ]
+  },
+  {
+   "start": 120.37,
+   "end": 121.43,
+   "text": " es un poco confusa.",
+   "words": [
+    {
+     "word": " es",
+     "start": 120.37,
+     "end": 120.51,
+     "probability": 0.96923828125
+    },
+    {
+     "word": " un",
+     "start": 120.51,
+     "end": 120.65,
+     "probability": 0.99267578125
+    },
+    {
+     "word": " poco",
+     "start": 120.65,
+     "end": 120.79,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " confusa.",
+     "start": 120.79,
+     "end": 121.43,
+     "probability": 0.995361328125
+    }
+   ]
+  },
+  {
+   "start": 127.14,
+   "end": 129.54,
+   "text": " Ok, ¿cuánto estaría demorando?",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 127.14,
+     "end": 127.52,
+     "probability": 0.7431640625
+    },
+    {
+     "word": " ¿cuánto",
+     "start": 128.26,
+     "end": 128.62,
+     "probability": 0.855224609375
+    },
+    {
+     "word": " estaría",
+     "start": 128.62,
+     "end": 128.92,
+     "probability": 0.94189453125
+    },
+    {
+     "word": " demorando?",
+     "start": 128.92,
+     "end": 129.54,
+     "probability": 0.9876302083333334
+    }
+   ]
+  },
+  {
+   "start": 137.83,
+   "end": 139.37,
+   "text": " Ok, listo. Gracias.",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 137.83,
+     "end": 138.09,
+     "probability": 0.919921875
+    },
+    {
+     "word": " listo.",
+     "start": 138.41,
+     "end": 138.93,
+     "probability": 0.970947265625
+    },
+    {
+     "word": " Gracias.",
+     "start": 139.07,
+     "end": 139.37,
+     "probability": 0.9453125
+    }
+   ]
+  },
+  {
+   "start": 140.31,
+   "end": 143.21,
+   "text": " Gracias a usted por su pedido. Buenas noches.",
+   "words": [
+    {
+     "word": " Gracias",
+     "start": 140.31,
+     "end": 140.85,
+     "probability": 0.202880859375
+    },
+    {
+     "word": " a",
+     "start": 140.85,
+     "end": 141.11,
+     "probability": 0.06622314453125
+    },
+    {
+     "word": " usted",
+     "start": 141.11,
+     "end": 141.39,
+     "probability": 0.2386474609375
+    },
+    {
+     "word": " por",
+     "start": 141.39,
+     "end": 141.79,
+     "probability": 0.9296875
+    },
+    {
+     "word": " su",
+     "start": 141.79,
+     "end": 141.97,
+     "probability": 0.98583984375
+    },
+    {
+     "word": " pedido.",
+     "start": 141.97,
+     "end": 142.41,
+     "probability": 0.5095596313476562
+    },
+    {
+     "word": " Buenas",
+     "start": 142.49,
+     "end": 142.71,
+     "probability": 0.9873046875
+    },
+    {
+     "word": " noches.",
+     "start": 142.71,
+     "end": 143.21,
+     "probability": 0.9833984375
+    }
+   ]
+  }
+ ],
+ "device": "cuda",
+ "compute_type": "int8_float16",
+ "elapsed_s": 4.989,
+ "duracion_audio_s": 144.233,
+ "seg_por_min_audio": 2.076,
+ "peak_vram_mb": 192.0,
+ "modelo": "small",
+ "glosario": "plano",
+ "parametros_glosario": {},
+ "faster_whisper": "1.2.1",
+ "ctranslate2": "4.8.4"
+}

@@ -31,6 +31,18 @@ def test_normalizar(cfg, entrada, esperado):
     assert normalizar(entrada, cfg) == quitar_tildes(esperado)
 
 
+@pytest.mark.parametrize("entrada, esperado", [
+    # Así escribe Whisper los montos (encontrado con el audio real)
+    ("unos 6,500 soles mensuales", "unos 6500 soles mensuales"),
+    ("mi pretensión es de 9.000 soles", "mi pretension es de 9000 soles"),
+    ("1.234.567", "1234567"),
+    ("2.5 años", "2.5 anos"),        # decimal: no se toca
+    ("12,5 soles", "12 5 soles"),    # no son 3 dígitos: no es separador de miles
+])
+def test_separador_de_miles(cfg, entrada, esperado):
+    assert normalizar(entrada, cfg) == esperado
+
+
 def test_puntuacion_y_espacios(cfg):
     assert normalizar("¿Me  escucha bien?… ¡Sí!", cfg) == "me escucha bien si"
 

@@ -69,9 +69,24 @@ def quitar_puntuacion(texto: str) -> str:
     return re.sub(r"[^\w\s.]", " ", texto)
 
 
+def unir_miles(texto: str) -> str:
+    """'6,500' y '9.000' -> '6500' y '9000'. Whisper escribe así los montos.
+
+    Una coma o un punto seguido de EXACTAMENTE 3 dígitos es separador de miles;
+    '2.5' sigue siendo decimal. Se repite para '1.234.567'.
+    """
+    anterior = None
+    while anterior != texto:
+        anterior = texto
+        texto = re.sub(r"(\d)[.,](\d{3})(?!\d)", r"\1\2", texto)
+    return texto
+
+
 def normalizar(texto: str, cfg: dict) -> str:
     """Normalización completa según config.yaml (sección 'normalizacion')."""
     cfg_norm = cfg["normalizacion"]
+    if cfg_norm["unir_miles"]:
+        texto = unir_miles(texto)  # antes de todo: después la coma se volvería espacio
     if cfg_norm["minusculas"]:
         texto = texto.lower()
     if cfg_norm["numeros_a_digitos"]:

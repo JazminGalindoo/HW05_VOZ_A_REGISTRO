@@ -1,0 +1,18 @@
+{
+  "L01": {
+    "snr_objetivo_db": 10,
+    "snr_medido_db": 10.0
+  },
+  "L02": {
+    "snr_objetivo_db": 10,
+    "snr_medido_db": 10.0
+  },
+  "L03": {
+    "snr_objetivo_db": 10,
+    "snr_medido_db": 10.0
+  },
+  "L04": {
+    "snr_objetivo_db": 10,
+    "snr_medido_db": 10.0
+  }
+}
