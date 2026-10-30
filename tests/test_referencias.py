@@ -13,7 +13,8 @@ def test_un_txt_por_clip():
 
 
 def test_sin_nombres_de_hablante():
+    # En guiones.md cada turno es "**HABLANTE:** texto"; en la referencia solo queda el texto
     for clip in CLIPS:
         texto = (CARPETA / f"{clip}.txt").read_text(encoding="utf-8")
         assert "**" not in texto
-        assert "JAZMÍN:" not in texto and "MAMÁ:" not in texto
+        assert "PERSONA 1" not in texto and "PERSONA 2" not in texto

@@ -2,4 +2,4 @@ clip,items,promocion,descuento,direccion_entrega,metodo_pago,total_correcto,tota
 L01,"pollo entero x1 @64; papas familiares x1 @15; gaseosa 1.5L x1 @10",,0,"Av. Los Álamos 1245, Surco",tarjeta,89,89,1,0,1
 L02,"medio pollo x1 @36; arroz chaufa x2 @28; ensalada x1 @8",10 soles de descuento en compras mayores a 80,10,"Jr. Huallaga 382, dpto 4B, Cercado",efectivo,90,80,1,1,1
 L03,"cuarto de pollo x2 @20; papas familiares x1 @15; gaseosa 1.5L x2 @10",gaseosas 2x1,10,"Calle Las Begonias 517, San Isidro",yape,65,75,1,1,1
-L04,"pollo entero x1 @64; arroz chaufa x1 @28; ensalada x1 @8",10 soles de descuento en compras mayores a 80,10,"Av. Arequipa 2890, interior 302, Lince",tarjeta,90,98,0,1,1
+L04,"pollo entero x1 @64; arroz chaufa x1 @28; ensalada x1 @8",10 soles de descuento por la promoción del día (compra mayor a 80),10,"Av. Arequipa 2890, interior 302, Lince",tarjeta,90,98,0,1,1
