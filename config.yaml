@@ -221,6 +221,8 @@ metricas:
   bootstrap_n: 1000             # réplicas (remuestreo por clip)
   bootstrap_alpha: 0.05         # IC al 95 %
   semilla: 42
+  # Al comparar direcciones: abreviatura -> palabra completa ("Av." = "avenida")
+  abreviaturas: {av: avenida, jr: jiron, dpto: departamento, int: interior, ca: calle}
 
 # ---------------------------------------------------------------------
 # Regresión en CI (lee cache/, nunca re-transcribe)
