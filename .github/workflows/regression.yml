@@ -23,3 +23,5 @@ jobs:
         run: |
           python -c "import sys; import src.engine; bad={'streamlit','gradio','telegram'}&set(sys.modules); assert not bad, bad; print('OK: engine sin UI')"
       - run: pytest -q
+      - name: Métricas desde cache/ y umbrales (no transcribe)
+        run: python -m src.evaluar --verificar

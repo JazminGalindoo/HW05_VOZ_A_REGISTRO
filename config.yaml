@@ -276,3 +276,34 @@ metricas:
 regresion:
   wer_max: 0.30
   accuracy_campos_min: 0.70
+  # Qué combinación se vigila (si todavía no está en cache, solo se revisa
+  # la extracción sobre los transcripts de referencia)
+  combinacion: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+
+# ---------------------------------------------------------------------
+# Evaluación final (python -m src.evaluar): lee cache/, escribe cache/results/
+# ---------------------------------------------------------------------
+evaluacion:
+  metodos: [reglas]             # "llm" se agrega con: python -m src.evaluar --llm
+  # Comparaciones pareadas en L0: diferencia de WER = WER(b) - WER(a) con IC bootstrap
+  comparaciones:
+    - nombre: tamaño (small -> large-v3)
+      a: {modelo: small,    device: cuda, compute_type: float16, glosario: plano}
+      b: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+    - nombre: device (cpu -> cuda), small int8
+      a: {modelo: small, device: cpu,  compute_type: int8, glosario: plano}
+      b: {modelo: small, device: cuda, compute_type: int8, glosario: plano}
+    - nombre: precisión (float16 -> int8), small
+      a: {modelo: small, device: cuda, compute_type: float16, glosario: plano}
+      b: {modelo: small, device: cuda, compute_type: int8,    glosario: plano}
+    - nombre: precisión (float16 -> int8), large-v3
+      a: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+      b: {modelo: large-v3, device: cuda, compute_type: int8,    glosario: plano}
+    - nombre: glosario (plano -> glosario), small
+      a: {modelo: small, device: cuda, compute_type: float16, glosario: plano}
+      b: {modelo: small, device: cuda, compute_type: float16, glosario: glosario}
+    - nombre: glosario (plano -> glosario), large-v3
+      a: {modelo: large-v3, device: cuda, compute_type: float16, glosario: plano}
+      b: {modelo: large-v3, device: cuda, compute_type: float16, glosario: glosario}
+  # Campos categóricos con macro-F1 (campo -> lista de clases en extraccion.categorias)
+  macro_f1: {entrevista: nivel_ingles, pedido: metodo_pago}
