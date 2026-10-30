@@ -79,6 +79,16 @@ def test_reglas_no_duplican_productos_repetidos(cfg):
     assert _items_simples(r["items"]) == [("pollo entero", 1, 64), ("gaseosa 1.5L", 1, 10)]
 
 
+def test_reglas_con_formas_de_hablar_del_audio_real(cfg):
+    # Frases reales del ASR: "está a N soles", "su pedido sería", "el total sería de", montos "6,500"
+    texto = ("Un pollo entero, por favor. Pollo entero está a 64 soles. Entonces, su pedido sería "
+             "un pollo entero. El total sería de 64 soles.")
+    r = extraer_reglas(texto, "pedido", cfg)
+    assert _items_simples(r["items"]) == [("pollo entero", 1, 64)] and r["total_dicho"] == 64
+    e = extraer_reglas("¿Cuál es su pretensión salarial? Unos 6,500 soles.", "entrevista", cfg)
+    assert e["pretension_salarial"] == 6500
+
+
 # ---------------- LLM con cliente falso ----------------
 
 class ClienteFalso:
