@@ -17,5 +17,7 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Motor sin UI
-        run: python -c "import sys; import src.engine; bad={'streamlit','gradio','telegram'}&set(sys.modules); assert not bad, bad; print('OK: engine sin UI')"
+        # Bloque "|": el ": " dentro del comando rompería el YAML si va en una sola línea
+        run: |
+          python -c "import sys; import src.engine; bad={'streamlit','gradio','telegram'}&set(sys.modules); assert not bad, bad; print('OK: engine sin UI')"
       - run: pytest -q
