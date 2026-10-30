@@ -193,6 +193,8 @@ validacion:
   # Diagnóstico ASR vs hablante: umbral de probabilidad por palabra
   # en los tokens numéricos. Por debajo -> sospecha de error de ASR.
   prob_palabra_min: 0.80
+  # Un número dicho ocupa hasta N palabras ("dos mil ochocientos noventa")
+  max_palabras_numero: 6
 
 # ---------------------------------------------------------------------
 # Escalera de degradación (Tarea 2) — reproducible con ffmpeg
