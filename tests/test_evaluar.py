@@ -7,6 +7,7 @@ L1 de A: en L01 el ASR "oye" 81 en vez de 89, con baja confianza.
 
 import json
 
+import pandas as pd
 import pytest
 
 from src.asr import ruta_cache
@@ -41,6 +42,10 @@ def resultados(cfg, referencias, tmp_path_factory):
     l01 = referencias["L01"].replace("ochenta y nueve soles", "ochenta y uno soles")
     escribir(c, "L01", A, "L1", l01, prob_baja={"uno"})
     escribir(c, "Z99", A, "L0", "clip sintético sin ground truth")
+    # VRAM total medida aparte (src/medir_vram.py) solo para small float16
+    (tmp / "results").mkdir()
+    (tmp / "results" / "vram_modelos.json").write_text(json.dumps(
+        {"small|float16": {"modelo_mb": 700.0, "total_mb": 1700.0, "extra_mb": 1000.0}}), encoding="utf-8")
     return c, evaluar(c, ["reglas"])
 
 
@@ -50,6 +55,15 @@ def test_wer_por_combinacion(resultados):
     assert res.loc[("small", "L0", "entrevista"), "wer"] == 0
     assert res.loc[("large-v3", "L0", "pedido"), "wer"] > 0
     assert res.loc[("small", "L0", "pedido"), "n_clips"] == 4
+
+
+def test_vram_extra_y_total(resultados):
+    _, r = resultados
+    res = r["asr_resumen"].set_index(["modelo", "nivel", "tarea"])
+    small = res.loc[("small", "L0", "pedido")]
+    assert small["vram_extra_mb_max"] == 900.0                                # del cache
+    assert (small["vram_modelo_mb"], small["vram_total_mb"]) == (700.0, 1700.0)  # de vram_modelos.json
+    assert pd.isna(res.loc[("large-v3", "L0", "pedido"), "vram_total_mb"])     # no medida: vacía
 
 
 def test_comparacion_tamano(resultados):
