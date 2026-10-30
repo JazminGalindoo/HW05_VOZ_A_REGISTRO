@@ -106,7 +106,7 @@ def l3_ruido(entrada_l1, ruta_ruido, salida, cfg: dict, snr_objetivo: float | No
                                        leer_mono(ruta_ruido, sr, cfg), snr_objetivo)
     Path(salida).parent.mkdir(parents=True, exist_ok=True)
     sf.write(salida, mezcla, sr, subtype="FLOAT")  # FLOAT: sin pérdida al guardar
-    return {"snr_objetivo_db": snr_objetivo, "snr_medido_db": round(snr_medido, 2)}
+    return {"snr_objetivo_db": snr_objetivo, "snr_medido_db": round(float(snr_medido), 2)}
 
 
 # =====================================================================

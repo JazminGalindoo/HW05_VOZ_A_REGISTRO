@@ -12,6 +12,7 @@ Responsabilidad:
     - Guardar y leer el cache de transcripts (cache/transcripts/*.json).
 """
 
+import gc
 import inspect
 import json
 import threading
@@ -98,6 +99,12 @@ def cargar_modelo(nombre: str, device: str, compute_type: str, cfg: dict) -> Whi
             download_root=str(RAIZ / cfg["rutas"]["modelos"]),
         )
     return _MODELOS[clave]
+
+
+def liberar_modelos() -> None:
+    """Saca los modelos de memoria (libera VRAM antes de medir con otro modelo)."""
+    _MODELOS.clear()
+    gc.collect()
 
 
 def soporta_hotwords() -> bool:
