@@ -76,10 +76,22 @@ normalizacion:
   # DECISIÓN A DOCUMENTAR EN README: quitar tildes evita penalizar
   # "inglés" vs "ingles", pero pierde información. Valor inicial:
   quitar_tildes: true
-  # Coloquialismos que text2num no resuelve (extensión propia, documentada)
-  coloquialismos:
-    lucas: "000"                # "seis lucas" -> 6000 soles
-    "y medio": ".5"             # "tres y medio años" -> 3.5
+  # text2num: números por debajo de este umbral NO se convierten.
+  # Con el valor por defecto (3) "dos chaufas" quedaba sin convertir;
+  # con 0 se convierte todo, incluso "un pollo" -> "1 pollo".
+  umbral_text2num: 0
+  # Palabras que text2num convierte por error y se protegen:
+  # ordinales ("dos cuartos de pollo" -> "2 4ᵒˢ") y "unos/unas" ("unos 6500" -> "1 6500").
+  palabras_protegidas: [cuarto, cuartos, primer, primero, primera, segundo, segunda,
+                        tercer, tercero, tercera, medio, media, unos, unas]
+  # Reglas propias para coloquialismos que text2num no resuelve:
+  # "2 años y medio" / "3 y medio años" -> 2.5 / 3.5 (solo con estas unidades,
+  # para no tocar "gaseosa de litro y medio", que es nombre de producto)
+  unidades_y_medio: [años, meses, semanas, horas]
+  # "seis lucas" -> 6000
+  multiplicadores:
+    luca: 1000
+    lucas: 1000
 
 # ---------------------------------------------------------------------
 # Extracción
