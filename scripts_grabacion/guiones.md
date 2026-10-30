@@ -414,7 +414,7 @@ PERSONA 2 — cliente
 
 **PERSONA 2:** Un arroz chaufa y una ensalada.
 
-**PERSONA 1:** Chaufa a veintiocho soles y ensalada a ocho soles. Como su compra pasa de ochenta soles, tiene diez soles de descuento por la promoción del día.
+**PERSONA 1:** Chaufa a veinticinco soles y ensalada a ocho soles. Como su compra pasa de ochenta soles, tiene diez soles de descuento por la promoción del día.
 
 **PERSONA 2:** Ah, perfecto.
 

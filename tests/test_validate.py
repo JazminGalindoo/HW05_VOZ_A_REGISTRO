@@ -26,7 +26,7 @@ def pedidos(cfg, referencias):
     ("L01", True, 89, 89),
     ("L02", False, 90, 80),   # dice 80, lo correcto es 90
     ("L03", False, 65, 75),   # se olvidó del 2x1
-    ("L04", False, 90, 98),   # dice 98, lo correcto es 90
+    ("L04", False, 87, 98),   # dice 98, lo correcto es 87 (chaufa a 25)
 ])
 def test_chequeo_detecta_l02_l03_l04(cfg, pedidos, clip, cuadra, esperado, dicho):
     r = chequear(pedidos[clip], cfg)

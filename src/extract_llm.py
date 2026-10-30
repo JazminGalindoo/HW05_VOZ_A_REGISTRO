@@ -82,16 +82,17 @@ def armar_solicitud(transcript: str, schema: str, cfg: dict) -> dict:
 
 
 def _llamar(cliente, solicitud: dict, llm: dict):
-    """Una llamada al API, esperando si el nivel gratuito responde 429."""
+    """Una llamada al API, esperando si responde 429 (límite del nivel gratuito)
+    o 503 (modelo saturado, "high demand"): los dos son temporales."""
     for _ in range(llm["max_esperas_por_limite"] + 1):
         time.sleep(llm["pausa_entre_llamadas_s"])  # no pasar el límite por minuto
         try:
             return cliente.models.generate_content(**solicitud)
         except errors.APIError as e:
-            if e.code != 429:
+            if e.code not in (429, 503):
                 raise
             time.sleep(llm["espera_si_limite_s"])
-    raise ErrorExtraccion("límite de solicitudes del nivel gratuito: se agotaron las esperas")
+    raise ErrorExtraccion("el API siguió respondiendo 429/503: se agotaron las esperas")
 
 
 def extraer_llm(transcript: str, schema: str, cfg: dict, cliente=None) -> dict:
