@@ -1,0 +1,1512 @@
+{
+ "audio": "E04.m4a",
+ "transcript": "Buenas tardes, Andrea Paredes. Sí, buenas tardes. Gracias por conectarse. Empiezo por algo práctico. El proyecto arranca pronto. ¿En cuánto tiempo podría incorporarse? Tengo que dar un previo aviso en mi empresa, así que podría empezar en un mes. Está bien. ¿Con qué herramientas gestionas sus proyectos? Para el seguimiento del equipo Uso Gira, y en la parte técnica trabajamos con Sobre AOS, la infraestructura la manejamos con el Terraform. Este puesto se paga en dólares. ¿Cuál sería su pretensión? Cuadro mil dólares mensuales. ¿Y cuántos años tiene de experiencia? Empecé como programadora y luego pasé a gestión. En total se podría decir que son 10 años. Una década impresionante. ¿Con qué incluentes de afuera? La verdad que avanzado. Hago presentaciones a clientes de Estados Unidos casi toda la semana. Soy jefa de proyectos T en una empresa de logística. Tengo a cargo de dos equipos. En total, unas 12 personas. Es el proyecto más difícil. La verdad que a mudar todo el sistema de una empresa a la nube, sin que el negocio parara. Sin embargo, lo hicimos en etapas durante varios fines de semana. Bueno, si el equipo ya está formado tendría que contratar. Ok, perfecto, gracias. Ok, estaré atenta a cualquier coordinación próxima.",
+ "segments": [
+  {
+   "start": 1.07,
+   "end": 3.51,
+   "text": " Buenas tardes, Andrea Paredes.",
+   "words": [
+    {
+     "word": " Buenas",
+     "start": 1.07,
+     "end": 1.77,
+     "probability": 0.766845703125
+    },
+    {
+     "word": " tardes,",
+     "start": 1.77,
+     "end": 2.23,
+     "probability": 0.976806640625
+    },
+    {
+     "word": " Andrea",
+     "start": 2.47,
+     "end": 2.79,
+     "probability": 0.755859375
+    },
+    {
+     "word": " Paredes.",
+     "start": 2.79,
+     "end": 3.51,
+     "probability": 0.91552734375
+    }
+   ]
+  },
+  {
+   "start": 4.41,
+   "end": 5.43,
+   "text": " Sí, buenas tardes.",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 4.41,
+     "end": 4.41,
+     "probability": 0.03411865234375
+    },
+    {
+     "word": " buenas",
+     "start": 4.53,
+     "end": 4.71,
+     "probability": 0.9814453125
+    },
+    {
+     "word": " tardes.",
+     "start": 4.71,
+     "end": 5.43,
+     "probability": 0.999267578125
+    }
+   ]
+  },
+  {
+   "start": 7.82,
+   "end": 9.2,
+   "text": " Gracias por conectarse.",
+   "words": [
+    {
+     "word": " Gracias",
+     "start": 7.82,
+     "end": 8.16,
+     "probability": 0.96484375
+    },
+    {
+     "word": " por",
+     "start": 8.16,
+     "end": 8.46,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " conectarse.",
+     "start": 8.46,
+     "end": 9.2,
+     "probability": 0.96337890625
+    }
+   ]
+  },
+  {
+   "start": 9.46,
+   "end": 10.84,
+   "text": " Empiezo por algo práctico.",
+   "words": [
+    {
+     "word": " Empiezo",
+     "start": 9.46,
+     "end": 9.94,
+     "probability": 0.88720703125
+    },
+    {
+     "word": " por",
+     "start": 9.94,
+     "end": 10.14,
+     "probability": 0.8779296875
+    },
+    {
+     "word": " algo",
+     "start": 10.14,
+     "end": 10.28,
+     "probability": 0.97509765625
+    },
+    {
+     "word": " práctico.",
+     "start": 10.28,
+     "end": 10.84,
+     "probability": 0.9690755208333334
+    }
+   ]
+  },
+  {
+   "start": 11.54,
+   "end": 13.6,
+   "text": " El proyecto arranca pronto.",
+   "words": [
+    {
+     "word": " El",
+     "start": 11.54,
+     "end": 11.66,
+     "probability": 0.9384765625
+    },
+    {
+     "word": " proyecto",
+     "start": 11.66,
+     "end": 12.72,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " arranca",
+     "start": 12.72,
+     "end": 13.24,
+     "probability": 0.9658203125
+    },
+    {
+     "word": " pronto.",
+     "start": 13.24,
+     "end": 13.6,
+     "probability": 0.99755859375
+    }
+   ]
+  },
+  {
+   "start": 14.04,
+   "end": 15.72,
+   "text": " ¿En cuánto tiempo podría incorporarse?",
+   "words": [
+    {
+     "word": " ¿En",
+     "start": 14.04,
+     "end": 14.18,
+     "probability": 0.767822265625
+    },
+    {
+     "word": " cuánto",
+     "start": 14.18,
+     "end": 14.46,
+     "probability": 0.951416015625
+    },
+    {
+     "word": " tiempo",
+     "start": 14.46,
+     "end": 14.7,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " podría",
+     "start": 14.7,
+     "end": 15.1,
+     "probability": 0.939453125
+    },
+    {
+     "word": " incorporarse?",
+     "start": 15.1,
+     "end": 15.72,
+     "probability": 0.985107421875
+    }
+   ]
+  },
+  {
+   "start": 16.64,
+   "end": 18.7,
+   "text": " Tengo que dar un previo aviso en mi empresa,",
+   "words": [
+    {
+     "word": " Tengo",
+     "start": 16.64,
+     "end": 16.98,
+     "probability": 0.94287109375
+    },
+    {
+     "word": " que",
+     "start": 16.98,
+     "end": 17.16,
+     "probability": 0.99609375
+    },
+    {
+     "word": " dar",
+     "start": 17.16,
+     "end": 17.36,
+     "probability": 0.99267578125
+    },
+    {
+     "word": " un",
+     "start": 17.36,
+     "end": 17.6,
+     "probability": 0.970703125
+    },
+    {
+     "word": " previo",
+     "start": 17.6,
+     "end": 17.88,
+     "probability": 0.72607421875
+    },
+    {
+     "word": " aviso",
+     "start": 17.88,
+     "end": 18.08,
+     "probability": 0.92431640625
+    },
+    {
+     "word": " en",
+     "start": 18.08,
+     "end": 18.24,
+     "probability": 0.77197265625
+    },
+    {
+     "word": " mi",
+     "start": 18.24,
+     "end": 18.28,
+     "probability": 0.994140625
+    },
+    {
+     "word": " empresa,",
+     "start": 18.28,
+     "end": 18.7,
+     "probability": 0.9990234375
+    }
+   ]
+  },
+  {
+   "start": 19.0,
+   "end": 20.62,
+   "text": " así que podría empezar en un mes.",
+   "words": [
+    {
+     "word": " así",
+     "start": 19.0,
+     "end": 19.12,
+     "probability": 0.98779296875
+    },
+    {
+     "word": " que",
+     "start": 19.12,
+     "end": 19.28,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " podría",
+     "start": 19.28,
+     "end": 19.6,
+     "probability": 0.94873046875
+    },
+    {
+     "word": " empezar",
+     "start": 19.6,
+     "end": 20.02,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " en",
+     "start": 20.02,
+     "end": 20.22,
+     "probability": 0.986328125
+    },
+    {
+     "word": " un",
+     "start": 20.22,
+     "end": 20.36,
+     "probability": 0.98876953125
+    },
+    {
+     "word": " mes.",
+     "start": 20.36,
+     "end": 20.62,
+     "probability": 0.9990234375
+    }
+   ]
+  },
+  {
+   "start": 21.84,
+   "end": 22.36,
+   "text": " Está bien.",
+   "words": [
+    {
+     "word": " Está",
+     "start": 21.84,
+     "end": 22.16,
+     "probability": 0.7890625
+    },
+    {
+     "word": " bien.",
+     "start": 22.16,
+     "end": 22.36,
+     "probability": 0.998046875
+    }
+   ]
+  },
+  {
+   "start": 23.02,
+   "end": 25.08,
+   "text": " ¿Con qué herramientas gestionas sus proyectos?",
+   "words": [
+    {
+     "word": " ¿Con",
+     "start": 23.02,
+     "end": 23.2,
+     "probability": 0.755615234375
+    },
+    {
+     "word": " qué",
+     "start": 23.2,
+     "end": 23.34,
+     "probability": 0.9609375
+    },
+    {
+     "word": " herramientas",
+     "start": 23.34,
+     "end": 23.82,
+     "probability": 0.928955078125
+    },
+    {
+     "word": " gestionas",
+     "start": 23.82,
+     "end": 24.4,
+     "probability": 0.7980143229166666
+    },
+    {
+     "word": " sus",
+     "start": 24.4,
+     "end": 24.6,
+     "probability": 0.72412109375
+    },
+    {
+     "word": " proyectos?",
+     "start": 24.6,
+     "end": 25.08,
+     "probability": 0.9990234375
+    }
+   ]
+  },
+  {
+   "start": 26.14,
+   "end": 28.38,
+   "text": " Para el seguimiento del equipo Uso Gira,",
+   "words": [
+    {
+     "word": " Para",
+     "start": 26.14,
+     "end": 26.6,
+     "probability": 0.9033203125
+    },
+    {
+     "word": " el",
+     "start": 26.6,
+     "end": 26.72,
+     "probability": 0.9267578125
+    },
+    {
+     "word": " seguimiento",
+     "start": 26.72,
+     "end": 27.14,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " del",
+     "start": 27.14,
+     "end": 27.38,
+     "probability": 0.9794921875
+    },
+    {
+     "word": " equipo",
+     "start": 27.38,
+     "end": 27.6,
+     "probability": 0.994140625
+    },
+    {
+     "word": " Uso",
+     "start": 27.6,
+     "end": 27.96,
+     "probability": 0.5076904296875
+    },
+    {
+     "word": " Gira,",
+     "start": 27.96,
+     "end": 28.38,
+     "probability": 0.59173583984375
+    }
+   ]
+  },
+  {
+   "start": 28.78,
+   "end": 31.94,
+   "text": " y en la parte técnica trabajamos con Sobre AOS,",
+   "words": [
+    {
+     "word": " y",
+     "start": 28.78,
+     "end": 28.9,
+     "probability": 0.9345703125
+    },
+    {
+     "word": " en",
+     "start": 28.9,
+     "end": 29.1,
+     "probability": 0.95263671875
+    },
+    {
+     "word": " la",
+     "start": 29.1,
+     "end": 29.18,
+     "probability": 0.99365234375
+    },
+    {
+     "word": " parte",
+     "start": 29.18,
+     "end": 29.42,
+     "probability": 0.99609375
+    },
+    {
+     "word": " técnica",
+     "start": 29.42,
+     "end": 30.1,
+     "probability": 0.96484375
+    },
+    {
+     "word": " trabajamos",
+     "start": 30.1,
+     "end": 30.76,
+     "probability": 0.95361328125
+    },
+    {
+     "word": " con",
+     "start": 30.76,
+     "end": 31.08,
+     "probability": 0.84423828125
+    },
+    {
+     "word": " Sobre",
+     "start": 31.08,
+     "end": 31.62,
+     "probability": 0.5865478515625
+    },
+    {
+     "word": " AOS,",
+     "start": 31.62,
+     "end": 31.94,
+     "probability": 0.419921875
+    }
+   ]
+  },
+  {
+   "start": 31.94,
+   "end": 35.54,
+   "text": " la infraestructura la manejamos con el Terraform.",
+   "words": [
+    {
+     "word": " la",
+     "start": 31.94,
+     "end": 32.82,
+     "probability": 0.0017423629760742188
+    },
+    {
+     "word": " infraestructura",
+     "start": 32.82,
+     "end": 33.82,
+     "probability": 0.98583984375
+    },
+    {
+     "word": " la",
+     "start": 33.82,
+     "end": 33.96,
+     "probability": 0.40185546875
+    },
+    {
+     "word": " manejamos",
+     "start": 33.96,
+     "end": 34.38,
+     "probability": 0.90087890625
+    },
+    {
+     "word": " con",
+     "start": 34.38,
+     "end": 34.66,
+     "probability": 0.98681640625
+    },
+    {
+     "word": " el",
+     "start": 34.66,
+     "end": 34.86,
+     "probability": 0.94873046875
+    },
+    {
+     "word": " Terraform.",
+     "start": 34.86,
+     "end": 35.54,
+     "probability": 0.5062255859375
+    }
+   ]
+  },
+  {
+   "start": 38.46,
+   "end": 40.08,
+   "text": " Este puesto se paga en dólares.",
+   "words": [
+    {
+     "word": " Este",
+     "start": 38.46,
+     "end": 38.7,
+     "probability": 0.07086181640625
+    },
+    {
+     "word": " puesto",
+     "start": 38.7,
+     "end": 38.96,
+     "probability": 0.97998046875
+    },
+    {
+     "word": " se",
+     "start": 38.96,
+     "end": 39.26,
+     "probability": 0.98828125
+    },
+    {
+     "word": " paga",
+     "start": 39.26,
+     "end": 39.54,
+     "probability": 0.9794921875
+    },
+    {
+     "word": " en",
+     "start": 39.54,
+     "end": 39.76,
+     "probability": 0.98974609375
+    },
+    {
+     "word": " dólares.",
+     "start": 39.76,
+     "end": 40.08,
+     "probability": 0.9921875
+    }
+   ]
+  },
+  {
+   "start": 40.72,
+   "end": 42.1,
+   "text": " ¿Cuál sería su pretensión?",
+   "words": [
+    {
+     "word": " ¿Cuál",
+     "start": 40.72,
+     "end": 40.86,
+     "probability": 0.91162109375
+    },
+    {
+     "word": " sería",
+     "start": 40.86,
+     "end": 41.2,
+     "probability": 0.97802734375
+    },
+    {
+     "word": " su",
+     "start": 41.2,
+     "end": 41.52,
+     "probability": 0.93896484375
+    },
+    {
+     "word": " pretensión?",
+     "start": 41.52,
+     "end": 42.1,
+     "probability": 0.9554036458333334
+    }
+   ]
+  },
+  {
+   "start": 42.7,
+   "end": 44.28,
+   "text": " Cuadro mil dólares mensuales.",
+   "words": [
+    {
+     "word": " Cuadro",
+     "start": 42.7,
+     "end": 43.02,
+     "probability": 0.8302408854166666
+    },
+    {
+     "word": " mil",
+     "start": 43.02,
+     "end": 43.18,
+     "probability": 0.951171875
+    },
+    {
+     "word": " dólares",
+     "start": 43.18,
+     "end": 43.4,
+     "probability": 0.921875
+    },
+    {
+     "word": " mensuales.",
+     "start": 43.4,
+     "end": 44.28,
+     "probability": 0.9912109375
+    }
+   ]
+  },
+  {
+   "start": 45.08,
+   "end": 46.56,
+   "text": " ¿Y cuántos años tiene de experiencia?",
+   "words": [
+    {
+     "word": " ¿Y",
+     "start": 45.08,
+     "end": 45.32,
+     "probability": 0.66796875
+    },
+    {
+     "word": " cuántos",
+     "start": 45.32,
+     "end": 45.6,
+     "probability": 0.900146484375
+    },
+    {
+     "word": " años",
+     "start": 45.6,
+     "end": 45.82,
+     "probability": 0.99951171875
+    },
+    {
+     "word": " tiene",
+     "start": 45.82,
+     "end": 46.06,
+     "probability": 0.7431640625
+    },
+    {
+     "word": " de",
+     "start": 46.06,
+     "end": 46.2,
+     "probability": 0.81591796875
+    },
+    {
+     "word": " experiencia?",
+     "start": 46.2,
+     "end": 46.56,
+     "probability": 0.99169921875
+    }
+   ]
+  },
+  {
+   "start": 48.6,
+   "end": 52.84,
+   "text": " Empecé como programadora y luego pasé a gestión.",
+   "words": [
+    {
+     "word": " Empecé",
+     "start": 48.6,
+     "end": 49.24,
+     "probability": 0.807373046875
+    },
+    {
+     "word": " como",
+     "start": 49.24,
+     "end": 49.54,
+     "probability": 0.9921875
+    },
+    {
+     "word": " programadora",
+     "start": 49.54,
+     "end": 50.8,
+     "probability": 0.981689453125
+    },
+    {
+     "word": " y",
+     "start": 50.8,
+     "end": 51.34,
+     "probability": 0.87109375
+    },
+    {
+     "word": " luego",
+     "start": 51.34,
+     "end": 51.66,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " pasé",
+     "start": 51.66,
+     "end": 52.1,
+     "probability": 0.834228515625
+    },
+    {
+     "word": " a",
+     "start": 52.1,
+     "end": 52.26,
+     "probability": 0.984375
+    },
+    {
+     "word": " gestión.",
+     "start": 52.26,
+     "end": 52.84,
+     "probability": 0.994140625
+    }
+   ]
+  },
+  {
+   "start": 53.46,
+   "end": 55.86,
+   "text": " En total se podría decir que son 10 años.",
+   "words": [
+    {
+     "word": " En",
+     "start": 53.46,
+     "end": 53.58,
+     "probability": 0.982421875
+    },
+    {
+     "word": " total",
+     "start": 53.58,
+     "end": 53.9,
+     "probability": 0.998046875
+    },
+    {
+     "word": " se",
+     "start": 53.9,
+     "end": 54.3,
+     "probability": 0.66943359375
+    },
+    {
+     "word": " podría",
+     "start": 54.3,
+     "end": 54.5,
+     "probability": 0.98681640625
+    },
+    {
+     "word": " decir",
+     "start": 54.5,
+     "end": 54.78,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " que",
+     "start": 54.78,
+     "end": 54.92,
+     "probability": 0.9873046875
+    },
+    {
+     "word": " son",
+     "start": 54.92,
+     "end": 55.14,
+     "probability": 0.9892578125
+    },
+    {
+     "word": " 10",
+     "start": 55.14,
+     "end": 55.46,
+     "probability": 0.74853515625
+    },
+    {
+     "word": " años.",
+     "start": 55.46,
+     "end": 55.86,
+     "probability": 0.99853515625
+    }
+   ]
+  },
+  {
+   "start": 56.96,
+   "end": 59.22,
+   "text": " Una década impresionante.",
+   "words": [
+    {
+     "word": " Una",
+     "start": 56.96,
+     "end": 57.24,
+     "probability": 0.68310546875
+    },
+    {
+     "word": " década",
+     "start": 57.24,
+     "end": 57.7,
+     "probability": 0.996826171875
+    },
+    {
+     "word": " impresionante.",
+     "start": 57.7,
+     "end": 59.22,
+     "probability": 0.9459635416666666
+    }
+   ]
+  },
+  {
+   "start": 59.64,
+   "end": 61.12,
+   "text": " ¿Con qué incluentes de afuera?",
+   "words": [
+    {
+     "word": " ¿Con",
+     "start": 59.64,
+     "end": 59.8,
+     "probability": 0.8740234375
+    },
+    {
+     "word": " qué",
+     "start": 59.8,
+     "end": 59.96,
+     "probability": 0.84814453125
+    },
+    {
+     "word": " incluentes",
+     "start": 59.96,
+     "end": 60.52,
+     "probability": 0.5367431640625
+    },
+    {
+     "word": " de",
+     "start": 60.52,
+     "end": 60.76,
+     "probability": 0.77392578125
+    },
+    {
+     "word": " afuera?",
+     "start": 60.76,
+     "end": 61.12,
+     "probability": 0.9894205729166666
+    }
+   ]
+  },
+  {
+   "start": 64.97,
+   "end": 66.31,
+   "text": " La verdad que avanzado.",
+   "words": [
+    {
+     "word": " La",
+     "start": 64.97,
+     "end": 65.49,
+     "probability": 0.0653076171875
+    },
+    {
+     "word": " verdad",
+     "start": 65.49,
+     "end": 65.61,
+     "probability": 0.990234375
+    },
+    {
+     "word": " que",
+     "start": 65.61,
+     "end": 65.77,
+     "probability": 0.78076171875
+    },
+    {
+     "word": " avanzado.",
+     "start": 65.77,
+     "end": 66.31,
+     "probability": 0.74951171875
+    }
+   ]
+  },
+  {
+   "start": 66.53,
+   "end": 68.97,
+   "text": " Hago presentaciones a clientes de Estados Unidos",
+   "words": [
+    {
+     "word": " Hago",
+     "start": 66.53,
+     "end": 66.69,
+     "probability": 0.93896484375
+    },
+    {
+     "word": " presentaciones",
+     "start": 66.69,
+     "end": 67.15,
+     "probability": 0.932861328125
+    },
+    {
+     "word": " a",
+     "start": 67.15,
+     "end": 67.67,
+     "probability": 0.95556640625
+    },
+    {
+     "word": " clientes",
+     "start": 67.67,
+     "end": 68.17,
+     "probability": 0.985107421875
+    },
+    {
+     "word": " de",
+     "start": 68.17,
+     "end": 68.29,
+     "probability": 0.9326171875
+    },
+    {
+     "word": " Estados",
+     "start": 68.29,
+     "end": 68.51,
+     "probability": 0.79296875
+    },
+    {
+     "word": " Unidos",
+     "start": 68.51,
+     "end": 68.97,
+     "probability": 0.99853515625
+    }
+   ]
+  },
+  {
+   "start": 68.97,
+   "end": 70.15,
+   "text": " casi toda la semana.",
+   "words": [
+    {
+     "word": " casi",
+     "start": 68.97,
+     "end": 69.35,
+     "probability": 0.80810546875
+    },
+    {
+     "word": " toda",
+     "start": 69.35,
+     "end": 69.67,
+     "probability": 0.89697265625
+    },
+    {
+     "word": " la",
+     "start": 69.67,
+     "end": 69.81,
+     "probability": 0.98779296875
+    },
+    {
+     "word": " semana.",
+     "start": 69.81,
+     "end": 70.15,
+     "probability": 0.998046875
+    }
+   ]
+  },
+  {
+   "start": 74.81,
+   "end": 76.81,
+   "text": " Soy jefa de proyectos T",
+   "words": [
+    {
+     "word": " Soy",
+     "start": 74.81,
+     "end": 75.33,
+     "probability": 0.51611328125
+    },
+    {
+     "word": " jefa",
+     "start": 75.33,
+     "end": 75.55,
+     "probability": 0.84033203125
+    },
+    {
+     "word": " de",
+     "start": 75.55,
+     "end": 75.73,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " proyectos",
+     "start": 75.73,
+     "end": 76.51,
+     "probability": 0.95849609375
+    },
+    {
+     "word": " T",
+     "start": 76.51,
+     "end": 76.81,
+     "probability": 0.5556640625
+    }
+   ]
+  },
+  {
+   "start": 76.81,
+   "end": 78.35,
+   "text": " en una empresa de logística.",
+   "words": [
+    {
+     "word": " en",
+     "start": 76.81,
+     "end": 77.25,
+     "probability": 0.426513671875
+    },
+    {
+     "word": " una",
+     "start": 77.25,
+     "end": 77.39,
+     "probability": 0.98974609375
+    },
+    {
+     "word": " empresa",
+     "start": 77.39,
+     "end": 77.61,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " de",
+     "start": 77.61,
+     "end": 77.77,
+     "probability": 0.449951171875
+    },
+    {
+     "word": " logística.",
+     "start": 77.77,
+     "end": 78.35,
+     "probability": 0.99267578125
+    }
+   ]
+  },
+  {
+   "start": 79.05,
+   "end": 80.25,
+   "text": " Tengo a cargo de dos equipos.",
+   "words": [
+    {
+     "word": " Tengo",
+     "start": 79.05,
+     "end": 79.25,
+     "probability": 0.989990234375
+    },
+    {
+     "word": " a",
+     "start": 79.25,
+     "end": 79.37,
+     "probability": 0.70751953125
+    },
+    {
+     "word": " cargo",
+     "start": 79.37,
+     "end": 79.47,
+     "probability": 0.399658203125
+    },
+    {
+     "word": " de",
+     "start": 79.47,
+     "end": 79.61,
+     "probability": 0.6611328125
+    },
+    {
+     "word": " dos",
+     "start": 79.61,
+     "end": 79.73,
+     "probability": 0.8369140625
+    },
+    {
+     "word": " equipos.",
+     "start": 79.73,
+     "end": 80.25,
+     "probability": 0.9970703125
+    }
+   ]
+  },
+  {
+   "start": 80.67,
+   "end": 82.47,
+   "text": " En total, unas 12 personas.",
+   "words": [
+    {
+     "word": " En",
+     "start": 80.67,
+     "end": 80.77,
+     "probability": 0.95947265625
+    },
+    {
+     "word": " total,",
+     "start": 80.77,
+     "end": 81.07,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " unas",
+     "start": 81.21,
+     "end": 81.49,
+     "probability": 0.79150390625
+    },
+    {
+     "word": " 12",
+     "start": 81.49,
+     "end": 81.97,
+     "probability": 0.759765625
+    },
+    {
+     "word": " personas.",
+     "start": 81.97,
+     "end": 82.47,
+     "probability": 0.9970703125
+    }
+   ]
+  },
+  {
+   "start": 84.61,
+   "end": 85.87,
+   "text": " Es el proyecto más difícil.",
+   "words": [
+    {
+     "word": " Es",
+     "start": 84.61,
+     "end": 84.77,
+     "probability": 0.1072998046875
+    },
+    {
+     "word": " el",
+     "start": 84.77,
+     "end": 84.89,
+     "probability": 0.61083984375
+    },
+    {
+     "word": " proyecto",
+     "start": 84.89,
+     "end": 85.23,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " más",
+     "start": 85.23,
+     "end": 85.57,
+     "probability": 0.8564453125
+    },
+    {
+     "word": " difícil.",
+     "start": 85.57,
+     "end": 85.87,
+     "probability": 0.953125
+    }
+   ]
+  },
+  {
+   "start": 86.63,
+   "end": 88.85,
+   "text": " La verdad que a mudar todo el sistema de una empresa",
+   "words": [
+    {
+     "word": " La",
+     "start": 86.63,
+     "end": 87.07,
+     "probability": 0.9736328125
+    },
+    {
+     "word": " verdad",
+     "start": 87.07,
+     "end": 87.25,
+     "probability": 0.99951171875
+    },
+    {
+     "word": " que",
+     "start": 87.25,
+     "end": 87.41,
+     "probability": 0.87548828125
+    },
+    {
+     "word": " a",
+     "start": 87.41,
+     "end": 87.43,
+     "probability": 0.317138671875
+    },
+    {
+     "word": " mudar",
+     "start": 87.43,
+     "end": 87.59,
+     "probability": 0.8955078125
+    },
+    {
+     "word": " todo",
+     "start": 87.59,
+     "end": 87.85,
+     "probability": 0.921875
+    },
+    {
+     "word": " el",
+     "start": 87.85,
+     "end": 87.99,
+     "probability": 0.99169921875
+    },
+    {
+     "word": " sistema",
+     "start": 87.99,
+     "end": 88.21,
+     "probability": 0.998046875
+    },
+    {
+     "word": " de",
+     "start": 88.21,
+     "end": 88.41,
+     "probability": 0.98681640625
+    },
+    {
+     "word": " una",
+     "start": 88.41,
+     "end": 88.51,
+     "probability": 0.96435546875
+    },
+    {
+     "word": " empresa",
+     "start": 88.51,
+     "end": 88.85,
+     "probability": 0.99951171875
+    }
+   ]
+  },
+  {
+   "start": 88.85,
+   "end": 92.03,
+   "text": " a la nube, sin que el negocio parara.",
+   "words": [
+    {
+     "word": " a",
+     "start": 88.85,
+     "end": 89.11,
+     "probability": 0.380859375
+    },
+    {
+     "word": " la",
+     "start": 89.11,
+     "end": 89.19,
+     "probability": 0.98291015625
+    },
+    {
+     "word": " nube,",
+     "start": 89.19,
+     "end": 89.55,
+     "probability": 0.97900390625
+    },
+    {
+     "word": " sin",
+     "start": 89.97,
+     "end": 90.35,
+     "probability": 0.974609375
+    },
+    {
+     "word": " que",
+     "start": 90.35,
+     "end": 90.59,
+     "probability": 0.98828125
+    },
+    {
+     "word": " el",
+     "start": 90.59,
+     "end": 90.79,
+     "probability": 0.98388671875
+    },
+    {
+     "word": " negocio",
+     "start": 90.79,
+     "end": 91.29,
+     "probability": 0.997802734375
+    },
+    {
+     "word": " parara.",
+     "start": 91.29,
+     "end": 92.03,
+     "probability": 0.894775390625
+    }
+   ]
+  },
+  {
+   "start": 92.91,
+   "end": 94.45,
+   "text": " Sin embargo, lo hicimos en etapas",
+   "words": [
+    {
+     "word": " Sin",
+     "start": 92.91,
+     "end": 93.17,
+     "probability": 0.474365234375
+    },
+    {
+     "word": " embargo,",
+     "start": 93.17,
+     "end": 93.35,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " lo",
+     "start": 93.47,
+     "end": 93.55,
+     "probability": 0.5107421875
+    },
+    {
+     "word": " hicimos",
+     "start": 93.55,
+     "end": 93.67,
+     "probability": 0.933349609375
+    },
+    {
+     "word": " en",
+     "start": 93.67,
+     "end": 93.85,
+     "probability": 0.99462890625
+    },
+    {
+     "word": " etapas",
+     "start": 93.85,
+     "end": 94.45,
+     "probability": 0.982177734375
+    }
+   ]
+  },
+  {
+   "start": 94.45,
+   "end": 96.13,
+   "text": " durante varios fines de semana.",
+   "words": [
+    {
+     "word": " durante",
+     "start": 94.45,
+     "end": 94.87,
+     "probability": 0.80224609375
+    },
+    {
+     "word": " varios",
+     "start": 94.87,
+     "end": 95.37,
+     "probability": 0.98388671875
+    },
+    {
+     "word": " fines",
+     "start": 95.37,
+     "end": 95.63,
+     "probability": 0.8388671875
+    },
+    {
+     "word": " de",
+     "start": 95.63,
+     "end": 95.79,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " semana.",
+     "start": 95.79,
+     "end": 96.13,
+     "probability": 0.9931640625
+    }
+   ]
+  },
+  {
+   "start": 96.13,
+   "end": 105.8,
+   "text": " Bueno, si el equipo ya está formado",
+   "words": [
+    {
+     "word": " Bueno,",
+     "start": 96.13,
+     "end": 96.49,
+     "probability": 0.09210205078125
+    },
+    {
+     "word": " si",
+     "start": 102.56,
+     "end": 103.14,
+     "probability": 0.464111328125
+    },
+    {
+     "word": " el",
+     "start": 103.14,
+     "end": 104.08,
+     "probability": 0.435546875
+    },
+    {
+     "word": " equipo",
+     "start": 104.08,
+     "end": 104.4,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " ya",
+     "start": 104.4,
+     "end": 104.72,
+     "probability": 0.9423828125
+    },
+    {
+     "word": " está",
+     "start": 104.72,
+     "end": 105.1,
+     "probability": 0.82666015625
+    },
+    {
+     "word": " formado",
+     "start": 105.1,
+     "end": 105.8,
+     "probability": 0.98974609375
+    }
+   ]
+  },
+  {
+   "start": 105.8,
+   "end": 107.8,
+   "text": " tendría que contratar.",
+   "words": [
+    {
+     "word": " tendría",
+     "start": 105.8,
+     "end": 106.4,
+     "probability": 0.526123046875
+    },
+    {
+     "word": " que",
+     "start": 106.4,
+     "end": 106.52,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " contratar.",
+     "start": 106.52,
+     "end": 107.8,
+     "probability": 0.978759765625
+    }
+   ]
+  },
+  {
+   "start": 113.0,
+   "end": 114.4,
+   "text": " Ok, perfecto, gracias.",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 113.0,
+     "end": 113.18,
+     "probability": 0.6044921875
+    },
+    {
+     "word": " perfecto,",
+     "start": 113.34,
+     "end": 114.0,
+     "probability": 0.96923828125
+    },
+    {
+     "word": " gracias.",
+     "start": 114.0,
+     "end": 114.4,
+     "probability": 0.9892578125
+    }
+   ]
+  },
+  {
+   "start": 118.84,
+   "end": 121.8,
+   "text": " Ok, estaré atenta a cualquier coordinación próxima.",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 118.84,
+     "end": 119.14,
+     "probability": 0.80029296875
+    },
+    {
+     "word": " estaré",
+     "start": 119.28,
+     "end": 119.72,
+     "probability": 0.88037109375
+    },
+    {
+     "word": " atenta",
+     "start": 119.72,
+     "end": 120.18,
+     "probability": 0.75
+    },
+    {
+     "word": " a",
+     "start": 120.18,
+     "end": 120.36,
+     "probability": 0.91259765625
+    },
+    {
+     "word": " cualquier",
+     "start": 120.36,
+     "end": 120.6,
+     "probability": 0.837890625
+    },
+    {
+     "word": " coordinación",
+     "start": 120.6,
+     "end": 121.42,
+     "probability": 0.72705078125
+    },
+    {
+     "word": " próxima.",
+     "start": 121.42,
+     "end": 121.8,
+     "probability": 0.98828125
+    }
+   ]
+  }
+ ],
+ "device": "cuda",
+ "compute_type": "float16",
+ "elapsed_s": 4.017,
+ "duracion_audio_s": 123.753,
+ "seg_por_min_audio": 1.947,
+ "peak_vram_mb": 192.0,
+ "modelo": "small",
+ "glosario": "plano",
+ "parametros_glosario": {},
+ "faster_whisper": "1.2.1",
+ "ctranslate2": "4.8.4"
+}

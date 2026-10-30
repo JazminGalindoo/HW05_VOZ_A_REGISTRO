@@ -1,5 +1,38 @@
 grupo,nivel,metodo,clip,total_dicho,total_esperado,total_correcto_gt,cuadra,diagnostico,motivo,trampa_total_erroneo,esperado,acierta
-referencia,-,reglas,L01,89,89,89,True,ok,la cuenta cuadra,False,ok,True
-referencia,-,reglas,L02,80,90,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
-referencia,-,reglas,L03,75,65,65,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
-referencia,-,reglas,L04,98,90,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+referencia,-,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+referencia,-,reglas,L02,80.0,90.0,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+referencia,-,reglas,L03,75.0,65.0,65,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+referencia,-,reglas,L04,98.0,90.0,90,False,indeterminado,sin probabilidades por palabra,True,error_hablante,
+large-v3|cuda|float16|plano,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+large-v3|cuda|int8|glosario,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+large-v3|cuda|int8|plano,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+large-v3|cuda|int8|plano,L1,reglas,L01,,,89,,indeterminado,faltan precios o total,False,error_asr,
+large-v3|cuda|int8|plano,L2,reglas,L01,,,89,,indeterminado,faltan precios o total,False,error_asr,
+large-v3|cuda|int8|plano,L3,reglas,L01,,,89,,indeterminado,faltan precios o total,False,error_asr,
+small|cpu|int8|plano,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+small|cuda|float16|plano,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+small|cuda|int8|plano,L0,reglas,L01,89.0,89.0,89,True,ok,la cuenta cuadra,False,ok,True
+large-v3|cuda|float16|plano,L0,reglas,L02,,,90,,indeterminado,faltan precios o total,True,error_hablante,
+large-v3|cuda|int8|glosario,L0,reglas,L02,80.0,90.0,90,False,error_asr,el ASR dudó en: precio ensalada,True,error_hablante,False
+large-v3|cuda|int8|plano,L0,reglas,L02,,,90,,indeterminado,faltan precios o total,True,error_hablante,
+large-v3|cuda|int8|plano,L1,reglas,L02,80.0,90.0,90,False,error_asr,el ASR dudó en: precio ensalada,True,error_hablante,False
+large-v3|cuda|int8|plano,L2,reglas,L02,,,90,,indeterminado,faltan precios o total,True,error_hablante,
+large-v3|cuda|int8|plano,L3,reglas,L02,,,90,,indeterminado,faltan precios o total,True,error_hablante,
+small|cuda|float16|plano,L0,reglas,L02,80.0,100.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+small|cuda|int8|plano,L0,reglas,L02,80.0,90.0,90,False,error_asr,"el ASR dudó en: descuento, precio ensalada",True,error_hablante,False
+large-v3|cuda|float16|plano,L0,reglas,L03,75.0,75.0,65,True,ok,la cuenta cuadra,True,error_hablante,False
+large-v3|cuda|int8|glosario,L0,reglas,L03,75.0,75.0,65,True,ok,la cuenta cuadra,True,error_hablante,False
+large-v3|cuda|int8|plano,L0,reglas,L03,75.0,75.0,65,True,ok,la cuenta cuadra,True,error_hablante,False
+large-v3|cuda|int8|plano,L1,reglas,L03,,,65,,indeterminado,faltan precios o total,True,error_hablante,
+large-v3|cuda|int8|plano,L2,reglas,L03,,,65,,indeterminado,faltan precios o total,True,error_hablante,
+large-v3|cuda|int8|plano,L3,reglas,L03,,,65,,indeterminado,faltan precios o total,True,error_hablante,
+small|cuda|float16|plano,L0,reglas,L03,75.0,55.0,65,False,error_asr,"el ASR dudó en: total_dicho, precio cuarto de pollo, cantidad cuarto de pollo",True,error_hablante,False
+small|cuda|int8|plano,L0,reglas,L03,75.0,55.0,65,False,error_asr,"el ASR dudó en: total_dicho, precio cuarto de pollo, cantidad cuarto de pollo",True,error_hablante,False
+large-v3|cuda|float16|plano,L0,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+large-v3|cuda|int8|glosario,L0,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+large-v3|cuda|int8|plano,L0,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+large-v3|cuda|int8|plano,L1,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+large-v3|cuda|int8|plano,L2,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+large-v3|cuda|int8|plano,L3,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True
+small|cuda|float16|plano,L0,reglas,L04,98.0,87.0,90,False,error_asr,"el ASR dudó en: precio pollo entero, precio ensalada",True,error_hablante,False
+small|cuda|int8|plano,L0,reglas,L04,98.0,87.0,90,False,error_hablante,todos los números con prob >= 0.8: se dijo así,True,error_hablante,True

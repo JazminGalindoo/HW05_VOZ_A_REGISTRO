@@ -1,0 +1,2029 @@
+{
+ "audio": "E01.m4a",
+ "transcript": "Buenos días. Gracias por conectarse. Soy la encarada de selección. ¿Me escucha bien? Sí, buenos días. Les escucho perfecto. Mi nombre es Lucia Ramos. Perfecto, Lucia. Para empezar, cuéntame. ¿En qué trabajo último? En mi último puesto fue de analista de datos en una distribuidora de alimentos. Veía los reportes de venta de todas las tiendas y cada lunes armaba el resumen para gerencia. Interesante. ¿Y con qué herramientas trabajaba ahí? Sobre todo con PAITO para limpiar los datos, SQMLE para sacar la información de la base y los tableros los hacía en PowerBee al inicio usaba bastante el Excel, pero eso ya casi no. ¿Me cuente de algún proyecto del que esté orgullosa? Sí, armé un tablero que mostraba qué producto se vencía antes de que des. Con eso redujimos bastante las pérdidas en las tiendas de provincia. Muy bien. ¿Cuánto tiempo de experiencia tiene en total trabajando con datos? Empecé con unas prácticas y luego me contrataron. Si sumo todo, son cuatro años de experiencia. Ok, el puesto requiere leer documentación en inglés y a veces reuniones con un equipo de afuera. ¿Cómo está su nivel de inglés? Diría que intermedio. Leo sin problema y escribo correos, pero hablando todavía me pongo. Es normal, no se preocupe. ¿Y cuánto podría empezar si avanzamos? Tengo que avisar en mi trabajo actual, así que podría empezar en dos semanas. Perfecto. Última pregunta. ¿Cuál es su pretensión salarial? Bueno, revisé un poco el mercado, estaría pensando a unos 6500 soles vencerados. Lo anoto. ¿Tiene alguna pregunta sobre el puesto? Sí. ¿El trabajo es remoto o presencial? De hecho, es hibrido. Tres días en oficina y dos desde casa. Ah, perfecto. Me acomoda bastante. Muy bien, Lucía. Le escribiremos esta semana con los siguientes pasos. Muchas gracias por su tiempo. Gracias a usted. Que pena buen día.",
+ "segments": [
+  {
+   "start": 0.91,
+   "end": 5.85,
+   "text": " Buenos días. Gracias por conectarse. Soy la encarada de selección. ¿Me escucha bien?",
+   "words": [
+    {
+     "word": " Buenos",
+     "start": 0.91,
+     "end": 1.45,
+     "probability": 0.24267578125
+    },
+    {
+     "word": " días.",
+     "start": 1.45,
+     "end": 1.81,
+     "probability": 0.8984375
+    },
+    {
+     "word": " Gracias",
+     "start": 2.17,
+     "end": 2.35,
+     "probability": 0.96728515625
+    },
+    {
+     "word": " por",
+     "start": 2.35,
+     "end": 2.61,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " conectarse.",
+     "start": 2.61,
+     "end": 3.19,
+     "probability": 0.984130859375
+    },
+    {
+     "word": " Soy",
+     "start": 3.63,
+     "end": 3.83,
+     "probability": 0.9287109375
+    },
+    {
+     "word": " la",
+     "start": 3.83,
+     "end": 3.95,
+     "probability": 0.8125
+    },
+    {
+     "word": " encarada",
+     "start": 3.95,
+     "end": 4.25,
+     "probability": 0.8557942708333334
+    },
+    {
+     "word": " de",
+     "start": 4.25,
+     "end": 4.39,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " selección.",
+     "start": 4.39,
+     "end": 4.81,
+     "probability": 0.988525390625
+    },
+    {
+     "word": " ¿Me",
+     "start": 5.27,
+     "end": 5.39,
+     "probability": 0.949462890625
+    },
+    {
+     "word": " escucha",
+     "start": 5.39,
+     "end": 5.67,
+     "probability": 0.94921875
+    },
+    {
+     "word": " bien?",
+     "start": 5.67,
+     "end": 5.85,
+     "probability": 0.99853515625
+    }
+   ]
+  },
+  {
+   "start": 6.93,
+   "end": 11.13,
+   "text": " Sí, buenos días. Les escucho perfecto. Mi nombre es Lucia Ramos.",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 6.93,
+     "end": 7.31,
+     "probability": 0.6767578125
+    },
+    {
+     "word": " buenos",
+     "start": 7.61,
+     "end": 7.87,
+     "probability": 0.9521484375
+    },
+    {
+     "word": " días.",
+     "start": 7.87,
+     "end": 8.15,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " Les",
+     "start": 8.57,
+     "end": 8.65,
+     "probability": 0.6943359375
+    },
+    {
+     "word": " escucho",
+     "start": 8.65,
+     "end": 8.97,
+     "probability": 0.9677734375
+    },
+    {
+     "word": " perfecto.",
+     "start": 8.97,
+     "end": 9.53,
+     "probability": 0.984619140625
+    },
+    {
+     "word": " Mi",
+     "start": 9.95,
+     "end": 10.07,
+     "probability": 0.9814453125
+    },
+    {
+     "word": " nombre",
+     "start": 10.07,
+     "end": 10.29,
+     "probability": 0.998046875
+    },
+    {
+     "word": " es",
+     "start": 10.29,
+     "end": 10.49,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " Lucia",
+     "start": 10.49,
+     "end": 10.73,
+     "probability": 0.5364990234375
+    },
+    {
+     "word": " Ramos.",
+     "start": 10.73,
+     "end": 11.13,
+     "probability": 0.89501953125
+    }
+   ]
+  },
+  {
+   "start": 12.01,
+   "end": 16.21,
+   "text": " Perfecto, Lucia. Para empezar, cuéntame. ¿En qué trabajo último?",
+   "words": [
+    {
+     "word": " Perfecto,",
+     "start": 12.01,
+     "end": 12.43,
+     "probability": 0.934326171875
+    },
+    {
+     "word": " Lucia.",
+     "start": 12.51,
+     "end": 12.75,
+     "probability": 0.98583984375
+    },
+    {
+     "word": " Para",
+     "start": 13.37,
+     "end": 13.51,
+     "probability": 0.95849609375
+    },
+    {
+     "word": " empezar,",
+     "start": 13.51,
+     "end": 13.81,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " cuéntame.",
+     "start": 14.35,
+     "end": 14.67,
+     "probability": 0.9777018229166666
+    },
+    {
+     "word": " ¿En",
+     "start": 15.23,
+     "end": 15.37,
+     "probability": 0.90771484375
+    },
+    {
+     "word": " qué",
+     "start": 15.37,
+     "end": 15.45,
+     "probability": 0.96240234375
+    },
+    {
+     "word": " trabajo",
+     "start": 15.45,
+     "end": 15.73,
+     "probability": 0.888671875
+    },
+    {
+     "word": " último?",
+     "start": 15.73,
+     "end": 16.21,
+     "probability": 0.97607421875
+    }
+   ]
+  },
+  {
+   "start": 17.71,
+   "end": 21.51,
+   "text": " En mi último puesto fue de analista de datos en una distribuidora de alimentos.",
+   "words": [
+    {
+     "word": " En",
+     "start": 17.71,
+     "end": 17.99,
+     "probability": 0.397216796875
+    },
+    {
+     "word": " mi",
+     "start": 17.99,
+     "end": 18.07,
+     "probability": 0.970703125
+    },
+    {
+     "word": " último",
+     "start": 18.07,
+     "end": 18.33,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " puesto",
+     "start": 18.33,
+     "end": 18.71,
+     "probability": 0.8037109375
+    },
+    {
+     "word": " fue",
+     "start": 18.71,
+     "end": 19.01,
+     "probability": 0.71826171875
+    },
+    {
+     "word": " de",
+     "start": 19.01,
+     "end": 19.11,
+     "probability": 0.9794921875
+    },
+    {
+     "word": " analista",
+     "start": 19.11,
+     "end": 19.53,
+     "probability": 0.94384765625
+    },
+    {
+     "word": " de",
+     "start": 19.53,
+     "end": 19.69,
+     "probability": 0.994140625
+    },
+    {
+     "word": " datos",
+     "start": 19.69,
+     "end": 19.97,
+     "probability": 0.9716796875
+    },
+    {
+     "word": " en",
+     "start": 19.97,
+     "end": 20.27,
+     "probability": 0.76171875
+    },
+    {
+     "word": " una",
+     "start": 20.27,
+     "end": 20.45,
+     "probability": 0.9765625
+    },
+    {
+     "word": " distribuidora",
+     "start": 20.45,
+     "end": 21.03,
+     "probability": 0.596771240234375
+    },
+    {
+     "word": " de",
+     "start": 21.03,
+     "end": 21.21,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " alimentos.",
+     "start": 21.21,
+     "end": 21.51,
+     "probability": 0.93017578125
+    }
+   ]
+  },
+  {
+   "start": 22.27,
+   "end": 27.61,
+   "text": " Veía los reportes de venta de todas las tiendas y cada lunes armaba el resumen para gerencia.",
+   "words": [
+    {
+     "word": " Veía",
+     "start": 22.27,
+     "end": 22.67,
+     "probability": 0.922119140625
+    },
+    {
+     "word": " los",
+     "start": 22.67,
+     "end": 22.89,
+     "probability": 0.95849609375
+    },
+    {
+     "word": " reportes",
+     "start": 22.89,
+     "end": 23.39,
+     "probability": 0.974365234375
+    },
+    {
+     "word": " de",
+     "start": 23.39,
+     "end": 23.51,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " venta",
+     "start": 23.51,
+     "end": 23.91,
+     "probability": 0.98486328125
+    },
+    {
+     "word": " de",
+     "start": 23.91,
+     "end": 24.09,
+     "probability": 0.8115234375
+    },
+    {
+     "word": " todas",
+     "start": 24.09,
+     "end": 24.25,
+     "probability": 0.9794921875
+    },
+    {
+     "word": " las",
+     "start": 24.25,
+     "end": 24.49,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " tiendas",
+     "start": 24.49,
+     "end": 24.91,
+     "probability": 0.99658203125
+    },
+    {
+     "word": " y",
+     "start": 24.91,
+     "end": 25.07,
+     "probability": 0.8427734375
+    },
+    {
+     "word": " cada",
+     "start": 25.07,
+     "end": 25.27,
+     "probability": 0.9560546875
+    },
+    {
+     "word": " lunes",
+     "start": 25.27,
+     "end": 25.57,
+     "probability": 0.981201171875
+    },
+    {
+     "word": " armaba",
+     "start": 25.57,
+     "end": 26.41,
+     "probability": 0.66357421875
+    },
+    {
+     "word": " el",
+     "start": 26.41,
+     "end": 26.59,
+     "probability": 0.9853515625
+    },
+    {
+     "word": " resumen",
+     "start": 26.59,
+     "end": 26.91,
+     "probability": 0.839111328125
+    },
+    {
+     "word": " para",
+     "start": 26.91,
+     "end": 27.15,
+     "probability": 0.98486328125
+    },
+    {
+     "word": " gerencia.",
+     "start": 27.15,
+     "end": 27.61,
+     "probability": 0.7623697916666666
+    }
+   ]
+  },
+  {
+   "start": 28.57,
+   "end": 31.45,
+   "text": " Interesante. ¿Y con qué herramientas trabajaba ahí?",
+   "words": [
+    {
+     "word": " Interesante.",
+     "start": 28.57,
+     "end": 29.19,
+     "probability": 0.6897786458333334
+    },
+    {
+     "word": " ¿Y",
+     "start": 29.77,
+     "end": 30.01,
+     "probability": 0.72607421875
+    },
+    {
+     "word": " con",
+     "start": 30.01,
+     "end": 30.17,
+     "probability": 0.98388671875
+    },
+    {
+     "word": " qué",
+     "start": 30.17,
+     "end": 30.33,
+     "probability": 0.9326171875
+    },
+    {
+     "word": " herramientas",
+     "start": 30.33,
+     "end": 30.73,
+     "probability": 0.962890625
+    },
+    {
+     "word": " trabajaba",
+     "start": 30.73,
+     "end": 31.23,
+     "probability": 0.968994140625
+    },
+    {
+     "word": " ahí?",
+     "start": 31.23,
+     "end": 31.45,
+     "probability": 0.82470703125
+    }
+   ]
+  },
+  {
+   "start": 32.75,
+   "end": 37.93,
+   "text": " Sobre todo con PAITO para limpiar los datos, SQMLE para sacar la información de la base",
+   "words": [
+    {
+     "word": " Sobre",
+     "start": 32.75,
+     "end": 33.09,
+     "probability": 0.469482421875
+    },
+    {
+     "word": " todo",
+     "start": 33.09,
+     "end": 33.29,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " con",
+     "start": 33.29,
+     "end": 33.59,
+     "probability": 0.294189453125
+    },
+    {
+     "word": " PAITO",
+     "start": 33.59,
+     "end": 34.11,
+     "probability": 0.5923665364583334
+    },
+    {
+     "word": " para",
+     "start": 34.11,
+     "end": 34.47,
+     "probability": 0.865234375
+    },
+    {
+     "word": " limpiar",
+     "start": 34.47,
+     "end": 34.87,
+     "probability": 0.94775390625
+    },
+    {
+     "word": " los",
+     "start": 34.87,
+     "end": 35.05,
+     "probability": 0.9765625
+    },
+    {
+     "word": " datos,",
+     "start": 35.05,
+     "end": 35.35,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " SQMLE",
+     "start": 35.57,
+     "end": 36.31,
+     "probability": 0.493072509765625
+    },
+    {
+     "word": " para",
+     "start": 36.31,
+     "end": 36.53,
+     "probability": 0.89111328125
+    },
+    {
+     "word": " sacar",
+     "start": 36.53,
+     "end": 36.73,
+     "probability": 0.9736328125
+    },
+    {
+     "word": " la",
+     "start": 36.73,
+     "end": 36.93,
+     "probability": 0.8525390625
+    },
+    {
+     "word": " información",
+     "start": 36.93,
+     "end": 37.25,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " de",
+     "start": 37.25,
+     "end": 37.53,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " la",
+     "start": 37.53,
+     "end": 37.63,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " base",
+     "start": 37.63,
+     "end": 37.93,
+     "probability": 0.99462890625
+    }
+   ]
+  },
+  {
+   "start": 37.93,
+   "end": 45.21,
+   "text": " y los tableros los hacía en PowerBee al inicio usaba bastante el Excel, pero eso ya casi no.",
+   "words": [
+    {
+     "word": " y",
+     "start": 37.93,
+     "end": 38.61,
+     "probability": 0.473388671875
+    },
+    {
+     "word": " los",
+     "start": 38.61,
+     "end": 38.77,
+     "probability": 0.990234375
+    },
+    {
+     "word": " tableros",
+     "start": 38.77,
+     "end": 39.39,
+     "probability": 0.9879557291666666
+    },
+    {
+     "word": " los",
+     "start": 39.39,
+     "end": 39.95,
+     "probability": 0.72314453125
+    },
+    {
+     "word": " hacía",
+     "start": 39.95,
+     "end": 40.29,
+     "probability": 0.59228515625
+    },
+    {
+     "word": " en",
+     "start": 40.29,
+     "end": 40.55,
+     "probability": 0.9833984375
+    },
+    {
+     "word": " PowerBee",
+     "start": 40.55,
+     "end": 41.59,
+     "probability": 0.6041666666666666
+    },
+    {
+     "word": " al",
+     "start": 41.59,
+     "end": 41.81,
+     "probability": 0.55322265625
+    },
+    {
+     "word": " inicio",
+     "start": 41.81,
+     "end": 42.09,
+     "probability": 0.99462890625
+    },
+    {
+     "word": " usaba",
+     "start": 42.09,
+     "end": 42.57,
+     "probability": 0.90087890625
+    },
+    {
+     "word": " bastante",
+     "start": 42.57,
+     "end": 43.31,
+     "probability": 0.8515625
+    },
+    {
+     "word": " el",
+     "start": 43.31,
+     "end": 43.59,
+     "probability": 0.4619140625
+    },
+    {
+     "word": " Excel,",
+     "start": 43.59,
+     "end": 43.75,
+     "probability": 0.28076171875
+    },
+    {
+     "word": " pero",
+     "start": 43.87,
+     "end": 44.09,
+     "probability": 0.9931640625
+    },
+    {
+     "word": " eso",
+     "start": 44.09,
+     "end": 44.45,
+     "probability": 0.98828125
+    },
+    {
+     "word": " ya",
+     "start": 44.45,
+     "end": 44.65,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " casi",
+     "start": 44.65,
+     "end": 44.97,
+     "probability": 0.994140625
+    },
+    {
+     "word": " no.",
+     "start": 44.97,
+     "end": 45.21,
+     "probability": 0.99169921875
+    }
+   ]
+  },
+  {
+   "start": 46.07,
+   "end": 49.05,
+   "text": " ¿Me cuente de algún proyecto del que esté orgullosa?",
+   "words": [
+    {
+     "word": " ¿Me",
+     "start": 46.07,
+     "end": 46.55,
+     "probability": 0.932373046875
+    },
+    {
+     "word": " cuente",
+     "start": 46.55,
+     "end": 46.81,
+     "probability": 0.527099609375
+    },
+    {
+     "word": " de",
+     "start": 46.81,
+     "end": 47.01,
+     "probability": 0.892578125
+    },
+    {
+     "word": " algún",
+     "start": 47.01,
+     "end": 47.41,
+     "probability": 0.99267578125
+    },
+    {
+     "word": " proyecto",
+     "start": 47.41,
+     "end": 47.75,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " del",
+     "start": 47.75,
+     "end": 48.09,
+     "probability": 0.8720703125
+    },
+    {
+     "word": " que",
+     "start": 48.09,
+     "end": 48.33,
+     "probability": 0.98193359375
+    },
+    {
+     "word": " esté",
+     "start": 48.33,
+     "end": 48.59,
+     "probability": 0.63720703125
+    },
+    {
+     "word": " orgullosa?",
+     "start": 48.59,
+     "end": 49.05,
+     "probability": 0.93408203125
+    }
+   ]
+  },
+  {
+   "start": 50.37,
+   "end": 55.07,
+   "text": " Sí, armé un tablero que mostraba qué producto se vencía antes de que des.",
+   "words": [
+    {
+     "word": " Sí,",
+     "start": 50.37,
+     "end": 50.75,
+     "probability": 0.833984375
+    },
+    {
+     "word": " armé",
+     "start": 51.03,
+     "end": 51.29,
+     "probability": 0.605712890625
+    },
+    {
+     "word": " un",
+     "start": 51.29,
+     "end": 51.47,
+     "probability": 0.9775390625
+    },
+    {
+     "word": " tablero",
+     "start": 51.47,
+     "end": 51.99,
+     "probability": 0.7319742838541666
+    },
+    {
+     "word": " que",
+     "start": 51.99,
+     "end": 52.13,
+     "probability": 0.98681640625
+    },
+    {
+     "word": " mostraba",
+     "start": 52.13,
+     "end": 52.79,
+     "probability": 0.847900390625
+    },
+    {
+     "word": " qué",
+     "start": 52.79,
+     "end": 53.13,
+     "probability": 0.9111328125
+    },
+    {
+     "word": " producto",
+     "start": 53.13,
+     "end": 53.51,
+     "probability": 0.88818359375
+    },
+    {
+     "word": " se",
+     "start": 53.51,
+     "end": 53.79,
+     "probability": 0.99462890625
+    },
+    {
+     "word": " vencía",
+     "start": 53.79,
+     "end": 54.19,
+     "probability": 0.90869140625
+    },
+    {
+     "word": " antes",
+     "start": 54.19,
+     "end": 54.51,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " de",
+     "start": 54.51,
+     "end": 54.67,
+     "probability": 0.72314453125
+    },
+    {
+     "word": " que",
+     "start": 54.67,
+     "end": 54.75,
+     "probability": 0.272705078125
+    },
+    {
+     "word": " des.",
+     "start": 54.75,
+     "end": 55.07,
+     "probability": 0.478271484375
+    }
+   ]
+  },
+  {
+   "start": 55.07,
+   "end": 59.91,
+   "text": " Con eso redujimos bastante las pérdidas en las tiendas de provincia.",
+   "words": [
+    {
+     "word": " Con",
+     "start": 55.07,
+     "end": 55.85,
+     "probability": 0.07196044921875
+    },
+    {
+     "word": " eso",
+     "start": 55.85,
+     "end": 56.13,
+     "probability": 0.95458984375
+    },
+    {
+     "word": " redujimos",
+     "start": 56.13,
+     "end": 56.63,
+     "probability": 0.57421875
+    },
+    {
+     "word": " bastante",
+     "start": 56.63,
+     "end": 57.05,
+     "probability": 0.91650390625
+    },
+    {
+     "word": " las",
+     "start": 57.05,
+     "end": 57.45,
+     "probability": 0.92138671875
+    },
+    {
+     "word": " pérdidas",
+     "start": 57.45,
+     "end": 57.95,
+     "probability": 0.974853515625
+    },
+    {
+     "word": " en",
+     "start": 57.95,
+     "end": 58.69,
+     "probability": 0.9609375
+    },
+    {
+     "word": " las",
+     "start": 58.69,
+     "end": 58.81,
+     "probability": 0.98388671875
+    },
+    {
+     "word": " tiendas",
+     "start": 58.81,
+     "end": 59.25,
+     "probability": 0.9949544270833334
+    },
+    {
+     "word": " de",
+     "start": 59.25,
+     "end": 59.37,
+     "probability": 0.98583984375
+    },
+    {
+     "word": " provincia.",
+     "start": 59.37,
+     "end": 59.91,
+     "probability": 0.985595703125
+    }
+   ]
+  },
+  {
+   "start": 60.75,
+   "end": 65.05,
+   "text": " Muy bien. ¿Cuánto tiempo de experiencia tiene en total trabajando con datos?",
+   "words": [
+    {
+     "word": " Muy",
+     "start": 60.75,
+     "end": 60.95,
+     "probability": 0.7587890625
+    },
+    {
+     "word": " bien.",
+     "start": 60.95,
+     "end": 61.25,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " ¿Cuánto",
+     "start": 61.87,
+     "end": 62.21,
+     "probability": 0.880615234375
+    },
+    {
+     "word": " tiempo",
+     "start": 62.21,
+     "end": 62.43,
+     "probability": 0.97216796875
+    },
+    {
+     "word": " de",
+     "start": 62.43,
+     "end": 62.55,
+     "probability": 0.99658203125
+    },
+    {
+     "word": " experiencia",
+     "start": 62.55,
+     "end": 62.93,
+     "probability": 0.99462890625
+    },
+    {
+     "word": " tiene",
+     "start": 62.93,
+     "end": 63.33,
+     "probability": 0.356201171875
+    },
+    {
+     "word": " en",
+     "start": 63.33,
+     "end": 63.53,
+     "probability": 0.8359375
+    },
+    {
+     "word": " total",
+     "start": 63.53,
+     "end": 63.81,
+     "probability": 0.994140625
+    },
+    {
+     "word": " trabajando",
+     "start": 63.81,
+     "end": 64.39,
+     "probability": 0.98193359375
+    },
+    {
+     "word": " con",
+     "start": 64.39,
+     "end": 64.75,
+     "probability": 0.994140625
+    },
+    {
+     "word": " datos?",
+     "start": 64.75,
+     "end": 65.05,
+     "probability": 0.9736328125
+    }
+   ]
+  },
+  {
+   "start": 66.55,
+   "end": 72.51,
+   "text": " Empecé con unas prácticas y luego me contrataron. Si sumo todo, son cuatro años de experiencia.",
+   "words": [
+    {
+     "word": " Empecé",
+     "start": 66.55,
+     "end": 66.95,
+     "probability": 0.9563802083333334
+    },
+    {
+     "word": " con",
+     "start": 66.95,
+     "end": 67.13,
+     "probability": 0.9814453125
+    },
+    {
+     "word": " unas",
+     "start": 67.13,
+     "end": 67.31,
+     "probability": 0.67529296875
+    },
+    {
+     "word": " prácticas",
+     "start": 67.31,
+     "end": 67.77,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " y",
+     "start": 67.77,
+     "end": 68.07,
+     "probability": 0.8984375
+    },
+    {
+     "word": " luego",
+     "start": 68.07,
+     "end": 68.25,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " me",
+     "start": 68.25,
+     "end": 68.43,
+     "probability": 0.99462890625
+    },
+    {
+     "word": " contrataron.",
+     "start": 68.43,
+     "end": 69.03,
+     "probability": 0.9921875
+    },
+    {
+     "word": " Si",
+     "start": 69.71,
+     "end": 69.89,
+     "probability": 0.9697265625
+    },
+    {
+     "word": " sumo",
+     "start": 69.89,
+     "end": 70.29,
+     "probability": 0.936279296875
+    },
+    {
+     "word": " todo,",
+     "start": 70.29,
+     "end": 70.47,
+     "probability": 0.93310546875
+    },
+    {
+     "word": " son",
+     "start": 70.97,
+     "end": 71.27,
+     "probability": 0.94482421875
+    },
+    {
+     "word": " cuatro",
+     "start": 71.27,
+     "end": 71.49,
+     "probability": 0.78369140625
+    },
+    {
+     "word": " años",
+     "start": 71.49,
+     "end": 71.89,
+     "probability": 0.99951171875
+    },
+    {
+     "word": " de",
+     "start": 71.89,
+     "end": 72.01,
+     "probability": 0.99755859375
+    },
+    {
+     "word": " experiencia.",
+     "start": 72.01,
+     "end": 72.51,
+     "probability": 0.994140625
+    }
+   ]
+  },
+  {
+   "start": 73.67,
+   "end": 79.35,
+   "text": " Ok, el puesto requiere leer documentación en inglés y a veces reuniones con un equipo de afuera.",
+   "words": [
+    {
+     "word": " Ok,",
+     "start": 73.67,
+     "end": 73.95,
+     "probability": 0.65673828125
+    },
+    {
+     "word": " el",
+     "start": 74.27,
+     "end": 74.37,
+     "probability": 0.88623046875
+    },
+    {
+     "word": " puesto",
+     "start": 74.37,
+     "end": 74.55,
+     "probability": 0.9873046875
+    },
+    {
+     "word": " requiere",
+     "start": 74.55,
+     "end": 75.09,
+     "probability": 0.98876953125
+    },
+    {
+     "word": " leer",
+     "start": 75.09,
+     "end": 75.47,
+     "probability": 0.97509765625
+    },
+    {
+     "word": " documentación",
+     "start": 75.47,
+     "end": 76.31,
+     "probability": 0.989013671875
+    },
+    {
+     "word": " en",
+     "start": 76.31,
+     "end": 76.55,
+     "probability": 0.8662109375
+    },
+    {
+     "word": " inglés",
+     "start": 76.55,
+     "end": 76.85,
+     "probability": 0.9892578125
+    },
+    {
+     "word": " y",
+     "start": 76.85,
+     "end": 77.35,
+     "probability": 0.9267578125
+    },
+    {
+     "word": " a",
+     "start": 77.35,
+     "end": 77.55,
+     "probability": 0.88818359375
+    },
+    {
+     "word": " veces",
+     "start": 77.55,
+     "end": 77.71,
+     "probability": 0.97265625
+    },
+    {
+     "word": " reuniones",
+     "start": 77.71,
+     "end": 78.23,
+     "probability": 0.985595703125
+    },
+    {
+     "word": " con",
+     "start": 78.23,
+     "end": 78.45,
+     "probability": 0.998046875
+    },
+    {
+     "word": " un",
+     "start": 78.45,
+     "end": 78.59,
+     "probability": 0.482177734375
+    },
+    {
+     "word": " equipo",
+     "start": 78.59,
+     "end": 78.75,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " de",
+     "start": 78.75,
+     "end": 78.99,
+     "probability": 0.994140625
+    },
+    {
+     "word": " afuera.",
+     "start": 78.99,
+     "end": 79.35,
+     "probability": 0.9967447916666666
+    }
+   ]
+  },
+  {
+   "start": 79.93,
+   "end": 81.37,
+   "text": " ¿Cómo está su nivel de inglés?",
+   "words": [
+    {
+     "word": " ¿Cómo",
+     "start": 79.93,
+     "end": 80.19,
+     "probability": 0.971435546875
+    },
+    {
+     "word": " está",
+     "start": 80.19,
+     "end": 80.43,
+     "probability": 0.9814453125
+    },
+    {
+     "word": " su",
+     "start": 80.43,
+     "end": 80.65,
+     "probability": 0.97265625
+    },
+    {
+     "word": " nivel",
+     "start": 80.65,
+     "end": 81.05,
+     "probability": 0.998046875
+    },
+    {
+     "word": " de",
+     "start": 81.05,
+     "end": 81.17,
+     "probability": 0.86181640625
+    },
+    {
+     "word": " inglés?",
+     "start": 81.17,
+     "end": 81.37,
+     "probability": 0.99462890625
+    }
+   ]
+  },
+  {
+   "start": 82.35,
+   "end": 88.39,
+   "text": " Diría que intermedio. Leo sin problema y escribo correos, pero hablando todavía me pongo.",
+   "words": [
+    {
+     "word": " Diría",
+     "start": 82.35,
+     "end": 83.03,
+     "probability": 0.373077392578125
+    },
+    {
+     "word": " que",
+     "start": 83.03,
+     "end": 83.25,
+     "probability": 0.76904296875
+    },
+    {
+     "word": " intermedio.",
+     "start": 83.25,
+     "end": 83.81,
+     "probability": 0.9580078125
+    },
+    {
+     "word": " Leo",
+     "start": 84.31,
+     "end": 84.71,
+     "probability": 0.6497802734375
+    },
+    {
+     "word": " sin",
+     "start": 84.71,
+     "end": 84.93,
+     "probability": 0.98876953125
+    },
+    {
+     "word": " problema",
+     "start": 84.93,
+     "end": 85.29,
+     "probability": 0.98828125
+    },
+    {
+     "word": " y",
+     "start": 85.29,
+     "end": 85.55,
+     "probability": 0.931640625
+    },
+    {
+     "word": " escribo",
+     "start": 85.55,
+     "end": 85.89,
+     "probability": 0.98095703125
+    },
+    {
+     "word": " correos,",
+     "start": 85.89,
+     "end": 86.61,
+     "probability": 0.986572265625
+    },
+    {
+     "word": " pero",
+     "start": 86.95,
+     "end": 87.23,
+     "probability": 0.97802734375
+    },
+    {
+     "word": " hablando",
+     "start": 87.23,
+     "end": 87.51,
+     "probability": 0.984375
+    },
+    {
+     "word": " todavía",
+     "start": 87.51,
+     "end": 87.91,
+     "probability": 0.96337890625
+    },
+    {
+     "word": " me",
+     "start": 87.91,
+     "end": 88.13,
+     "probability": 0.986328125
+    },
+    {
+     "word": " pongo.",
+     "start": 88.13,
+     "end": 88.39,
+     "probability": 0.90478515625
+    }
+   ]
+  },
+  {
+   "start": 90.33,
+   "end": 94.31,
+   "text": " Es normal, no se preocupe. ¿Y cuánto podría empezar si avanzamos?",
+   "words": [
+    {
+     "word": " Es",
+     "start": 90.33,
+     "end": 90.33,
+     "probability": 0.00795745849609375
+    },
+    {
+     "word": " normal,",
+     "start": 90.33,
+     "end": 90.55,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " no",
+     "start": 90.73,
+     "end": 90.83,
+     "probability": 0.98828125
+    },
+    {
+     "word": " se",
+     "start": 90.83,
+     "end": 90.93,
+     "probability": 0.99169921875
+    },
+    {
+     "word": " preocupe.",
+     "start": 90.93,
+     "end": 91.49,
+     "probability": 0.93896484375
+    },
+    {
+     "word": " ¿Y",
+     "start": 91.87,
+     "end": 91.95,
+     "probability": 0.70703125
+    },
+    {
+     "word": " cuánto",
+     "start": 91.95,
+     "end": 92.17,
+     "probability": 0.928466796875
+    },
+    {
+     "word": " podría",
+     "start": 92.17,
+     "end": 92.47,
+     "probability": 0.9345703125
+    },
+    {
+     "word": " empezar",
+     "start": 92.47,
+     "end": 92.83,
+     "probability": 0.9921875
+    },
+    {
+     "word": " si",
+     "start": 92.83,
+     "end": 93.35,
+     "probability": 0.92919921875
+    },
+    {
+     "word": " avanzamos?",
+     "start": 93.35,
+     "end": 94.31,
+     "probability": 0.98974609375
+    }
+   ]
+  },
+  {
+   "start": 95.39,
+   "end": 99.83,
+   "text": " Tengo que avisar en mi trabajo actual, así que podría empezar en dos semanas.",
+   "words": [
+    {
+     "word": " Tengo",
+     "start": 95.39,
+     "end": 95.69,
+     "probability": 0.984130859375
+    },
+    {
+     "word": " que",
+     "start": 95.69,
+     "end": 95.89,
+     "probability": 0.99609375
+    },
+    {
+     "word": " avisar",
+     "start": 95.89,
+     "end": 96.29,
+     "probability": 0.974365234375
+    },
+    {
+     "word": " en",
+     "start": 96.29,
+     "end": 96.43,
+     "probability": 0.9892578125
+    },
+    {
+     "word": " mi",
+     "start": 96.43,
+     "end": 96.57,
+     "probability": 0.994140625
+    },
+    {
+     "word": " trabajo",
+     "start": 96.57,
+     "end": 96.79,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " actual,",
+     "start": 96.79,
+     "end": 97.13,
+     "probability": 0.98486328125
+    },
+    {
+     "word": " así",
+     "start": 97.75,
+     "end": 98.19,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " que",
+     "start": 98.19,
+     "end": 98.39,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " podría",
+     "start": 98.39,
+     "end": 98.69,
+     "probability": 0.98876953125
+    },
+    {
+     "word": " empezar",
+     "start": 98.69,
+     "end": 99.13,
+     "probability": 0.98876953125
+    },
+    {
+     "word": " en",
+     "start": 99.13,
+     "end": 99.33,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " dos",
+     "start": 99.33,
+     "end": 99.45,
+     "probability": 0.93798828125
+    },
+    {
+     "word": " semanas.",
+     "start": 99.45,
+     "end": 99.83,
+     "probability": 0.99951171875
+    }
+   ]
+  },
+  {
+   "start": 101.41,
+   "end": 104.67,
+   "text": " Perfecto. Última pregunta. ¿Cuál es su pretensión salarial?",
+   "words": [
+    {
+     "word": " Perfecto.",
+     "start": 101.41,
+     "end": 101.91,
+     "probability": 0.6358642578125
+    },
+    {
+     "word": " Última",
+     "start": 102.11,
+     "end": 102.37,
+     "probability": 0.97607421875
+    },
+    {
+     "word": " pregunta.",
+     "start": 102.37,
+     "end": 102.73,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " ¿Cuál",
+     "start": 103.13,
+     "end": 103.29,
+     "probability": 0.9015299479166666
+    },
+    {
+     "word": " es",
+     "start": 103.29,
+     "end": 103.43,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " su",
+     "start": 103.43,
+     "end": 103.71,
+     "probability": 0.9765625
+    },
+    {
+     "word": " pretensión",
+     "start": 103.71,
+     "end": 104.29,
+     "probability": 0.9654947916666666
+    },
+    {
+     "word": " salarial?",
+     "start": 104.29,
+     "end": 104.67,
+     "probability": 0.989990234375
+    }
+   ]
+  },
+  {
+   "start": 105.43,
+   "end": 111.51,
+   "text": " Bueno, revisé un poco el mercado, estaría pensando a unos 6500 soles vencerados.",
+   "words": [
+    {
+     "word": " Bueno,",
+     "start": 105.43,
+     "end": 106.11,
+     "probability": 0.68896484375
+    },
+    {
+     "word": " revisé",
+     "start": 106.87,
+     "end": 107.31,
+     "probability": 0.906494140625
+    },
+    {
+     "word": " un",
+     "start": 107.31,
+     "end": 107.43,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " poco",
+     "start": 107.43,
+     "end": 107.63,
+     "probability": 0.998046875
+    },
+    {
+     "word": " el",
+     "start": 107.63,
+     "end": 107.95,
+     "probability": 0.439453125
+    },
+    {
+     "word": " mercado,",
+     "start": 107.95,
+     "end": 108.35,
+     "probability": 0.99853515625
+    },
+    {
+     "word": " estaría",
+     "start": 108.51,
+     "end": 108.87,
+     "probability": 0.98681640625
+    },
+    {
+     "word": " pensando",
+     "start": 108.87,
+     "end": 109.23,
+     "probability": 0.9892578125
+    },
+    {
+     "word": " a",
+     "start": 109.23,
+     "end": 109.45,
+     "probability": 0.280029296875
+    },
+    {
+     "word": " unos",
+     "start": 109.45,
+     "end": 109.57,
+     "probability": 0.98583984375
+    },
+    {
+     "word": " 6500",
+     "start": 109.57,
+     "end": 110.25,
+     "probability": 0.69921875
+    },
+    {
+     "word": " soles",
+     "start": 110.25,
+     "end": 110.91,
+     "probability": 0.80712890625
+    },
+    {
+     "word": " vencerados.",
+     "start": 110.91,
+     "end": 111.51,
+     "probability": 0.5352376302083334
+    }
+   ]
+  },
+  {
+   "start": 111.51,
+   "end": 114.85,
+   "text": " Lo anoto. ¿Tiene alguna pregunta sobre el puesto?",
+   "words": [
+    {
+     "word": " Lo",
+     "start": 111.51,
+     "end": 112.31,
+     "probability": 0.117431640625
+    },
+    {
+     "word": " anoto.",
+     "start": 112.31,
+     "end": 112.75,
+     "probability": 0.970703125
+    },
+    {
+     "word": " ¿Tiene",
+     "start": 113.15,
+     "end": 113.39,
+     "probability": 0.8341471354166666
+    },
+    {
+     "word": " alguna",
+     "start": 113.39,
+     "end": 113.59,
+     "probability": 0.99609375
+    },
+    {
+     "word": " pregunta",
+     "start": 113.59,
+     "end": 113.93,
+     "probability": 0.9951171875
+    },
+    {
+     "word": " sobre",
+     "start": 113.93,
+     "end": 114.31,
+     "probability": 0.99072265625
+    },
+    {
+     "word": " el",
+     "start": 114.31,
+     "end": 114.63,
+     "probability": 0.9873046875
+    },
+    {
+     "word": " puesto?",
+     "start": 114.63,
+     "end": 114.85,
+     "probability": 0.99609375
+    }
+   ]
+  },
+  {
+   "start": 116.37,
+   "end": 118.63,
+   "text": " Sí. ¿El trabajo es remoto o presencial?",
+   "words": [
+    {
+     "word": " Sí.",
+     "start": 116.37,
+     "end": 116.63,
+     "probability": 0.4951171875
+    },
+    {
+     "word": " ¿El",
+     "start": 117.21,
+     "end": 117.43,
+     "probability": 0.532958984375
+    },
+    {
+     "word": " trabajo",
+     "start": 117.43,
+     "end": 117.63,
+     "probability": 0.9912109375
+    },
+    {
+     "word": " es",
+     "start": 117.63,
+     "end": 117.85,
+     "probability": 0.98779296875
+    },
+    {
+     "word": " remoto",
+     "start": 117.85,
+     "end": 118.13,
+     "probability": 0.3148193359375
+    },
+    {
+     "word": " o",
+     "start": 118.13,
+     "end": 118.29,
+     "probability": 0.9248046875
+    },
+    {
+     "word": " presencial?",
+     "start": 118.29,
+     "end": 118.63,
+     "probability": 0.96044921875
+    }
+   ]
+  },
+  {
+   "start": 119.39,
+   "end": 122.91,
+   "text": " De hecho, es hibrido. Tres días en oficina y dos desde casa.",
+   "words": [
+    {
+     "word": " De",
+     "start": 119.39,
+     "end": 119.71,
+     "probability": 0.69091796875
+    },
+    {
+     "word": " hecho,",
+     "start": 119.71,
+     "end": 119.87,
+     "probability": 0.9990234375
+    },
+    {
+     "word": " es",
+     "start": 119.97,
+     "end": 119.99,
+     "probability": 0.560546875
+    },
+    {
+     "word": " hibrido.",
+     "start": 119.99,
+     "end": 120.41,
+     "probability": 0.7535807291666666
+    },
+    {
+     "word": " Tres",
+     "start": 120.79,
+     "end": 120.93,
+     "probability": 0.935302734375
+    },
+    {
+     "word": " días",
+     "start": 120.93,
+     "end": 121.09,
+     "probability": 0.9970703125
+    },
+    {
+     "word": " en",
+     "start": 121.09,
+     "end": 121.25,
+     "probability": 0.986328125
+    },
+    {
+     "word": " oficina",
+     "start": 121.25,
+     "end": 121.73,
+     "probability": 0.9153645833333334
+    },
+    {
+     "word": " y",
+     "start": 121.73,
+     "end": 122.01,
+     "probability": 0.91796875
+    },
+    {
+     "word": " dos",
+     "start": 122.01,
+     "end": 122.33,
+     "probability": 0.9853515625
+    },
+    {
+     "word": " desde",
+     "start": 122.33,
+     "end": 122.55,
+     "probability": 0.88134765625
+    },
+    {
+     "word": " casa.",
+     "start": 122.55,
+     "end": 122.91,
+     "probability": 0.99365234375
+    }
+   ]
+  },
+  {
+   "start": 123.91,
+   "end": 126.05,
+   "text": " Ah, perfecto. Me acomoda bastante.",
+   "words": [
+    {
+     "word": " Ah,",
+     "start": 123.91,
+     "end": 124.47,
+     "probability": 0.54931640625
+    },
+    {
+     "word": " perfecto.",
+     "start": 124.47,
+     "end": 125.03,
+     "probability": 0.98779296875
+    },
+    {
+     "word": " Me",
+     "start": 125.33,
+     "end": 125.43,
+     "probability": 0.98193359375
+    },
+    {
+     "word": " acomoda",
+     "start": 125.43,
+     "end": 125.79,
+     "probability": 0.844970703125
+    },
+    {
+     "word": " bastante.",
+     "start": 125.79,
+     "end": 126.05,
+     "probability": 0.994140625
+    }
+   ]
+  },
+  {
+   "start": 127.09,
+   "end": 132.31,
+   "text": " Muy bien, Lucía. Le escribiremos esta semana con los siguientes pasos. Muchas gracias por su tiempo.",
+   "words": [
+    {
+     "word": " Muy",
+     "start": 127.09,
+     "end": 127.21,
+     "probability": 0.97021484375
+    },
+    {
+     "word": " bien,",
+     "start": 127.21,
+     "end": 127.39,
+     "probability": 0.99951171875
+    },
+    {
+     "word": " Lucía.",
+     "start": 127.45,
+     "end": 127.77,
+     "probability": 0.87451171875
+    },
+    {
+     "word": " Le",
+     "start": 128.13,
+     "end": 128.21,
+     "probability": 0.7548828125
+    },
+    {
+     "word": " escribiremos",
+     "start": 128.21,
+     "end": 128.75,
+     "probability": 0.9615478515625
+    },
+    {
+     "word": " esta",
+     "start": 128.75,
+     "end": 128.95,
+     "probability": 0.986328125
+    },
+    {
+     "word": " semana",
+     "start": 128.95,
+     "end": 129.29,
+     "probability": 0.994140625
+    },
+    {
+     "word": " con",
+     "start": 129.29,
+     "end": 129.69,
+     "probability": 0.9892578125
+    },
+    {
+     "word": " los",
+     "start": 129.69,
+     "end": 129.99,
+     "probability": 0.98486328125
+    },
+    {
+     "word": " siguientes",
+     "start": 129.99,
+     "end": 130.35,
+     "probability": 0.997802734375
+    },
+    {
+     "word": " pasos.",
+     "start": 130.35,
+     "end": 130.85,
+     "probability": 0.997802734375
+    },
+    {
+     "word": " Muchas",
+     "start": 131.27,
+     "end": 131.41,
+     "probability": 0.9482421875
+    },
+    {
+     "word": " gracias",
+     "start": 131.41,
+     "end": 131.69,
+     "probability": 0.998046875
+    },
+    {
+     "word": " por",
+     "start": 131.69,
+     "end": 131.91,
+     "probability": 0.99560546875
+    },
+    {
+     "word": " su",
+     "start": 131.91,
+     "end": 132.03,
+     "probability": 0.96435546875
+    },
+    {
+     "word": " tiempo.",
+     "start": 132.03,
+     "end": 132.31,
+     "probability": 0.99951171875
+    }
+   ]
+  },
+  {
+   "start": 132.99,
+   "end": 135.03,
+   "text": " Gracias a usted. Que pena buen día.",
+   "words": [
+    {
+     "word": " Gracias",
+     "start": 132.99,
+     "end": 133.33,
+     "probability": 0.96630859375
+    },
+    {
+     "word": " a",
+     "start": 133.33,
+     "end": 133.55,
+     "probability": 0.96484375
+    },
+    {
+     "word": " usted.",
+     "start": 133.55,
+     "end": 133.71,
+     "probability": 0.98388671875
+    },
+    {
+     "word": " Que",
+     "start": 134.27,
+     "end": 134.31,
+     "probability": 0.81201171875
+    },
+    {
+     "word": " pena",
+     "start": 134.31,
+     "end": 134.55,
+     "probability": 0.353759765625
+    },
+    {
+     "word": " buen",
+     "start": 134.55,
+     "end": 134.75,
+     "probability": 0.409912109375
+    },
+    {
+     "word": " día.",
+     "start": 134.75,
+     "end": 135.03,
+     "probability": 0.98388671875
+    }
+   ]
+  }
+ ],
+ "device": "cuda",
+ "compute_type": "float16",
+ "elapsed_s": 4.452,
+ "duracion_audio_s": 136.041,
+ "seg_por_min_audio": 1.964,
+ "peak_vram_mb": 192.0,
+ "modelo": "small",
+ "glosario": "plano",
+ "parametros_glosario": {},
+ "faster_whisper": "1.2.1",
+ "ctranslate2": "4.8.4"
+}

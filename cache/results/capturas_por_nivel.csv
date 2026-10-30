@@ -1,2 +1,11 @@
 grupo,nivel,metodo,n_llamadas,trampas,capturadas,perdidas,falsas_alarmas,sin_chequeo,diagnostico_aciertos,diagnostico_evaluados
+large-v3|cuda|float16|plano,L0,reglas,4,3,1,1,0,1,2,3
+large-v3|cuda|int8|glosario,L0,reglas,4,3,2,1,0,0,2,4
+large-v3|cuda|int8|plano,L0,reglas,4,3,1,1,0,1,2,3
+large-v3|cuda|int8|plano,L1,reglas,4,3,2,0,0,2,1,2
+large-v3|cuda|int8|plano,L2,reglas,4,3,1,0,0,3,1,1
+large-v3|cuda|int8|plano,L3,reglas,4,3,1,0,0,3,1,1
 referencia,-,reglas,4,3,3,0,0,0,1,1
+small|cpu|int8|plano,L0,reglas,1,0,0,0,0,0,1,1
+small|cuda|float16|plano,L0,reglas,4,3,3,0,0,0,2,4
+small|cuda|int8|plano,L0,reglas,4,3,3,0,0,0,2,4
