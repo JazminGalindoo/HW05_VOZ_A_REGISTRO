@@ -176,7 +176,7 @@ extraccion:
   # --- LLM ---
   llm:
     proveedor: anthropic
-    modelo: claude-opus-5-5     # alternativa más barata: claude-haiku-5-5
+    modelo: claude-haiku-5-5    # el más barato; alternativa más capaz: claude-opus-5-5
     # NO hay "temperatura": desde la versión de API 2026-10-21 (SDK anthropic 2.x)
     # enviar temperature da error 400, y los modelos actuales solo aceptan el
     # valor por defecto. La salida se fija con structured outputs (JSON schema)
@@ -184,9 +184,10 @@ extraccion:
     effort: low                 # low | medium | high | xhigh | max
     max_tokens: 16000           # incluye el razonamiento interno; no bajarlo mucho
     reintentos: 2               # si el JSON no valida contra schemas.py
-    # Si el modelo rechaza la solicitud, el API la reintenta en otro modelo.
-    # null para desactivarlo.
-    fallbacks: default
+    # Si el modelo rechaza la solicitud, el API puede reintentarla en otro modelo
+    # ("default"). Haiku NO tiene ese fallback: null. Si se vuelve a Opus, poner default.
+    # Con null, un rechazo queda registrado en EngineResult.error.
+    fallbacks: null
     beta_fallbacks: server-side-fallback-2026-07-01
     # Variable de entorno que contiene la API key (el valor va en .env)
     api_key_env: ANTHROPIC_API_KEY
