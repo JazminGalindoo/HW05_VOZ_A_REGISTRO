@@ -98,31 +98,84 @@ normalizacion:
 # ---------------------------------------------------------------------
 extraccion:
   metodos: [reglas, llm]        # se comparan ambos
+
+  # Categorías cerradas: las usan las reglas, el JSON schema del LLM y las métricas
+  categorias:
+    nivel_ingles: [basico, intermedio, avanzado, nativo]
+    moneda: [PEN, USD]
+    metodo_pago: [yape, plin, tarjeta, efectivo, transferencia]
+
+  # Para resolver fechas dichas sin año ("primero de diciembre")
+  anio_referencia: 2026
+
+  # --- Vocabulario de las reglas (se normaliza igual que el transcript) ---
+  reglas:
+    tecnologias_conocidas: [Python, SQL, Power BI, Excel, Java, Spring Boot, Docker,
+                            Kubernetes, Google Analytics, HubSpot, Canva, Jira, AWS,
+                            Terraform, Django, FastAPI, pandas, scikit-learn, Tableau,
+                            Azure, Git, JavaScript, React]
+    # palabra dicha -> código de moneda
+    monedas: {soles: PEN, sol: PEN, lucas: PEN, dolares: USD, dolar: USD}
+    # categoría -> palabras que la indican
+    metodos_pago:
+      yape: [yape]
+      plin: [plin]
+      tarjeta: [tarjeta, pos]
+      efectivo: [efectivo]
+      transferencia: [transferencia]
+    distritos: [surco, cercado, san isidro, lince, miraflores, san borja, la molina,
+                barranco, jesus maria, pueblo libre, magdalena, san miguel, los olivos,
+                chorrillos, ate, breña, rimac, callao]
+    # Carta de la pollería: nombre canónico (igual que el ground truth),
+    # tamaño y formas de decirlo. SIN precios: el precio se extrae del audio.
+    carta:
+      - {producto: pollo entero, tamano: entero, alias: [pollo entero, pollos enteros]}
+      - {producto: medio pollo, tamano: medio, alias: [medio pollo, medios pollos]}
+      - {producto: cuarto de pollo, tamano: cuarto, alias: [cuarto de pollo, cuartos de pollo]}
+      - {producto: arroz chaufa, tamano: null, alias: [arroz chaufa, arroces chaufa, chaufas, chaufa]}
+      - {producto: papas familiares, tamano: familiar, alias: [papas familiares]}
+      - {producto: ensalada, tamano: null, alias: [ensaladas, ensalada]}
+      - {producto: gaseosa 1.5L, tamano: 1.5L, alias: [gaseosas de litro y medio, gaseosa de litro y medio, gaseosas, gaseosa]}
+
+  # --- LLM ---
   llm:
     proveedor: anthropic
-    modelo: claude-haiku-5-5    # barato y suficiente para JSON estructurado
-    temperatura: 0
-    max_tokens: 1024
+    modelo: claude-opus-5-5     # alternativa más barata: claude-haiku-5-5
+    # NO hay "temperatura": desde la versión de API 2026-10-21 (SDK anthropic 2.x)
+    # enviar temperature da error 400, y los modelos actuales solo aceptan el
+    # valor por defecto. La salida se fija con structured outputs (JSON schema)
+    # y poco esfuerzo de razonamiento.
+    effort: low                 # low | medium | high | xhigh | max
+    max_tokens: 16000           # incluye el razonamiento interno; no bajarlo mucho
     reintentos: 2               # si el JSON no valida contra schemas.py
+    # Si el modelo rechaza la solicitud, el API la reintenta en otro modelo.
+    # null para desactivarlo.
+    fallbacks: default
+    beta_fallbacks: server-side-fallback-2026-07-01
     # Variable de entorno que contiene la API key (el valor va en .env)
     api_key_env: ANTHROPIC_API_KEY
   prompts:
     sistema: >-
-      Eres un extractor de datos. Recibes la transcripción de un audio en
-      español. Devuelve SOLO un JSON válido con los campos pedidos. Si un dato
-      no se dice en el audio, usa null. No corrijas ni inventes valores: copia
-      los números tal como aparecen en la transcripción.
+      Eres un extractor de datos. Recibes la transcripción automática de un audio
+      en español. Llena los campos pedidos. Si un dato no se dice en el audio, usa
+      null. No corrijas ni inventes valores: usa los números tal como aparecen en
+      la transcripción, aunque parezcan un error (por ejemplo, un total mal sumado).
     entrevista: >-
-      Extrae de esta entrevista: anios_experiencia (número), ultimo_puesto
-      (texto), tecnologias (lista de textos), pretension_salarial (objeto con
-      monto y moneda), disponibilidad (texto), nivel_ingles (una de: basico,
-      intermedio, avanzado, nativo).
+      Extrae los datos del candidato de esta entrevista de trabajo.
+      anios_experiencia: años de experiencia total (número; "dos años y medio" = 2.5).
+      ultimo_puesto: el cargo, sin la empresa. tecnologias: solo las que usa o usó
+      de verdad (no las que dice que ya no usa). pretension_salarial: monto mensual
+      (número) y moneda (PEN para soles, USD para dólares). disponibilidad: "inmediata",
+      "N_semanas", "N_mes"/"N_meses" (ej. "2_semanas") o fecha AAAA-MM-DD si dice una
+      fecha (año {anio}). nivel_ingles: el que declara el candidato.
     pedido: >-
-      Extrae de esta llamada el pedido FINAL (si el cliente se corrige, usa la
-      última versión): items (lista de objetos con producto, tamano_o_plan,
-      cantidad, precio_unitario), promocion (texto o null),
-      direccion_entrega o plazo_contrato (texto), metodo_pago (una de: yape,
-      plin, tarjeta, efectivo, transferencia), total_dicho (número).
+      Extrae el pedido FINAL de esta llamada de venta: si el cliente se corrige, usa
+      la última versión. items: producto, tamano_o_plan (o null), cantidad y
+      precio_unitario dicho. promocion: descripción breve o null. descuento: soles
+      que descuenta la promoción (0 si no hay; en un 2x1, el precio de la unidad
+      gratis). direccion_entrega: vía, número, interior/departamento y distrito.
+      metodo_pago: cómo va a pagar. total_dicho: el total que se dice en voz alta,
+      aunque no cuadre con la suma.
 
 # ---------------------------------------------------------------------
 # Verificación literal (regla dura #7)
