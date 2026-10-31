@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "producto": "pollo entero",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 64
+    },
+    {
+      "producto": "arroz chaufa",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 25
+    },
+    {
+      "producto": "ensalada",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 8
+    }
+  ],
+  "promocion": "promoción del día por compra mayor a 80 soles",
+  "descuento": 10,
+  "direccion_entrega": "Avenida Arequipa, 2890, Interior 302, Lince",
+  "metodo_pago": "tarjeta",
+  "total_dicho": 98
+}

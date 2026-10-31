@@ -1,0 +1,13 @@
+{
+  "anios_experiencia": 10,
+  "ultimo_puesto": "jefa de proyectos TI",
+  "tecnologias": [
+    "Jira",
+    "AWS",
+    "Terraform"
+  ],
+  "pretension_salarial": 4000,
+  "moneda": "USD",
+  "disponibilidad": "1_mes",
+  "nivel_ingles": "avanzado"
+}

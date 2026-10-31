@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "producto": "medio pollo",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 36
+    },
+    {
+      "producto": "chaufas",
+      "tamano_o_plan": null,
+      "cantidad": 2,
+      "precio_unitario": 28
+    },
+    {
+      "producto": "ensalada",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 8
+    }
+  ],
+  "promocion": "diez soles de descuento en compras mayores a ochenta soles",
+  "descuento": 10,
+  "direccion_entrega": "Jirón Huallaga trescientos ochenta y dos, departamento cuatro B, en el Cercado",
+  "metodo_pago": "efectivo",
+  "total_dicho": 80
+}

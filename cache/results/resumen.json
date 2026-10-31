@@ -1,6 +1,7 @@
 {
   "metodos": [
-    "reglas"
+    "reglas",
+    "llm"
   ],
   "n_clips_por_tarea": {
     "entrevista": 4,

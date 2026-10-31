@@ -174,7 +174,7 @@ _(pendiente: filas "glosario")_
 
 ### 8.5 Extracción: reglas vs LLM, verificación literal
 - **Reglas** (`extract_rules.py`): cada campo se busca **después de una pregunta ancla** ("pretensión", "inglés"…), así no depende del orden. Para el pedido se usa el **resumen final de la operadora** ("su pedido es… el total es…"), que ya incluye las autocorrecciones; los precios salen de lo que dice la operadora (la carta del config no tiene precios).
-- **LLM** (`extract_llm.py`): Google **Gemini `gemini-3.8-flash`** (nivel gratuito, SDK `google-genai`), con **temperatura 0** y **salida JSON estructurada**: se le pasa el JSON schema de `schemas.py` (`response_json_schema`), así que solo puede responder con esa forma. Igual se valida y se reintenta.
+- **LLM** (`extract_llm.py`): Google **Gemini `gemini-3-flash-preview`** (nivel gratuito, SDK `google-genai`; se empezó con `gemini-3.8-flash`, pero agotó su cuota diaria antes de terminar), con **temperatura 0** y **salida JSON estructurada**: se le pasa el JSON schema de `schemas.py` (`response_json_schema`), así que solo puede responder con esa forma. Igual se valida y se reintenta.
   - Gemini no acepta `"type": ["number", "null"]` ni `null` dentro de `enum`, así que `esquema_para_gemini` reescribe esos campos como `anyOf`. El esquema de `schemas.py` no cambia.
   - **Nivel gratuito:** pocas solicitudes por minuto. Hay una pausa entre llamadas, y si el API responde 429 se espera y se reintenta (valores en `config.yaml → extraccion.llm`).
   - **Hallazgo: la cuota real es de 20 solicitudes por día y por modelo.** La primera corrida de `--llm` (62 llamadas: todos los grupos y niveles) la agotó. Además cada 429 esperaba 30 s × 6 intentos, así que la corrida no terminaba nunca. Arreglos:

@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "producto": "pollo entero",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 64
+    },
+    {
+      "producto": "papas familiares",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 15
+    },
+    {
+      "producto": "gaseosa",
+      "tamano_o_plan": "litro y medio",
+      "cantidad": 1,
+      "precio_unitario": 10
+    }
+  ],
+  "promocion": null,
+  "descuento": 0,
+  "direccion_entrega": "Avenida Los Álamos, 1245, Surco",
+  "metodo_pago": "tarjeta",
+  "total_dicho": 89
+}
