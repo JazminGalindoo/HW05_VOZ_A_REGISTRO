@@ -1,7 +1,7 @@
 # HW05_VOZ_A_REGISTRO
 ASR con faster-whisper: de entrevistas y llamadas de venta grabadas a registros estructurados y verificados. HW_05 Data Science Python.
 
-**Video:** (pendiente)
+**Video:** [Video de la presentación](https://drive.google.com/file/d/1LviP702aWLWxuRE8aP7lwFNZOssjvbvh/view?usp=sharing)
 
 > **Estado:** pipeline completo, corrido sobre los audios reales (Colab T4). Todos los resultados salen de `python -m src.evaluar` sobre `cache/`; ningún número está escrito a mano.
 
