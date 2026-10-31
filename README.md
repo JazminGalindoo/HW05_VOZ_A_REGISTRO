@@ -53,7 +53,7 @@ También corre en cada push en GitHub Actions (`.github/workflows/regression.yml
 ```
 config.yaml              # TODOS los parámetros (rutas, modelos, umbrales, prompts, SNR, grilla...)
 .env.example             # solo nombres de variables; .env nunca se sube
-app.py                   # interfaz (pendiente); solo lee cache/
+app.py                   # interfaz Streamlit; solo lee cache/
 scripts_grabacion/
   guiones.md             # guiones escritos ANTES de grabar (ground truth)
   generar_referencias.py # guiones.md -> transcripts de referencia
@@ -100,7 +100,39 @@ tests/                   # pytest
 | L03 | sí (pollo entero → 2 cuartos) | **75** (olvida el 2×1) | 65 |
 | L04 | no | **98** | 87 (el chaufa se dijo a 25; el guion decía 28 y se corrigió tras escuchar el audio) |
 
-- En las entrevistas los campos se preguntan **en distinto orden** en cada clip (columna `orden_campos`), para que la extracción no dependa del orden.
+- **Cómo se varió la posición y la forma de cada campo** (columna `orden_campos` de `entrevistas.csv`):
+
+  | Clip | Orden en que aparecen los campos |
+  |---|---|
+  | E01 | puesto → tecnologías → experiencia → inglés → disponibilidad → salario |
+  | E02 | salario → inglés → tecnologías → puesto → disponibilidad → experiencia |
+  | E03 | inglés → disponibilidad → experiencia → salario → puesto → tecnologías |
+  | E04 | disponibilidad → tecnologías → salario → experiencia → inglés → puesto |
+
+  - Cada campo cae en una posición distinta en cada clip. E02 empieza directamente por el sueldo, y E04 por la disponibilidad.
+  - Además, **ningún valor se dice limpio:** "si sumo todo, son cuatro años"; "dos años y medio… no llegan a tres"; "una década" junto a "diez años"; "unos seis mil quinientos soles **mensuales**"; "a partir del **primero de diciembre**" (fecha relativa, sin año); "**de inmediato**, estoy libre desde ya"; el cargo como "mi último puesto fue…", "fui…" o "soy jefa de…".
+  - Las preguntas también cambian de palabras ("¿cuándo podría empezar?", "¿desde cuándo estaría disponible?", "¿en cuánto tiempo podría incorporarse?"), y en E02/E04 se invierten los roles de las voces.
+- **Distribución de cada campo** (ground truth; también en la app, pestaña Corpus):
+
+  | Campo | Valores en los 4 clips |
+  |---|---|
+  | `anios_experiencia` | 2.5 · 4 · 7 · 10 (rango 2.5–10, con un decimal) |
+  | `ultimo_puesto` | 4 distintos (datos, backend, marketing, gestión TI) |
+  | `tecnologias` | 3, 4, 3 y 3 elementos; 13 tecnologías distintas, ninguna repetida |
+  | `pretension_salarial` | 3800 · 6500 · 9000 PEN y 4000 **USD** (2 monedas) |
+  | `disponibilidad` | inmediata · 2 semanas · 1 mes · fecha (2026-12-01) |
+  | `nivel_ingles` | básico 1 · intermedio 1 · avanzado 2 · nativo 0 (clase sin ejemplos) |
+  | `items` (pedido) | 3 productos por llamada; cantidades 1–2; precios 8–64 soles |
+  | `promocion` / `descuento` | sin promoción 1 · descuento de 10 soles 2 · 2×1 en gaseosas 1 |
+  | `direccion_entrega` | 4 distritos (Surco, Cercado, San Isidro, Lince), **todas con dígitos** |
+  | `metodo_pago` | tarjeta 2 · efectivo 1 · yape 1 · plin/transferencia 0 |
+  | `total_dicho` | 89 · 80 · 75 · 98 (3 de 4 mal dichos a propósito) |
+
+  Con 4 clips, varias clases no aparecen nunca (`nativo`, `plin`, `transferencia`). El macro-F1 se calcula sobre las clases presentes, y la muestra no dice nada de las ausentes.
+- **Audios y pesos de modelo (no se suben al repo):**
+  - **Audios:** son grabaciones con voces reales, así que no se publican. El equipo docente puede pedírselos a la autora por el canal del curso: se comparten por Drive con la estructura `audio/{entrevistas,llamadas,ruido}/`. Para **regenerar** un corpus propio: grabar con los guiones de `scripts_grabacion/guiones.md`, ponerlos en `data/audio/`, correr `python -m src.degrade` (escalera L1–L3) y el notebook de Colab (§10).
+  - **Pesos:** faster-whisper los descarga solo la primera vez (Hugging Face) en `rutas.modelos`.
+  - **No hace falta ninguno de los dos** para reproducir las métricas o abrir la app: todo sale de `cache/` (transcripts, respuestas del LLM y resultados).
 - **Datos sintéticos:** ninguno entra en las métricas. Durante el desarrollo se usó una frase con voz sintética de Windows solo para probar que el pipeline corre de punta a punta; ese audio no está en el repo, y `src/evaluar.py` ignora cualquier clip que no esté en el ground truth (y lo lista en `cache/results/resumen.json`).
 
 ## 6. Versión de faster-whisper y glosario
@@ -165,14 +197,33 @@ La combinación principal (la que vigila el CI y la que abre la app) es **large-
 - **¿Cambió el texto?** Para cada par: cuántos clips salen idénticos carácter a carácter y el WER de una salida contra la otra.
 - **Velocidad:** segundos de cómputo por minuto de audio. **VRAM:** pico − base (§6).
 
-### 8.1 Modelos (small vs large-v3)
-_(pendiente: `cache/results/comparaciones.csv`, fila "tamaño")_
-### 8.2 CPU vs GPU
-_(pendiente: fila "device"; device real en `asr_resumen.csv`)_
-### 8.3 Precisión (float16 vs int8) y diff de texto
-_(pendiente: filas "precisión")_
-### 8.4 Glosario vs plano (diferencia de WER con IC bootstrap)
-_(pendiente: filas "glosario")_
+**Capa 1 — transcripción por configuración** (`cache/results/asr_resumen.csv`, L0, 4 clips por tarea; device y compute **leídos del modelo**):
+
+| Modelo · device · precisión · glosario | Compute real | WER entrevista (IC 95 %) | WER pedido (IC 95 %) | CER entr. / ped. | s por min de audio (entr.) | VRAM total (MB) |
+|---|---|---|---|---|---|---|
+| small · cuda · float16 · plano | float16 | 0.203 (0.131–0.295) | 0.310 (0.206–0.426) | 0.153 / 0.226 | 1.89 | 884 |
+| small · cuda · int8 · plano | int8_float16 | 0.205 (0.133–0.297) | 0.317 (0.210–0.437) | 0.154 / 0.227 | 2.03 | 596 |
+| large-v3 · cuda · float16 · plano | float16 | 0.196 (0.157–0.245) | 0.289 (0.183–0.407) | 0.173 / 0.221 | 6.59 | 4052 |
+| **large-v3 · cuda · int8 · plano** | int8_float16 | **0.176** (0.119–0.249) | **0.276** (0.168–0.397) | 0.152 / 0.212 | 7.36 | 2580 |
+| large-v3 · cuda · int8 · glosario | int8_float16 | 0.212 (0.103–0.296) | 0.280 (0.173–0.399) | 0.183 / 0.213 | 6.15 | 2580 |
+| small · **cpu** · int8 · plano (solo E01/L01) | int8_float32 | 0.100 (1 clip) | 0.215 (1 clip) | 0.048 / 0.136 | **32.5** | — |
+
+**Comparaciones pareadas** (`cache/results/comparaciones.csv`; diferencia = WER(b) − WER(a) sobre los mismos clips, bootstrap pareado):
+
+| Comparación (a → b) | Clips | WER a → b | Diferencia (IC 95 %) | ¿IC incluye 0? | s/min a → b | Clips con texto idéntico | WER entre salidas |
+|---|---|---|---|---|---|---|---|
+| 8.1 tamaño: small → large-v3 (float16) | 8 | 0.254 → 0.240 | −0.014 (−0.039 a 0.024) | sí | 1.88 → 6.21 | 0 / 8 | 0.104 |
+| 8.2 device: cpu → cuda (small int8) | 2 | 0.153 → 0.153 | 0.000 (−0.003 a 0.004) | sí | **31.5 → 2.06** | 0 / 2 | 0.039 |
+| 8.3 precisión small: float16 → int8 | 8 | 0.254 → 0.259 | +0.004 (0.001 a 0.008) | **no** | 1.88 → 2.01 | 0 / 8 | 0.035 |
+| 8.3 precisión large-v3: float16 → int8 | 8 | 0.240 → 0.224 | −0.016 (−0.044 a 0.002) | sí | 6.21 → 6.54 | 1 / 8 | 0.037 |
+| 8.4 glosario: plano → glosario (large-v3 int8) | 8 | 0.224 → 0.244 | +0.020 (−0.011 a 0.072) | sí | 6.54 → 6.05 | 0 / 8 | 0.046 |
+
+Lectura:
+- **8.1 Tamaño:** large-v3 baja el WER solo 1,4 puntos (el IC incluye 0) y es 3,3× más lento, con 4,6× más VRAM (884 → 4052 MB en float16). Con esta muestra, el modelo grande **no** demuestra ser mejor en WER.
+- **8.2 CPU vs GPU:** la GPU es **15× más rápida** (31,5 → 2,06 s por minuto de audio) con el mismo WER. Pero el **texto cambió en los 2 clips** (WER entre salidas 3,9 %): con el mismo `int8`, la CPU corre `int8_float32` y la GPU `int8_float16`, y esa diferencia numérica cambia algunas palabras.
+- **8.3 Precisión:** en small, int8 empeora un poco pero **de forma consistente** (+0,4 puntos; es el único IC que excluye 0). En large-v3, int8 no empeora (−1,6, el IC incluye 0) y ahorra 1472 MB. **En los dos casos cambia el texto** (0/8 y 1/8 clips idénticos): int8 no es "lo mismo pero más rápido". Por eso la combinación principal es large-v3 int8: mismo WER que float16, 36 % menos VRAM.
+- **8.4 Glosario:** no hay evidencia de mejora. La diferencia es +2,0 puntos (peor) con un IC de −1,1 a +7,2. Con 8 clips no se puede afirmar ni que ayude ni que dañe.
+- **Prueba de GPU:** en cada corrida, `device_real` = `cuda` y `compute_real` = `int8_float16`/`float16` salen del objeto CTranslate2, y cada una tiene VRAM medida > 0 (la tabla de §6). En las corridas CPU la VRAM es nula y el compute es `int8_float32`.
 
 ### 8.5 Extracción: reglas vs LLM, verificación literal
 - **Reglas** (`extract_rules.py`): cada campo se busca **después de una pregunta ancla** ("pretensión", "inglés"…), así no depende del orden. Para el pedido se usa el **resumen final de la operadora** ("su pedido es… el total es…"), que ya incluye las autocorrecciones; los precios salen de lo que dice la operadora (la carta del config no tiene precios).
@@ -198,7 +249,48 @@ _(pendiente: filas "glosario")_
 
 El único error es **E01 tecnologías**: la candidata dice "usaba bastante Excel, pero eso ya casi no" y las reglas listan Excel (no entienden negaciones). Ojo: las reglas se escribieron **mirando los guiones**, así que este 100 % es una cota optimista, no evidencia de que generalicen. La prueba real es con la salida del ASR.
 
-_(pendiente: resultados con ASR y con LLM)_
+**Con ASR** (large-v3 · cuda · int8 · plano, L0; `extraccion_por_campo.csv`; accuracy con IC 95 %, EA = error absoluto medio en numéricos):
+
+| Tarea | Campo | Reglas | LLM | % verificado reglas / LLM |
+|---|---|---|---|---|
+| entrevista | anios_experiencia | 0.75 (0.25–1) · EA 0 | **1.00** · EA 0 | 75 % / 75 % |
+| entrevista | ultimo_puesto | 0.50 (0–1) | 0.50 (0–1) | 50 % / 100 % |
+| entrevista | tecnologias | 0.50 (0–1) | **0.75** (0.25–1) | 100 % / 100 % |
+| entrevista | pretension_salarial | 1.00 · EA 0 | 1.00 · EA 0 | 100 % / 100 % |
+| entrevista | moneda | 1.00 | 1.00 | 100 % / 100 % |
+| entrevista | disponibilidad | **1.00** | 0.75 (0.25–1) | 100 % / 100 % |
+| entrevista | nivel_ingles (macro-F1) | 1.0 | 1.0 | 100 % / 100 % |
+| pedido | items | **1.00** | 0.50 (0–1) | 100 % / 100 % |
+| pedido | promocion | 0.75 (0.25–1) | **1.00** | 50 % / 50 % |
+| pedido | descuento | 0.75 (0.25–1) · EA 2.5 | **1.00** · EA 0 | 50 % / 75 % |
+| pedido | direccion_entrega | 0.75 (0.25–1) | 0.75 (0.25–1) | 75 % / 75 % |
+| pedido | metodo_pago (macro-F1) | 1.0 | 1.0 | 100 % / 100 % |
+| pedido | total_dicho | 0.75 (0.25–1) · EA 0 | **1.00** · EA 0 | 75 % / 100 % |
+| | **registro completo, entrevista** | 0.821 | 0.857 | |
+| | **registro completo, pedido** | 0.833 | 0.875 | |
+
+En referencia (sin ASR): reglas 0.964 / 1.000 y LLM 1.000 / 0.833 (entrevista / pedido).
+
+- **Ningún método gana con esta muestra:** todas las diferencias caen dentro de los IC.
+  - El **LLM** aguanta mejor los errores del ASR en números y montos. Cuando el ASR cambia la frase que buscan las reglas ("en totales 80"), el LLM igual entiende.
+  - Las **reglas** ganan en `items`. El LLM acierta todas las cantidades y precios, pero escribe el producto a su manera ("chaufas", "gaseosa" + "litro y medio") en vez del nombre de la carta.
+- **La verificación literal atrapó al LLM corrigiendo al ASR (E03).** En E03 el ASR **se saltó** "dos años y medio" (solo quedó "empecé a mitad de año, así que no llegan a tres"). El LLM igual devolvió `2.5`: lo dedujo de esa frase, y esta vez acertó. Como `2.5` no está en el transcript, el campo quedó **`sin_verificar`**. Por eso `anios_experiencia` del LLM tiene accuracy 1.00 y solo 75 % verificado. Es justo el caso que la regla existe para marcar: la próxima deducción puede salir mal.
+
+**¿El WER dice si el registro sirve? No** (large-v3 int8, L0, `asr_por_clip.csv` + `extraccion_por_clip.csv`):
+
+| Clip | WER | Campos correctos (reglas) | Lectura |
+|---|---|---|---|
+| **L04** | **44,7 %** (el más alto del corpus) | **6 / 6** | WER alto, registro perfecto |
+| **L02** | **14,8 %** | **4 / 6** | WER bajo, registro roto |
+| E01 | 9,3 % (el más bajo) | 6 / 7 | el error es de extracción ("Excel, pero ya casi no"), no del ASR |
+
+- **L04:** de sus 102 errores, 59 son **inserciones**, es decir, palabras que el ASR escribió y la referencia no tiene (frases improvisadas al grabar y no corregidas, §12; más alguna repetición del ASR). Aun así los números, los productos, la dirección y el pago salen bien.
+- **L02** tiene pocos errores, pero caen justo en dos campos: el total ("en **totales** 80" → sin total no hay pedido verificable) y la dirección ("**Girón Guayaga**" por "Jr. Huallaga").
+- **El WER cuenta todas las palabras por igual. El registro depende de unas pocas** (un número, un nombre). Quien reporta solo WER puede llamar "bueno" a un sistema que rompe el dato que importa, y "malo" a uno que lo saca perfecto.
+- **Asimetría entre tipos de campo:**
+  - Un campo **categórico** sobrevive a mucho error: `nivel_ingles` y `metodo_pago` tienen macro-F1 1.0 con large-v3 en L0 (con small, `metodo_pago` baja a 0.67), porque basta con oír "avanzado" o "tarjeta" una vez.
+  - Un **monto** no sobrevive a nada: `pretension_salarial` dio **0 %** con todos los modelos hasta agregar la regla del separador de miles (§7), porque Whisper escribe `6,500` y un solo carácter rompía el número.
+  - El **texto libre** es el más difícil de verificar: `ultimo_puesto` 0.50 con los dos métodos.
 
 ## 9. Tarea 2 — Metodología y resultados
 ### 9.1 Escalera de degradación L0–L3 (SNR medido)
@@ -211,14 +303,43 @@ _(pendiente: resultados con ASR y con LLM)_
 | L2 | teléfono | paso banda 300–3400 Hz, 8 kHz |
 | L3 | L1 + ruido ambiente | ruido grabado mezclado a SNR objetivo 10 dB |
 
-El SNR de L3 **se calcula**: el ruido se escala para que `20·log10(RMS señal / RMS ruido)` sea el objetivo, y el SNR medido de cada clip queda en `cache/results/degradacion.json`. Si L3 sigue sin errores, se baja a 5 o 0 dB (`snr_db_alternativos`) y se documenta. Cada nivel se transcribe con small y large-v3 (cuda, float16, plano).
+El SNR de L3 **se calcula**: el ruido se escala para que `20·log10(RMS señal / RMS ruido)` sea el objetivo, y el SNR medido de cada clip queda en `cache/results/degradacion.json`. Si L3 sigue sin errores, se baja a 5 o 0 dB (`snr_db_alternativos`) y se documenta. La escalera se transcribe con large-v3 · cuda · int8 · plano (la combinación principal).
 
-_(pendiente: WER y accuracy por nivel)_
+**Por qué 10 dB, y cómo se midió:**
+- **Por qué:** a 10 dB la voz tiene 10 veces más potencia que el ruido. Es el caso realista de alguien que pide por teléfono en un local o en la calle: el ruido se oye claro, pero la voz domina. A 0 dB (ruido igual de fuerte que la voz) ya no es una llamada que una persona aceptaría, y a 20 dB casi no degrada.
+- **Cómo se mide:** RMS de la señal (L1) y RMS del ruido grabado, sobre las muestras a 16 kHz. El ruido se escala para que `20·log10(RMS_señal / RMS_ruido)` dé 10 dB, y luego se **re-mide** sobre lo que se mezcló. SNR medido: **10,0 dB en los 4 clips** (`degradacion.json`).
+- **¿Hubo que endurecer?** No: a 10 dB el registro ya se rompe (accuracy 0.54 en L3), así que no se usaron 5 ni 0 dB.
+
+**Curva de la escalera** (`asr_resumen.csv` y `extraccion_por_campo.csv`; extracción por reglas; 4 llamadas):
+
+| Nivel | WER (IC 95 %) | Accuracy del registro | items | total_dicho | metodo_pago | direccion_entrega |
+|---|---|---|---|---|---|---|
+| L0 original | 0.276 (0.168–0.397) | **0.833** | 1.00 | 0.75 | 1.00 | 0.75 |
+| L1 WhatsApp | 0.408 (0.288–0.563) | 0.625 | 0.50 | 0.50 | 0.75 | 0.50 |
+| L2 teléfono | 0.463 (0.430–0.509) | 0.625 | 0.50 | 0.25 | 0.75 | 0.75 |
+| L3 L1 + ruido 10 dB | 0.469 (0.371–0.571) | **0.542** | 0.50 | 0.25 | 0.50 | 0.50 |
+
+El WER sube 19 puntos entre L0 y L3 y el registro pierde 29. `total_dicho` es el campo que más cae (0.75 → 0.25): justo el que necesita la validación. El LLM solo corrió en L0 (cuota, §8.5).
 
 ### 9.2 Validación aritmética
 `validate.chequear`: `Σ cantidad × precio_unitario − descuento` contra `total_dicho`, con tolerancia de 0.5 soles. Sobre las referencias detecta **L02, L03 y L04** y L01 cuadra.
 
-_(pendiente: con ASR, por nivel — `cache/results/pedidos_validacion.csv`)_
+**Capturadas vs perdidas por nivel** (`cache/results/capturas_por_nivel.csv`, large-v3 int8; 3 trampas de total mal dicho: L02, L03, L04):
+
+| Grupo · método | Capturadas | Perdidas | Falsas alarmas | Sin chequeo (faltó un precio o el total) |
+|---|---|---|---|---|
+| referencia · reglas | 3 | 0 | 0 | 0 |
+| L0 · reglas | 1 | 1 | 0 | 1 |
+| L0 · **LLM** | **3** | 0 | 0 | 0 |
+| L1 · reglas | 2 | 0 | 0 | 2 |
+| L2 · reglas | 1 | 0 | 0 | 3 |
+| L3 · reglas | 1 | 0 | 0 | 3 |
+
+- **Lo que atrapa:** cualquier total que no cuadre con lo que se dijo antes (L04 se atrapa en **todos** los niveles).
+- **Lo que pierde:**
+  - **L03 en L0:** el ASR borró la promoción "2×1", y sin ella la cuenta de lo transcrito da justo 75, el total mal dicho. El error del hablante y el del ASR se cancelan.
+  - **Las llamadas sin chequeo:** si el ASR rompe un precio o el total, no hay nada que comparar. Al degradar el audio, el problema principal no es dejar pasar errores, es quedarse **sin poder chequear** (de 1 a 3 llamadas sin chequeo).
+- **Cero falsas alarmas** en todos los niveles: L01, que suma bien, nunca se marcó como error.
 
 ### 9.3 Diagnóstico: error de ASR vs error del hablante
 Si la cuenta no cuadra, en este orden:
@@ -228,7 +349,36 @@ Si la cuenta no cuadra, en este orden:
 
 Se mide contra las trampas: lo esperado es "error del hablante" en L02–L04 y "ok" en L01 (o "error de ASR" si deja de cuadrar por la degradación).
 
-_(pendiente: aciertos del diagnóstico)_
+**Cuántas veces acierta** (`pedidos_validacion.csv`; solo se evalúan las llamadas que tienen un chequeo; "indeterminado" = sin datos para decidir):
+
+| Grupo · método | Aciertos / evaluados |
+|---|---|
+| L0 · reglas | 2 / 3 |
+| L0 · LLM | 2 / 4 |
+| L1 · reglas | 1 / 2 |
+| L2 · reglas | 1 / 1 |
+| L3 · reglas | 1 / 1 |
+| **Total escalera (reglas)** | **5 / 7** |
+
+- **Acierta siempre en L04** (el total mal dicho, con números claros: "todos los números con prob ≥ 0.80, se dijo así") y en L01 (cuadra).
+- **Falla de dos maneras:**
+  - **Error del hablante tomado como error del ASR:** Whisper dudó en un precio que sí se dijo bien (L02 "precio ensalada"; L03 con el LLM). Basta una palabra con baja probabilidad para culpar al ASR.
+  - **Errores que se cancelan:** L03 en L0, donde la cuenta cuadra por accidente (ver arriba).
+- **Lección:** la regla favorece culpar al ASR. Con 4 llamadas no se puede ajustar el umbral de 0.80 sin sobreajustarlo a este corpus.
+
+### 9.4 Un motor, dos esquemas
+Las dos tareas llaman a **la misma función**, `process_audio(audio_path, schema, cfg)`. Solo cambia el argumento `schema`:
+
+```python
+from src.engine import process_audio
+entrevista = process_audio("data/audio/entrevistas/E01.m4a", "entrevista")
+pedido     = process_audio("data/audio/llamadas/L01.m4a", "pedido")
+```
+
+- El **ASR, la normalización, la verificación literal y el cache son idénticos** para las dos.
+- Lo que depende del esquema sale de **datos**, no de código copiado: los campos y el JSON schema (`schemas.py`), los prompts y el vocabulario de las reglas (`config.yaml`), y el glosario por esquema.
+- La validación aritmética (`validate.py`) es un paso **posterior** que solo aplica a `pedido`.
+- No se copió ni se editó el motor para la Tarea 2. **Ventaja:** cambiar el modelo (`motor.modelo` en el config) cambia las dos tareas a la vez, con una sola grilla y un solo cache.
 
 ## 10. Cómo reproducir
 1. **Grabar** y subir a Drive: `MyDrive/HW05/audio/{entrevistas,llamadas,ruido}/`.
@@ -290,6 +440,15 @@ Así, un cambio que empeore la normalización, las reglas o el cache (por ejempl
   - **Además, large-v3 se salta frases completas**, sobre todo al final de algunos clips (E02, E04, L01). Son borrados reales del ASR, no improvisaciones.
 - **Ground truth anotado por una sola persona** y guiones leídos (habla menos espontánea que una llamada real).
 - **El diagnóstico usa probabilidades de Whisper**, que no están calibradas; el umbral de 0.80 es una elección, no un valor ajustado.
+- **LLM solo en L0 y en un modelo de ASR** por la cuota gratuita (§8.5). Las comparaciones en la escalera son solo con reglas.
+- **Historial de commits concentrado:** el repositorio se creó el 26-oct y la mayoría de los commits son del 30-oct.
+
+### Para qué NO usar este sistema
+- **Para decidir sobre personas.** No sirve para filtrar, puntuar ni rechazar candidatos automáticamente: un `ultimo_puesto` acierta la mitad de las veces y un error del ASR cambia un sueldo.
+- **Para cobrar o despachar sin que una persona confirme.** El pedido trae marcas de `sin_verificar` y un chequeo aritmético precisamente para que alguien revise. Un pedido que cuadra no está garantizado (ver L03: dos errores que se cancelan).
+- **Como prueba de lo que alguien dijo** (reclamos, disputas, cosas legales). Es una transcripción automática con errores medidos de 18–47 % de WER.
+- **Con datos reales de personas** sin su consentimiento y sin cumplir la ley de protección de datos personales. Además, la extracción con LLM manda el texto a un servicio externo (Gemini).
+- **Fuera de lo que se midió:** otros acentos, otros idiomas, más de dos voces, otros dominios o audio peor que L3. Nada de eso está evaluado.
 
 ## 13. Uso de IA
 - **Claude Code en VS Code (agente):** escribió el código, los tests y los PRs siguiendo `CLAUDE.md`, con un PR por bloque. Solo mergeaba con el CI en verde.

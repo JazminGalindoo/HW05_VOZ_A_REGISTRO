@@ -329,8 +329,11 @@ with t4:
 with t5:
     st.subheader("Escalera de degradación")
     snr = resultado_json("degradacion")
-    st.markdown("L0 original · L1 WhatsApp (mono, Opus 12 kbps) · L2 teléfono (300–3400 Hz, 8 kHz) · "
-                f"L3 = L1 + ruido ambiente a {cfg['degradacion']['L3']['snr_db']} dB (SNR medido por RMS).")
+    d = cfg["degradacion"]  # los parámetros salen del config, no se escriben aquí
+    banda = d["L2"]["paso_banda_hz"]
+    st.markdown(f"L0 original · L1 WhatsApp (mono, Opus {d['L1']['bitrate_kbps']} kbps) · "
+                f"L2 teléfono ({banda[0]}–{banda[1]} Hz, {d['L2']['sample_rate_hz'] // 1000} kHz) · "
+                f"L3 = L1 + ruido ambiente a {d['L3']['snr_db']} dB (SNR medido por RMS).")
     if snr:
         st.dataframe(pd.DataFrame(snr).T, width="stretch")
 
