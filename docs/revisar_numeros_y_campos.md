@@ -26,7 +26,7 @@ Los transcripts de referencia salen del guion, pero al grabar se improvisó. Par
 
 | # | Tiempo | Guion | ASR | ¿Otros modelos igual? | Lo que se dijo |
 |---|---|---|---|---|---|
-| 1 | 0:42 | experiencia tiene en marketing **mmm 2.5 anos** empece a mitad de | experiencia tiene en marketing **∅** empece a mitad de | sí | |
+| 1 | 0:42 | experiencia tiene en marketing **2.5 anos** empece a mitad de | experiencia tiene en marketing **∅** empece a mitad de | sí | |
 | 2 | 1:20 | correos los mandabamos por **hubspot** y las imagenes las | correos los mandabamos por **∅** y las imagenes las | sí | |
 
 ## E04 — 1 fragmentos
@@ -64,4 +64,4 @@ Los transcripts de referencia salen del guion, pero al grabar se improvisó. Par
 | # | Tiempo | Guion | ASR | ¿Otros modelos igual? | Lo que se dijo |
 |---|---|---|---|---|---|
 | 1 | 0:36 | entrega avenida arequipa 2890 **en lince es 1 edificio interior 302** avenida arequipa 2890 interior | entrega avenida arequipa 2890 **inficio interior 302 ok** avenida arequipa 2890 interior | no | |
-| 2 | 1:34 | mayonesa ketchup y aji **oiga el pollo lo pueden cortar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |
+| 2 | 1:34 | mayonesa ketchup y aji **el pollo lo puede trozar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |

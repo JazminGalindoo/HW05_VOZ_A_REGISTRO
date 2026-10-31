@@ -129,7 +129,7 @@ PERSONA 2 — candidata
 
 **PERSONA 1:** Perfecto. ¿Y cuánta experiencia tiene en marketing?
 
-**PERSONA 2:** Mmm, dos años y medio. Empecé a mitad de año, así que no llegan a tres todavía.
+**PERSONA 2:** Dos años y medio. Empecé a mitad de año, así que no llegan a tres todavía.
 
 **PERSONA 1:** Muy bien. Hablemos de sueldo, ¿cuánto estaría buscando?
 
@@ -436,7 +436,7 @@ PERSONA 2 — cliente
 
 **PERSONA 1:** Sí, mayonesa, ketchup y ají.
 
-**PERSONA 2:** Oiga, ¿el pollo lo pueden cortar en piezas? Es para compartir.
+**PERSONA 2:** ¿El pollo lo puede trozar en piezas? Es para compartir.
 
 **PERSONA 1:** Sí, claro, se lo mandamos cortado en ocho piezas.
 

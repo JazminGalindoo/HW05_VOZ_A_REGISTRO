@@ -49,7 +49,7 @@ Los transcripts de referencia salen del guion, pero al grabar se improvisó. Par
 | 1 | 0:12 | extranjeras que tal se **defiende** en ingles ay la | extranjeras que tal se **define** en ingles ay la | sí | |
 | 2 | 0:24 | verdad es basico entiendo **lo principal si lo leo despacio pero no podria tener 1 reunion en ingles entiendo** gracias por la sinceridad | verdad es basico entiendo **∅** gracias por la sinceridad | sí | |
 | 3 | 0:26 | la sinceridad desde cuando **estaria disponible ahorita** estoy terminando 1 curso | la sinceridad desde cuando **podria estar disponible ahora** estoy terminando 1 curso | sí | |
-| 4 | 0:42 | experiencia tiene en marketing **mmm 2.5 anos** empece a mitad de | experiencia tiene en marketing **∅** empece a mitad de | sí | |
+| 4 | 0:42 | experiencia tiene en marketing **2.5 anos** empece a mitad de | experiencia tiene en marketing **∅** empece a mitad de | sí | |
 | 5 | 0:48 | muy bien hablemos de **sueldo** cuanto estaria buscando estaba | muy bien hablemos de **suelo** cuanto estaria buscando estaba | sí | |
 | 6 | 0:56 | aunque se podria conversar **∅** lo tengo en cuenta | aunque se podria conversar **ok** lo tengo en cuenta | sí | |
 | 7 | 1:15 | usaba para medir usaba **∅** google analytics los correos | usaba para medir usaba **el** google analytics los correos | sí | |
@@ -154,7 +154,7 @@ Los transcripts de referencia salen del guion, pero al grabar se improvisó. Par
 | 10 | 1:08 | bien el motorizado lleva **pos entonces es** 1 pollo entero 1 | bien el motorizado lleva **el pos entonces seria** 1 pollo entero 1 | sí | |
 | 11 | 1:16 | su descuento el total **es** 98 soles ya perfecto | su descuento el total **seria de** 98 soles ya perfecto | sí | |
 | 12 | 1:20 | 98 soles ya perfecto **mandan cremas si** mayonesa ketchup y aji | 98 soles ya perfecto **me mandan cremas si mandamos todas** mayonesa ketchup y aji | no | |
-| 13 | 1:34 | mayonesa ketchup y aji **oiga el pollo lo pueden cortar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |
+| 13 | 1:34 | mayonesa ketchup y aji **el pollo lo puede trozar en piezas es para compartir** si claro se lo | mayonesa ketchup y aji **∅** si claro se lo | sí | |
 | 14 | 1:42 | perfecto y el chaufa **es para cuantas personas** alcanza bien para 2 | perfecto y el chaufa **para cuantas personas alcanza de acuerdo a lo que ustedes venden** alcanza bien para 2 | no | |
 | 15 | 1:50 | bien para 2 personas **∅** ya esta bien y | bien para 2 personas **en verdad** ya esta bien y | no | |
 | 16 | 1:58 | motorizado sube si si **el edificio lo** permite sube hasta la | motorizado sube si si **si el edificio le** permite sube hasta la | no | |
