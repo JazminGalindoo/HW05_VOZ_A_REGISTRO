@@ -48,3 +48,11 @@ def test_corpus_muestra_registro_verificado(app):
     tablas = [d.value for d in app.dataframe]
     registro = next(t for t in tablas if "verificación" in t.columns)
     assert set(registro["verificación"]) == {"verificado"}
+
+
+def test_probador_acepta_los_tipos_del_config(app, cfg):
+    # Los tipos salen de config.yaml (app.probador_tipos), no del código
+    aceptados = set(app.get("file_uploader")[0].proto.type)
+    for ext in ["m4a", "mp4", "aac", "ogg", "opus", "wav", "mp3"]:
+        assert f".{ext}" in aceptados, ext
+    assert "audio/*" in aceptados  # por si el navegador manda el MIME en vez de la extensión

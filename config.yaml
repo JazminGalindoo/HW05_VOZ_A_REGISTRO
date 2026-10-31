@@ -326,3 +326,7 @@ app:
   probador: {modelo: small, device: auto, compute_type: int8, glosario: plano}
   # Transcripts de audios nuevos subidos al probador: fuera del repo
   carpeta_probador: .probador_cache
+  # Tipos que acepta el probador: extensiones + tipos MIME. Los MIME hacen falta porque
+  # el navegador puede reportar .m4a como audio/x-m4a o audio/mp4, y .mp4 como video/mp4.
+  # faster-whisper decodifica todos con PyAV (del .mp4 solo usa el audio).
+  probador_tipos: [wav, mp3, m4a, mp4, aac, ogg, opus, flac, "audio/*", video/mp4]

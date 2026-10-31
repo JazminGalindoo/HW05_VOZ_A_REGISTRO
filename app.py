@@ -300,8 +300,7 @@ with t4:
     p = cfg["app"]["probador"]
     st.caption(f"Este es el único lugar donde la app transcribe: {p['modelo']} · {p['compute_type']} · "
                f"device {p['device']} (el real se lee del modelo). Un clip de 3 min tarda ~1 min en CPU.")
-    extensiones = [e.lstrip(".") for e in cfg["degradacion"]["extensiones_audio"]]
-    subido = st.file_uploader("Audio", type=extensiones)
+    subido = st.file_uploader("Audio", type=cfg["app"]["probador_tipos"])
     schema_p = st.radio("Esquema", list(TAREAS), format_func=TAREAS.get, horizontal=True, key="prob_schema")
     metodo_p = st.radio("Extracción", ["reglas", "llm"], horizontal=True, key="prob_metodo",
                         help="llm necesita GEMINI_API_KEY en .env")
