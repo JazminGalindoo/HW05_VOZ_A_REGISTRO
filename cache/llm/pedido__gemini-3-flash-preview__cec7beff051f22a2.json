@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "producto": "cuartos de pollo",
+      "tamano_o_plan": "pierna",
+      "cantidad": 2,
+      "precio_unitario": 20
+    },
+    {
+      "producto": "papas familiares",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 15
+    },
+    {
+      "producto": "gaseosas",
+      "tamano_o_plan": "litro y medio",
+      "cantidad": 2,
+      "precio_unitario": 10
+    }
+  ],
+  "promocion": "2x1 en gaseosas (una sale gratis)",
+  "descuento": 10,
+  "direccion_entrega": "Calle Las Begonias, 517, San Isidro",
+  "metodo_pago": "yape",
+  "total_dicho": 75
+}

@@ -1,0 +1,13 @@
+{
+  "anios_experiencia": 4,
+  "ultimo_puesto": "analista de datos",
+  "tecnologias": [
+    "Python",
+    "SQL",
+    "Power BI"
+  ],
+  "pretension_salarial": 6500,
+  "moneda": "PEN",
+  "disponibilidad": "2_semanas",
+  "nivel_ingles": "intermedio"
+}

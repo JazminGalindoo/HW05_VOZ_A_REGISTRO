@@ -1,0 +1,14 @@
+{
+  "anios_experiencia": 7,
+  "ultimo_puesto": "Desarrolladora backend",
+  "tecnologias": [
+    "Java",
+    "Spring Boot",
+    "Docker",
+    "Kubernetes"
+  ],
+  "pretension_salarial": 9000,
+  "moneda": "PEN",
+  "disponibilidad": "inmediata",
+  "nivel_ingles": "avanzado"
+}

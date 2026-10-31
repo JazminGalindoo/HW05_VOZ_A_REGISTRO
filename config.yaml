@@ -180,7 +180,7 @@ extraccion:
   # --- LLM ---
   llm:
     proveedor: gemini           # Google Gemini, nivel gratuito (SDK google-genai)
-    modelo: gemini-3.8-flash
+    modelo: gemini-3-flash-preview   # gemini-3.8-flash agotó su cuota diaria (20/día) el 30-oct
     temperatura: 0              # salida lo más estable posible
     max_tokens: 8192            # incluye el razonamiento interno del modelo; no bajarlo mucho
     reintentos: 2               # si el JSON no valida contra schemas.py

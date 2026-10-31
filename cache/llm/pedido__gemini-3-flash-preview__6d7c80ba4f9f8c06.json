@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "producto": "medio pollo",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 36
+    },
+    {
+      "producto": "arroz chaufa",
+      "tamano_o_plan": null,
+      "cantidad": 2,
+      "precio_unitario": 28
+    },
+    {
+      "producto": "ensalada",
+      "tamano_o_plan": null,
+      "cantidad": 1,
+      "precio_unitario": 8
+    }
+  ],
+  "promocion": "10 soles de descuento en compras mayores a 80 soles",
+  "descuento": 10,
+  "direccion_entrega": "Girón Guayaga, 382, departamento 4B, cercado",
+  "metodo_pago": "efectivo",
+  "total_dicho": 80
+}
