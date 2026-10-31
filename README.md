@@ -403,7 +403,7 @@ Carga los resultados precalculados de `cache/results/` y **no transcribe el corp
 | 1 · Problema y método | por qué no basta el celular, diagrama del pipeline, método |
 | 2 · Corpus | reproductor de audio (si el audio está en la PC) con el transcript de referencia y el del ASR al lado; registro extraído contra el ground truth; distribución de cada campo |
 | 3 · Resultados | capa 1 (WER/CER con IC, comparaciones pareadas) y capa 2 (accuracy por campo con IC, macro-F1, error absoluto, % verificado); WER del clip contra accuracy de su registro |
-| 4 · Probar un audio | subir un clip y ver transcript, registro, campos verificados, device real y tiempo. Es lo único que transcribe (`app.probador` en el config); su cache queda fuera del repo |
+| 4 · Probar un audio | subir un clip (wav, mp3, m4a, mp4, aac, ogg, opus, flac: `app.probador_tipos`) y ver transcript, registro, campos verificados, device real y tiempo. Es lo único que transcribe (`app.probador` en el config); su cache queda fuera del repo |
 | 5 · Pedidos (Tarea 2) | escalera con SNR medido, curva WER/accuracy por nivel, capturadas vs perdidas por nivel y chequeo aritmético en vivo |
 
 En la barra lateral se elige qué transcripción mirar (cada combinación de ASR en cache, o `referencia`) y el método de extracción.
