@@ -18,6 +18,7 @@ rutas:
   transcripts_referencia: data/ground_truth/transcripts_referencia
   cache_transcripts: cache/transcripts           # SÍ se commitea
   cache_results: cache/results                   # SÍ se commitea
+  cache_llm: cache/llm                           # respuestas del LLM, SÍ se commitea
   modelos: models                                # pesos descargados, no se commitean
 
 # Plantilla del nombre de cada transcript cacheado (ver CLAUDE.md)
@@ -187,7 +188,11 @@ extraccion:
     # responde 429 (límite alcanzado), se espera y se vuelve a intentar.
     pausa_entre_llamadas_s: 4
     espera_si_limite_s: 30
-    max_esperas_por_limite: 5
+    max_esperas_por_limite: 5   # solo para el límite POR MINUTO; el diario no se espera
+    timeout_s: 60               # sin esto, una solicitud sin respuesta bloquea para siempre
+    # Cada respuesta se guarda en rutas.cache_llm: se paga una sola vez, una corrida
+    # cortada retoma donde quedó y los resultados se reproducen sin API.
+    usar_cache: true
     # Variable de entorno que contiene la API key (el valor va en .env)
     api_key_env: GEMINI_API_KEY
   prompts:
@@ -284,6 +289,11 @@ regresion:
 # ---------------------------------------------------------------------
 evaluacion:
   metodos: [reglas]             # "llm" se agrega con: python -m src.evaluar --llm
+  # Grupos donde corre el LLM. El nivel gratuito de Gemini da 20 solicitudes por día y
+  # por modelo: referencia (8) + large-v3 int8 plano en L0 (8) = 16 caben en un día.
+  grupos_llm:
+    - {grupo: referencia, nivel: "-"}
+    - {grupo: large-v3|cuda|int8|plano, nivel: L0}
   # Comparaciones pareadas en L0: diferencia de WER = WER(b) - WER(a) con IC bootstrap
   comparaciones:
     - nombre: tamaño (small -> large-v3), float16
