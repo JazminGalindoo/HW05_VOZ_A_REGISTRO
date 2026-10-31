@@ -1,7 +1,9 @@
 # HW05_VOZ_A_REGISTRO
 ASR con faster-whisper: de entrevistas y llamadas de venta grabadas a registros estructurados y verificados. HW_05 Data Science Python.
 
-> **Estado:** el pipeline completo está implementado y probado (tests + ensayo en CPU). Faltan los audios reales: las secciones de resultados (8 y 9) se llenan con `python -m src.evaluar` cuando el cache de Colab esté en el repo. Ningún número de resultados de este README está escrito a mano.
+**Video:** (pendiente)
+
+> **Estado:** pipeline completo, corrido sobre los audios reales (Colab T4). Todos los resultados salen de `python -m src.evaluar` sobre `cache/`; ningún número está escrito a mano.
 
 **Documento del pipeline:** [Notion — Pipeline HW05: De la voz al registro](https://gamy-maple-386.notion.site/Pipeline-HW05-De-la-voz-al-registro-6754285ae77e83c2873f010292a6b284) · versión en el repo: [docs/pipeline.md](docs/pipeline.md) (qué corre una vez, qué corre por cada audio, decisiones y lo descartado).
 
@@ -276,13 +278,22 @@ Así, un cambio que empeore la normalización, las reglas o el cache (por ejempl
 - **Reglas ajustadas después de ver la salida del ASR:** se agregaron 3 formas de decir que aparecieron al grabar ("pollo entero **está a** 64 soles", "el total **sería de** 98", "su pedido **sería**…"), además del separador de miles (§7). Son frases comunes del español y no errores del ASR, pero se detectaron con este mismo corpus: los resultados con ASR también son algo optimistas.
   - **No** se adaptaron las reglas a los errores del ASR ("en **totales** 80", "**Girón Guayaga**… encercado", "desarrolladora de **bacnet**", "las **doceras** están a" por "las gaseosas están dos por uno"). Esos errores son el hallazgo: rompen el registro aunque el WER sea moderado.
 - **Referencias = guiones, corregidos solo en números y valores de campos.** Al grabar se improvisaron frases ("¿algo más que desee?", "el total sería de…").
-  - **Lo que se corrigió escuchando el audio:** solo las diferencias que tocan un número o el valor de un campo. Se listan en [docs/revisar_numeros_y_campos.md](docs/revisar_numeros_y_campos.md), con clip y minuto:segundo; ahí también se anota qué se dijo. Hasta ahora: L04, chaufa a **25** soles (no 28).
+  - **Lo que se corrigió escuchando el audio:** solo las diferencias que tocan un número o el valor de un campo. Se listan en [docs/revisar_numeros_y_campos.md](docs/revisar_numeros_y_campos.md), con clip y minuto:segundo; ahí también se anota qué se dijo.
+    - **Revisados (4 de 16):**
+      - L04: chaufa a **25** soles (no 28) → corregido.
+      - E03 0:42: "dos años y medio, empecé a mitad de año", sin el "mmm" del guion → corregido.
+      - L04 1:34: "¿el pollo lo puede **trozar** en piezas? Es para compartir" → corregido.
+      - E03 1:20 ("HubSpot") y L03 0:27 ("dos gaseosas de litro y medio… a diez soles cada una"): se dijo como en el guion. Es **error del ASR**, la referencia no cambia.
+    - **No revisados (12 de 16):** los demás fragmentos de esa lista no se escucharon. Si alguno fue improvisación, la referencia tiene ahí un valor que no se dijo y el acierto de ese campo está **subestimado**. No se puede descartar.
   - **Lo que NO se corrigió:** las demás diferencias entre guion y audio (muletillas, frases de cortesía, preguntas reformuladas). Están en [docs/revisar_referencias.md](docs/revisar_referencias.md) (115 fragmentos).
-  - **Consecuencia: el WER está inflado.** Mide el error del ASR **más** lo improvisado que no se corrigió. Las métricas del **registro** no se afectan, porque los valores de los campos sí se corrigieron. Las comparaciones **pareadas** entre configuraciones (tamaño, precisión, glosario, CPU/GPU) siguen siendo válidas: todas se miden contra la misma referencia.
+  - **Consecuencia: el WER está inflado.** Mide el error del ASR **más** lo improvisado que no se corrigió. Las métricas del **registro** se afectan mucho menos, porque las diferencias en valores de campos se revisaron (salvo las 12 no escuchadas, ver arriba). Las comparaciones **pareadas** entre configuraciones (tamaño, precisión, glosario, CPU/GPU) siguen siendo válidas: todas se miden contra la misma referencia.
   - **Además, large-v3 se salta frases completas**, sobre todo al final de algunos clips (E02, E04, L01). Son borrados reales del ASR, no improvisaciones.
 - **Ground truth anotado por una sola persona** y guiones leídos (habla menos espontánea que una llamada real).
 - **El diagnóstico usa probabilidades de Whisper**, que no están calibradas; el umbral de 0.80 es una elección, no un valor ajustado.
 
 ## 13. Uso de IA
-_(pendiente de completar)_
-El código se desarrolló con Claude Code (Anthropic) como asistente, módulo por módulo, con un PR por bloque, tests y revisión de cada cambio. Las decisiones de diseño que se tomaron en el camino están documentadas en este README (§1, §2, §7, §8.5).
+- **Claude Code en VS Code (agente):** escribió el código, los tests y los PRs siguiendo `CLAUDE.md`, con un PR por bloque. Solo mergeaba con el CI en verde.
+- **Claude (chat):** lo usé para planificar el proyecto, escribir los guiones de las entrevistas y llamadas, y preparar el guion del video.
+- **Gemini (`gemini-3-flash-preview`):** es el LLM de extracción del pipeline (§8), no un asistente de desarrollo.
+- **Servidores MCP:** no conecté ninguno en Claude Code. Para GitHub usé la CLI `gh`.
+- **Lo que hice yo:** grabé todos los audios, corrí el notebook en Colab, escuché los fragmentos y corregí las referencias (§12), y tomé las decisiones de diseño y de alcance.

@@ -19,9 +19,9 @@
       "precio_unitario": 8
     }
   ],
-  "promocion": "diez soles de descuento por compra mayor a ochenta soles",
+  "promocion": "diez soles de descuento por la promoción del día",
   "descuento": 10,
-  "direccion_entrega": "Avenida Arequipa 2890, interior 302, Lince",
+  "direccion_entrega": "Avenida Arequipa dos mil ochocientos noventa, interior trescientos dos, Lince",
   "metodo_pago": "tarjeta",
   "total_dicho": 98
 }
