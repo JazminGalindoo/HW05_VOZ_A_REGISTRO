@@ -1,0 +1,42 @@
+{
+  "large-v3|float16": {
+    "gpu": "Tesla T4",
+    "device_real": "cuda",
+    "compute_real": "float16",
+    "audio": "E01.m4a",
+    "base_mb": 556.2,
+    "modelo_mb": 3078.0,
+    "total_mb": 4052.0,
+    "extra_mb": 974.0
+  },
+  "large-v3|int8": {
+    "gpu": "Tesla T4",
+    "device_real": "cuda",
+    "compute_real": "int8_float16",
+    "audio": "E01.m4a",
+    "base_mb": 556.2,
+    "modelo_mb": 1606.0,
+    "total_mb": 2580.0,
+    "extra_mb": 974.0
+  },
+  "small|float16": {
+    "gpu": "Tesla T4",
+    "device_real": "cuda",
+    "compute_real": "float16",
+    "audio": "E01.m4a",
+    "base_mb": 556.2,
+    "modelo_mb": 582.0,
+    "total_mb": 884.0,
+    "extra_mb": 302.0
+  },
+  "small|int8": {
+    "gpu": "Tesla T4",
+    "device_real": "cuda",
+    "compute_real": "int8_float16",
+    "audio": "E01.m4a",
+    "base_mb": 556.2,
+    "modelo_mb": 358.0,
+    "total_mb": 596.0,
+    "extra_mb": 238.0
+  }
+}

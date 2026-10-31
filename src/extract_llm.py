@@ -15,15 +15,19 @@ así no se llama a la red ni se gasta cuota.
 """
 
 import copy
+import hashlib
 import json
 import os
 import time
+from pathlib import Path
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai import errors, types
 
 from src.schemas import esquema_json, validar
+
+RAIZ = Path(__file__).resolve().parent.parent
 
 # Motivos de fin que significan "el modelo no quiso responder"
 RECHAZOS = {"SAFETY", "BLOCKLIST", "PROHIBITED_CONTENT", "SPII", "RECITATION"}
@@ -34,9 +38,31 @@ class ErrorExtraccion(Exception):
 
 
 def crear_cliente(cfg: dict) -> genai.Client:
-    """Cliente real de Gemini. La API key se lee de .env (nunca del código)."""
+    """Cliente real de Gemini. La API key se lee de .env (nunca del código).
+
+    Con timeout: sin él, una solicitud que nunca responde bloquea la corrida para siempre.
+    """
     load_dotenv()
-    return genai.Client(api_key=os.environ.get(cfg["extraccion"]["llm"]["api_key_env"]))
+    llm = cfg["extraccion"]["llm"]
+    return genai.Client(api_key=os.environ.get(llm["api_key_env"]),
+                        http_options=types.HttpOptions(timeout=llm["timeout_s"] * 1000))  # en ms
+
+
+def es_limite_diario(e: errors.APIError) -> bool:
+    """¿El 429 es por la cuota DIARIA? Esa no se libera en segundos: esperar no sirve."""
+    return "PerDay" in json.dumps(e.details, default=str)
+
+
+def ruta_cache_llm(transcript: str, schema: str, cfg: dict) -> Path:
+    """Archivo de cache de UNA respuesta: depende del modelo, los prompts y el transcript.
+
+    Si cambia cualquiera de los tres, el hash cambia y se vuelve a preguntar al LLM.
+    """
+    llm = cfg["extraccion"]["llm"]
+    clave = json.dumps([llm["modelo"], llm["temperatura"], cfg["extraccion"]["prompts"],
+                        schema, transcript], ensure_ascii=False, sort_keys=True)
+    h = hashlib.sha256(clave.encode("utf-8")).hexdigest()[:16]
+    return RAIZ / cfg["rutas"]["cache_llm"] / f"{schema}__{llm['modelo']}__{h}.json"
 
 
 def esquema_para_gemini(esquema: dict) -> dict:
@@ -91,14 +117,35 @@ def _llamar(cliente, solicitud: dict, llm: dict):
         except errors.APIError as e:
             if e.code not in (429, 503):
                 raise
+            if e.code == 429 and es_limite_diario(e):
+                raise ErrorExtraccion("cuota DIARIA del nivel gratuito agotada "
+                                      f"({llm['modelo']}): reintentar mañana") from e
             time.sleep(llm["espera_si_limite_s"])
     raise ErrorExtraccion("el API siguió respondiendo 429/503: se agotaron las esperas")
 
 
 def extraer_llm(transcript: str, schema: str, cfg: dict, cliente=None) -> dict:
-    """Devuelve el registro extraído por el LLM o lanza ErrorExtraccion."""
+    """Devuelve el registro extraído por el LLM o lanza ErrorExtraccion.
+
+    Con el cliente real y llm.usar_cache, la respuesta se lee/guarda en cache/llm/.
+    Con un cliente falso (tests) no se usa el cache.
+    """
     llm = cfg["extraccion"]["llm"]
-    cliente = cliente or crear_cliente(cfg)
+    usar_cache = cliente is None and llm.get("usar_cache", False)
+    if usar_cache:
+        ruta = ruta_cache_llm(transcript, schema, cfg)
+        if ruta.exists():
+            return json.loads(ruta.read_text(encoding="utf-8"))
+    registro = _extraer(transcript, schema, cfg, cliente or crear_cliente(cfg))
+    if usar_cache:
+        ruta.parent.mkdir(parents=True, exist_ok=True)
+        ruta.write_text(json.dumps(registro, ensure_ascii=False, indent=2), encoding="utf-8")
+    return registro
+
+
+def _extraer(transcript: str, schema: str, cfg: dict, cliente) -> dict:
+    """Pregunta al LLM, valida y reintenta (sin cache)."""
+    llm = cfg["extraccion"]["llm"]
     solicitud = armar_solicitud(transcript, schema, cfg)
 
     problemas = []

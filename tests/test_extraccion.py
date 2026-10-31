@@ -179,3 +179,25 @@ def test_llm_rechazo_lanza_error(cfg_rapido, referencias):
     cliente = ClienteFalso([("", "SAFETY")])
     with pytest.raises(ErrorExtraccion):
         extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente)
+
+
+def test_llm_cuota_diaria_no_espera(cfg_rapido, referencias):
+    # La cuota diaria no se libera en segundos: falla al toque, sin gastar las esperas
+    detalle = {"error": {"message": "cuota", "status": "RESOURCE_EXHAUSTED", "details": [
+        {"violations": [{"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]}]}}
+    cliente = ClienteFalso([errors.ClientError(429, detalle)])
+    with pytest.raises(ErrorExtraccion, match="DIARIA"):
+        extraer_llm(referencias["E01"], "entrevista", cfg_rapido, cliente)
+    assert len(cliente.solicitudes) == 1
+
+
+def test_llm_cache_evita_la_segunda_llamada(cfg_rapido, referencias, tmp_path, monkeypatch):
+    import src.extract_llm as m
+    cfg_rapido["extraccion"]["llm"]["usar_cache"] = True
+    monkeypatch.setattr(m, "RAIZ", tmp_path)  # el cache va a una carpeta temporal
+    cliente = ClienteFalso([(json.dumps(_registro_e01()), "STOP")])
+    monkeypatch.setattr(m, "crear_cliente", lambda cfg: cliente)
+    assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido) == _registro_e01()
+    assert extraer_llm(referencias["E01"], "entrevista", cfg_rapido) == _registro_e01()
+    assert len(cliente.solicitudes) == 1  # la segunda salió del cache
+    assert len(list(tmp_path.rglob("*.json"))) == 1

@@ -113,6 +113,16 @@ tests/                   # pytest
   - **VRAM extra durante la transcripción** (`peak_vram_mb` en el cache, `vram_extra_mb_max` en los resultados): pico − línea base, con la línea base tomada **con el modelo ya cargado**. No incluye los pesos: es lo que agrega transcribir (activaciones, búfer del beam search).
   - **VRAM total** (`vram_total_mb`): contexto CUDA + pesos + transcripción. La mide `src/medir_vram.py` en un **proceso nuevo** por modelo y precisión, desde antes de cargar el modelo (celda 11 del notebook). También separa cuánto ocupan solo los pesos (`vram_modelo_mb`).
   - **Por qué importa la diferencia:** la primera medición solo restaba la línea base con el modelo cargado, así que salía ~1 GB para large-v3 y casi igual en float16 e int8. La diferencia entre precisiones está en los **pesos**, no en la transcripción: para decir si un modelo "cabe" en una tarjeta hay que mirar la VRAM total.
+  - **Medido en Tesla T4** (`cache/results/vram_modelos.json`, celda 11; audio E01; un proceso por fila):
+
+    | Modelo · precisión | Compute real | Solo pesos (MB) | Total (MB) | Extra al transcribir (MB) |
+    |---|---|---|---|---|
+    | small · float16 | float16 | 582 | 884 | 302 |
+    | small · int8 | int8_float16 | 358 | 596 | 238 |
+    | large-v3 · float16 | float16 | 3078 | 4052 | 974 |
+    | large-v3 · int8 | int8_float16 | 1606 | 2580 | 974 |
+
+    int8 casi **divide a la mitad los pesos** de large-v3 (3078 → 1606 MB) y la VRAM total baja 36 % (4052 → 2580 MB). Lo que agrega transcribir es igual en las dos precisiones (974 MB). La línea base (contexto CUDA, 556 MB) entra en el total.
   - En CPU la VRAM no aplica (aunque Colab tenga GPU, lo que se mida ahí no es de ese modelo).
   - Antes de medir con un modelo recién cargado se descarta una corrida de calentamiento (incluye inicializar CUDA).
 - **Hallazgo: Colab trae CUDA 13 y CTranslate2 necesita CUDA 12.** CTranslate2 4.8.4 está compilado para CUDA 12 + cuDNN 9; en el Colab actual (CUDA 13) falla al usar la GPU con `Library libcublas.so.12 is not found`.
@@ -167,6 +177,11 @@ _(pendiente: filas "glosario")_
 - **LLM** (`extract_llm.py`): Google **Gemini `gemini-3.8-flash`** (nivel gratuito, SDK `google-genai`), con **temperatura 0** y **salida JSON estructurada**: se le pasa el JSON schema de `schemas.py` (`response_json_schema`), así que solo puede responder con esa forma. Igual se valida y se reintenta.
   - Gemini no acepta `"type": ["number", "null"]` ni `null` dentro de `enum`, así que `esquema_para_gemini` reescribe esos campos como `anyOf`. El esquema de `schemas.py` no cambia.
   - **Nivel gratuito:** pocas solicitudes por minuto. Hay una pausa entre llamadas, y si el API responde 429 se espera y se reintenta (valores en `config.yaml → extraccion.llm`).
+  - **Hallazgo: la cuota real es de 20 solicitudes por día y por modelo.** La primera corrida de `--llm` (62 llamadas: todos los grupos y niveles) la agotó. Además cada 429 esperaba 30 s × 6 intentos, así que la corrida no terminaba nunca. Arreglos:
+    - Un 429 de cuota **diaria** (`...PerDay...` en el error) falla al toque. Solo se espera el límite por minuto.
+    - **Timeout HTTP** (`timeout_s`): sin él, una solicitud sin respuesta bloquea para siempre.
+    - **Cache de respuestas** en `cache/llm/` (se commitea). La clave es un hash de modelo + prompts + transcript: cada llamada se paga una vez, una corrida cortada retoma donde quedó y los resultados se reproducen sin API.
+    - El LLM corre solo en `evaluacion.grupos_llm`: `referencia` + `large-v3|cuda|int8|plano` en L0 = 16 llamadas, que caben en un día. Las demás combinaciones y la escalera L1–L3 se comparan solo con reglas: **limitación declarada**.
   - **Descartado:** Anthropic (requiere pago). Con su API actual (versión `2026-10-21`) tampoco se podía fijar la temperatura en 0.
 - **Verificación literal** (`verify.py`): un campo es `verificado` solo si su valor aparece en el transcript normalizado. Números como número completo (`90` no cuenta dentro de `2890`); frases tal cual; dirección y promoción palabra por palabra; listas elemento por elemento; categorías por sus palabras del config (`PEN` ← "soles"). Si el LLM devolviera 90 como total de L02 (se dijo 80), queda `sin_verificar`.
 - **Métricas por campo:** accuracy con IC, % verificado, error absoluto medio en numéricos y macro-F1 en `nivel_ingles` (escrita a mano en `metrics.py`).

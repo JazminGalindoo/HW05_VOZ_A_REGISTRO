@@ -173,14 +173,24 @@ def extraer_grupos(corridas: list[dict], referencias: dict, esquema_de: dict,
                    metodos: list[str], cfg: dict) -> list[dict]:
     """Un registro por (grupo, nivel, método, clip): campos, verificación y segmentos."""
     registros = []
+    # El LLM tiene cuota diaria: solo corre en los grupos de evaluacion.grupos_llm
+    grupos_llm = {(g["grupo"], g["nivel"]) for g in cfg["evaluacion"]["grupos_llm"]}
+
+    def toca(metodo, grupo, nivel):
+        return metodo != "llm" or (grupo, nivel) in grupos_llm
+
     for metodo in metodos:
         base = con_motor(cfg, metodo_extraccion=metodo, solo_cache=True)
         for clip, texto in referencias.items():  # grupo "referencia": sin ASR
+            if not toca(metodo, "referencia", "-"):
+                continue
             r = process_transcript(texto, esquema_de[clip], base)
             registros.append({"grupo": "referencia", "nivel": "-", "metodo": metodo, "clip": clip,
                               "tarea": esquema_de[clip], "resultado": r})
         for c in corridas:  # cada combinación de ASR: SIEMPRE por process_audio
             motor = {k: c[k] for k in COMBO}
+            if not toca(metodo, "|".join(motor.values()), c["nivel"]):
+                continue
             r = process_audio(f"{c['clip']}.wav", esquema_de[c["clip"]],
                               con_motor(base, **motor, nivel=c["nivel"]))
             registros.append({"grupo": "|".join(motor.values()), "nivel": c["nivel"], "metodo": metodo,
